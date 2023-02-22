@@ -11,6 +11,7 @@ An app that allows for easy connections between charity event organizers and pot
 - **Contact options -** displays the contact information of each organization and volunteer
 - **Notifications -** notifies the user when new charity events that meet the user's preferences are announced
 
-### Assumptions and dependecies
+### Assumptions and dependencies
 
 - Google Maps API
+- Firebase
