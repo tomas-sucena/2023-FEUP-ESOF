@@ -7,7 +7,7 @@ Charity.net Development Report
 You can find here details about the product (or mini-app or module), from a high-level vision to low-level implementation decisions, a kind of Software Development Report, organized by discipline (as of Rational Unified Process):
 
 * Business modeling
-  * [Product Vision](https://github.com/FEUP-LEIC-ES-2022-23/2LEICO5T2/blob/main/docs/ProductVision.md)
+  * [Product Vision](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/ProductVision.md)
   * [Elevator Pitch](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/ElevatorPitch.md)
 * [Requirements](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/requirements.md)
 * [Use Case Model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/requirements.md#Use-case-model)
