@@ -1,1 +1,7 @@
+*.iml
 .idea/
+
+app/.*
+app/build/
+app/analysis_options.yaml
+app/pubspec.lock
