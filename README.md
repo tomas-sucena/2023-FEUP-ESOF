@@ -13,11 +13,11 @@ You can find here details about the product (or mini-app or module), from a high
 * [Use Case Model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/requirements.md#Use-case-model)
   * [User stories](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/requirements.md#User-stories)
   * [Domain model](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/requirements.md#Domain-model)
-  * [Architecture and Design](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/ArchitectureAndDesign.md)
-* [Logical architecture]
-  * [Physical architecture]
-  * [Vertical prototype]
-  * [Implementation]
+* [Architecture and Design](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/ArchitectureAndDesign.md)
+  * [Logical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/ArchitectureAndDesign.md#Logical-architecture)
+  * [Physical architecture](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/ArchitectureAndDesign.md#Physical-architecture)
+  * [Vertical prototype](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/ArchitectureAndDesign.md#Vertical-prototype)
+* [Implementation]
 * [Test]
 * [Configuration and change management]
 * [Project management](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/blob/main/docs/ProjectManagement.md)
