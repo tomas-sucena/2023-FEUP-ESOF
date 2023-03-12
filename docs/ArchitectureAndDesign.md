@@ -1,15 +1,7 @@
 
 ## Architecture and Design
-The architecture of a software system encompasses the set of key decisions about its overall organization.
-
-A well written architecture document is brief but reduces the amount of time it takes new programmers to a project to understand the code to feel able to make modifications and enhancements.
-
-To document the architecture requires describing the decomposition of the system in their parts (high-level components) and the key behaviors and collaborations between them.
-
-In this section you should start by briefly describing the overall components of the project and their interrelations. You should also describe how you solved typical problems you may have encountered, pointing to well-known architectural and design patterns, if applicable.
 
 ### Logical architecture
-![LogicalView](../images/LogicalArchitecture.png)
 
 #### Charity.net
 * **Event Finder Application -** represents the graphical interface of the application (i.e. the various pages, the widgets, etc.)
@@ -19,6 +11,8 @@ In this section you should start by briefly describing the overall components of
 #### External services
 * **Event Database API -** service that retrieves the newest volunteering events that are posted on the Internet
 * **Firebase -** database that stores the user authentication data
+
+![LogicalView](../images/LogicalArchitecture.png)
 
 ### Physical architecture
 The goal of this subsection is to document the high-level physical structure of the software system (machines, connections, software components installed, and their dependencies) using UML deployment diagrams (Deployment View) or component diagrams (Implementation View), separate or integrated, showing the physical structure of the system.
