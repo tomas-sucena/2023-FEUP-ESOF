@@ -10,8 +10,8 @@ which describes how we plan to approach it in our application.
 ### Domain model
 
 Our application models the following entities:
-* **Volunteer -** user that participates in volunteering events; represents an individual
-* **Organizer -** user that organizes volunteering events; it can represent an individual or a company
+* **Volunteer -** represents the users of the application
+* **Organizer -** entity that organizes volunteering events; it can be an individual or a company
 * **Event -** volunteering event, characterized by its <u>start date</u>, <u>location</u> and <u>type</u>
 * **Location -** place where an event occurs, characterized by its <u>coordinates</u> and <u>geographical context</u>
 
