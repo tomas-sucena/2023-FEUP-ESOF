@@ -2,7 +2,7 @@
 
 ### Vision Statement
 
-An app that allows for easy connections between charity event organizers and potential participants.
+For volunteers who want to discover new volunteering opportunities but don't know where to start looking, Charity.net is an application that fetches and displays all kinds of volunteering events published online.
 
 ### Main features
 
