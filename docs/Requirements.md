@@ -11,7 +11,7 @@ which describes how we plan to approach it in our application.
 
 Our application models the following entities:
 * **Volunteer -** represents the users of the application
-* **Organizer -** entity that organizes volunteering events; it can be an individual or a company
+* **Organizer -** individual/company that organizes volunteering events
 * **Event -** volunteering event, characterized by its <u>start date</u>, <u>location</u> and <u>type</u>
 * **Location -** place where an event occurs, characterized by its <u>coordinates</u> and <u>geographical context</u>
 
