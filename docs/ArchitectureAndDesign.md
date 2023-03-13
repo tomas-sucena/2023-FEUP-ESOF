@@ -21,13 +21,13 @@ It should describe also the technologies considered and justify the selections m
 
 Example of _UML deployment diagram_ showing a _deployment view_ of the Eletronic Ticketing System (please notice that, instead of software components, one should represent their physical/executable manifestations for deployment, called artifacts in UML; the diagram should be accompanied by a short description of each node and artifact):
 
-**Charity.net -** the app itself
-**Event Database API -** stores the data relating to charity events
-**Event Listing Logic Service -** responsible for listing events from the database to the users
-**User Credentials Database -** stores the credentions to authenticate into the app
-**User Authentication Logic Service -** handles authentications in the app, using the credentials database
-**Flutter -** open source Google framework used to develop apps in many platforms
-**App Development Framework**
+* **Charity.net -** the app itself
+* **Event Database API -** stores the data relating to charity events
+* **Event Listing Logic Service -** responsible for listing events from the database to the users
+* **User Credentials Database -** stores the credentions to authenticate into the app
+* **User Authentication Logic Service -** handles authentications in the app, using the credentials database
+* **Flutter -** open source Google framework used to develop apps in many platforms
+* **App Development Framework**
 
 ![ImplementationView](../images/PhysicalArchitecture.png)
 
