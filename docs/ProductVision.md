@@ -13,5 +13,5 @@ For volunteers who want to discover new volunteering opportunities but don't kno
 
 ### Assumptions and dependencies
 
-- Google Maps API
+- Event listing API
 - Firebase
