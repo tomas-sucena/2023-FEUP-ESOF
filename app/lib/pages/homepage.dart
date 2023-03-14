@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget{
 
              Image.asset('assets/images/maintenance.png',
                   height: 500),
+
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -20,7 +21,15 @@ class HomePage extends StatelessWidget{
                 },
                 child: const Text('Go back'),
               ),
-            )
+            ),
+
+             const SizedBox(height: 10),
+
+             const Text("Artur Oliveira"),
+             const Text("Duarte Gonçalves"),
+             const Text("Gonçalo Pinho"),
+             const Text("João Afonso Viveiros"),
+             const Text("Tomás Sucena Lopes"),
           ],
         ),
       );
