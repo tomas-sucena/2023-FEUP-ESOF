@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -27,23 +28,36 @@ class LoginPage extends StatelessWidget {
               Center(
                 child: Image.asset(
                   "assets/images/Logo.png",
-                  height: 150),
+                  height: 150,
+                  color: Color.fromRGBO(0, 0, 0, 125)
+                ),
               ),
 
               // name
               const Text('CHARITY.NET',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color.fromRGBO(0, 0, 0, 1),
+                  color: Color.fromRGBO(0, 0, 0, 125),
                   fontFamily: 'Dokdo',
                   fontSize: 55,
                   letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
                   fontWeight: FontWeight.normal,
                   height: 1
                 ),
-              )
+              ),
+
+              const SizedBox(height: 20),
 
               // Google sign-in
+              SignInButtonBuilder(
+                text: "Sign in with Google",
+                icon: Icons.email,
+                fontSize: 18,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'Home');
+                },
+                backgroundColor: Colors.red.shade700,
+              )
             ],
           ),
         ),
