@@ -1,8 +1,8 @@
 ## Project Management
 
-### First Iteration (v0.2)
+### Iteration #1 (v0.2)
 
 #### Before
-![Before the First Iteration](https://user-images.githubusercontent.com/93825634/225999900-98931902-8e9e-4eae-b857-d66f824cfa77.png)
+![Before Iteration #1](https://user-images.githubusercontent.com/93825634/226894306-62b71e68-eb88-46c7-82a5-d52774963f53.png)
 
 #### After
