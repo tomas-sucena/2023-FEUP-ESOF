@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'auth.dart';
+import 'authenticator.dart';
 
-class GoogleAuth extends Auth {
+class GoogleAuthenticator extends Authenticator {
   @override
   signIn() async {
     // get Google account
@@ -14,11 +14,12 @@ class GoogleAuth extends Auth {
     final GoogleSignInAuthentication userAuth = await user!.authentication;
 
     // create a new credential
-    final OAuthCredential credential = GoogleAuthProvider.credential(
+    final credential = GoogleAuthProvider.credential(
       accessToken: userAuth.accessToken,
       idToken: userAuth.idToken,
     );
 
+    // sign in
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }

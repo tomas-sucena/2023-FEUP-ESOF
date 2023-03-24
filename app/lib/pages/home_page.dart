@@ -1,5 +1,6 @@
-import 'package:app/services/authentication/googleAuth.dart';
 import 'package:flutter/material.dart';
+
+import '../services/authentication/google_authenticator.dart';
 
 class HomePage extends StatelessWidget{
   const HomePage({super.key});
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget{
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  GoogleAuth().signOut();// Navigate back to first screen when tapped.
+                  GoogleAuthenticator().signOut();// Navigate back to first screen when tapped.
                 },
                 child: const Text('Sign out'),
               ),

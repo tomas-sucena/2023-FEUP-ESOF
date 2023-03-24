@@ -1,6 +1,7 @@
-import 'package:app/services/authentication/googleAuth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
+
+import '../components/buttons/sign_in_button.dart';
+import '../services/authentication/google_authenticator.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -50,15 +51,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 20),
 
               // Google sign-in
-              SignInButtonBuilder(
-                text: "Sign in with Google",
-                icon: Icons.email,
-                fontSize: 18,
-                onPressed: () {
-                  GoogleAuth().signIn();
-                },
-                backgroundColor: Colors.red.shade700,
-              )
+              SignInButton(GoogleAuthenticator())
             ],
           ),
         ),
