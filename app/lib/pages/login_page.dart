@@ -1,3 +1,4 @@
+import 'package:app/services/authentication/googleAuth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -54,7 +55,7 @@ class LoginPage extends StatelessWidget {
                 icon: Icons.email,
                 fontSize: 18,
                 onPressed: () {
-                  Navigator.pushNamed(context, 'Home');
+                  GoogleAuth().signIn();
                 },
                 backgroundColor: Colors.red.shade700,
               )
