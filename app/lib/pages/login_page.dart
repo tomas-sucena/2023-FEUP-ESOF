@@ -10,14 +10,13 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-      gradient : LinearGradient(
-          begin: Alignment(0,1),
-          end: Alignment(-1,0),
-          colors: [
-            Color.fromRGBO(248, 240, 167, 1),
-            Color.fromRGBO(232, 159, 135, 1)
-          ]
-        )
+        gradient: LinearGradient(
+            begin: Alignment(0, 1),
+            end: Alignment(-1, 0),
+            colors: [
+              Color.fromRGBO(248, 240, 167, 1),
+              Color.fromRGBO(232, 159, 135, 1),
+            ]),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -30,32 +29,37 @@ class LoginPage extends StatelessWidget {
               Center(
                 child: Image.asset(
                   "assets/images/Logo.png",
-                  height: 150,
-                  color: Color.fromRGBO(0, 0, 0, 125)
+                  height: 170,
+                  color: Color.fromRGBO(0, 0, 0, 125),
                 ),
               ),
 
               // name
-              const Text('CHARITY.NET',
+              const Text(
+                'CHARITY.NET',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Color.fromRGBO(0, 0, 0, 125),
                   fontFamily: 'Dokdo',
-                  fontSize: 55,
-                  letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
+                  fontSize: 60,
+                  letterSpacing: 0,
                   fontWeight: FontWeight.normal,
-                  height: 1
+                  height: 1,
                 ),
               ),
 
               const SizedBox(height: 20),
 
               // Google sign-in
-              SignInButton(GoogleAuthenticator())
+              SignInButton(
+                authenticator: GoogleAuthenticator(),
+                logoFilename: "google_logo.png",
+                name: "Google",
+              ),
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }

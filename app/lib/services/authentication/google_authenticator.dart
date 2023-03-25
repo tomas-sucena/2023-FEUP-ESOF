@@ -7,8 +7,8 @@ class GoogleAuthenticator extends Authenticator {
   @override
   signIn() async {
     // get Google account
-    final GoogleSignInAccount? user = await GoogleSignIn(
-      scopes: <String>["email"]).signIn();
+    final GoogleSignInAccount? user =
+        await GoogleSignIn(scopes: <String>["email"]).signIn();
 
     // obtain the authentication details
     final GoogleSignInAuthentication userAuth = await user!.authentication;

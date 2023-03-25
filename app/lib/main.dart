@@ -22,13 +22,12 @@ class CharityNet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: 'Auth',
-      routes: {
-        'Auth': (context) => const AuthPage(),
-        'Login': (context) => const LoginPage(),
-        'Home' : (context) => const HomePage(),
-      },
-      debugShowCheckedModeBanner: false
-    );
+        initialRoute: 'Auth',
+        routes: {
+          'Auth': (context) => const AuthPage(),
+          'Login': (context) => const LoginPage(),
+          'Home': (context) => const HomePage(),
+        },
+        debugShowCheckedModeBanner: false);
   }
 }
