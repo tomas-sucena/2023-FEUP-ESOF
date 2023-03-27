@@ -25,8 +25,10 @@ class SignInButton extends StatelessWidget {
     );
 
     _text = "Sign in" + ((name == null) ? "" : " with $name");
-    _backgroundColor = (backgroundColor == null) ? Colors.white : backgroundColor;
-    _textColor = (textColor == null) ? Color.fromRGBO(108, 108, 108, 20) : textColor;
+    _backgroundColor =
+        (backgroundColor == null) ? Colors.white : backgroundColor;
+    _textColor =
+        (textColor == null) ? Color.fromRGBO(108, 108, 108, 20) : textColor;
   }
 
   @override
