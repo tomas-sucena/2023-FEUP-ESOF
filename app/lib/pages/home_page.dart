@@ -11,7 +11,12 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const SizedBox(height: 50),
+          const SizedBox(height: 100),
+          const Text('Home',
+              style: const TextStyle(
+                fontFamily: 'Jost',
+                fontSize: 30,
+              )),
           Image.asset('assets/images/maintenance.png', height: 500),
           Center(
             child: ElevatedButton(
@@ -22,12 +27,6 @@ class HomePage extends StatelessWidget {
               child: const Text('Sign out'),
             ),
           ),
-          const SizedBox(height: 10),
-          const Text("Artur Oliveira"),
-          const Text("Duarte Gonçalves"),
-          const Text("Gonçalo Pinho"),
-          const Text("João Afonso Viveiros"),
-          const Text("Tomás Sucena Lopes"),
         ],
       ),
     );

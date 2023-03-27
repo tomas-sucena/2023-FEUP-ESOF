@@ -36,25 +36,30 @@ class _NavigationPageState extends State<NavigationPage> {
         items: [
           BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/images/icons/COCO_Home.svg'),
+            activeIcon:
+                SvgPicture.asset('assets/images/icons/COCO_Home_active.svg'),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/images/icons/COCO_Notifications.svg'),
+            icon:
+                SvgPicture.asset('assets/images/icons/COCO_Notifications.svg'),
+            activeIcon: SvgPicture.asset(
+                'assets/images/icons/COCO_Notifications_active.svg'),
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset('assets/images/icons/COCO_Profile.svg'),
+            activeIcon:
+                SvgPicture.asset('assets/images/icons/COCO_Profile_active.svg'),
             label: 'Profile',
           ),
         ],
         onTap: _changePage,
         backgroundColor: Color.fromRGBO(248, 234, 165, 1),
         selectedFontSize: 16,
-        unselectedFontSize: 0,
-        selectedLabelStyle: const TextStyle(
-          fontFamily: 'Jost',
-          color: Colors.red,
-        ),
+        unselectedFontSize: 14,
+        selectedItemColor: Color.fromRGBO(36, 38, 53, 1),
+        selectedLabelStyle: TextStyle(fontFamily: 'Jost'),
       ),
     );
   }

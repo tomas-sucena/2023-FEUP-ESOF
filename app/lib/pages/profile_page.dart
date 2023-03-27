@@ -11,18 +11,13 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          const SizedBox(height: 50),
+          const SizedBox(height: 100),
+          const Text('Profile',
+              style: const TextStyle(
+                fontFamily: 'Jost',
+                fontSize: 30,
+              )),
           Image.asset('assets/images/maintenance.png', height: 500),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                GoogleAuthenticator()
-                    .signOut(); // Navigate back to first screen when tapped.
-              },
-              child: const Text('Sign out'),
-            ),
-          ),
-          const SizedBox(height: 10),
         ],
       ),
     );
