@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/auth_page.dart';
-import 'pages/home_page.dart';
-import 'pages/login_page.dart';
 import 'services/firebase_options.dart';
 
 void main() async {
@@ -21,13 +19,6 @@ class CharityNet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        initialRoute: 'Auth',
-        routes: {
-          'Auth': (context) => const AuthPage(),
-          'Login': (context) => const LoginPage(),
-          'Home': (context) => const HomePage(),
-        },
-        debugShowCheckedModeBanner: false);
+    return MaterialApp(home: AuthPage(), debugShowCheckedModeBanner: false);
   }
 }
