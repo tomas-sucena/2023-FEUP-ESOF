@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'home_page.dart';
+import 'notifications_page.dart';
 import 'profile_page.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -15,6 +17,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   final List<Widget> _pages = [
     HomePage(),
+    NotificationsPage(),
     ProfilePage(),
   ];
 
@@ -28,20 +31,30 @@ class _NavigationPageState extends State<NavigationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_currIndex],
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _currIndex,
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.home),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currIndex,
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset('assets/images/icons/COCO_Home.svg'),
             label: 'Home',
           ),
-          NavigationDestination(
-            icon: Icon(Icons.person),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset('assets/images/icons/COCO_Notifications.svg'),
+            label: 'Notifications',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset('assets/images/icons/COCO_Profile.svg'),
             label: 'Profile',
           ),
         ],
-        onDestinationSelected: _changePage,
+        onTap: _changePage,
         backgroundColor: Color.fromRGBO(248, 234, 165, 1),
+        selectedFontSize: 16,
+        unselectedFontSize: 0,
+        selectedLabelStyle: const TextStyle(
+          fontFamily: 'Jost',
+          color: Colors.red,
+        ),
       ),
     );
   }
