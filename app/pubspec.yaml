@@ -38,7 +38,7 @@ dependencies:
   firebase_auth: ^4.3.0
   firebase_core: ^2.8.0
   flutter_svg: ^2.0.4
-  google_sign_in: ^6.0.2
+  google_sign_in: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +51,10 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_launcher_icons: ^0.12.0
+
+  # The following are used for unit testing.
+  firebase_auth_mocks: ^0.11.0
+  google_sign_in_mocks: ^0.2.2
 
 # The following section sets the application icon.
 flutter_icons:
