@@ -12,12 +12,16 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           const SizedBox(height: 100),
-          const Text('Home',
-              style: const TextStyle(
-                fontFamily: 'Jost',
-                fontSize: 30,
-              )),
+          const Text(
+            'Home',
+            style: const TextStyle(
+              fontFamily: 'Jost',
+              fontSize: 30,
+            ),
+          ),
+
           Image.asset('assets/images/maintenance.png', height: 500),
+
           Center(
             child: ElevatedButton(
               onPressed: () {
