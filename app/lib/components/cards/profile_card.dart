@@ -17,6 +17,7 @@ class _ProfileCardState extends State<ProfileCard> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             addVerticalSpace(5),
 
@@ -30,15 +31,43 @@ class _ProfileCardState extends State<ProfileCard> {
             ),
 
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Josefina Gabriela',
+                  '64',
                   style: const TextStyle(
                     fontFamily: 'Jost',
-                    fontSize: 28,
-                    color: Color.fromRGBO(0, 0, 0, 0.5),
+                    fontSize: 50,
+                    color: Color.fromRGBO(0, 0, 0, 0.8),
                   ),
                 ),
+
+                addHorizontalSpace(15),
+
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    addVerticalSpace(5),
+
+                    Text(
+                      'Charity Events',
+                      style: const TextStyle(
+                        fontFamily: 'Jost',
+                        fontSize: 20,
+                        color: Color.fromRGBO(0, 0, 0, 0.5),
+                      ),
+                    ),
+
+                    Text(
+                      'Attended',
+                      style: const TextStyle(
+                        fontFamily: 'Jost',
+                        fontSize: 20,
+                        color: Color.fromRGBO(0, 0, 0, 0.5),
+                      ),
+                    ),
+                  ],
+                )
               ],
             )
           ],
