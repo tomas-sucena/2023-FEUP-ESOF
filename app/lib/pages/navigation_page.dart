@@ -39,6 +39,7 @@ class _NavigationPageState extends State<NavigationPage> {
             activeIcon:
                 SvgPicture.asset('assets/images/icons/COCO_Home_active.svg'),
             label: 'Home',
+
           ),
           BottomNavigationBarItem(
             icon:
@@ -55,10 +56,8 @@ class _NavigationPageState extends State<NavigationPage> {
           ),
         ],
         onTap: _changePage,
-        backgroundColor: Color.fromRGBO(248, 234, 165, 1),
         selectedFontSize: 16,
         unselectedFontSize: 14,
-        selectedItemColor: Color.fromRGBO(36, 38, 53, 1),
         selectedLabelStyle: TextStyle(fontFamily: 'Jost'),
       ),
     );
