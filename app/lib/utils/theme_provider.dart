@@ -26,10 +26,14 @@ class ThemeProvider extends ChangeNotifier {
 
   ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: const Color.fromRGBO(36, 38, 53, 1),
+
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: const Color.fromRGBO(248, 234, 165, 1),
       selectedItemColor: const Color.fromRGBO(36, 38, 53, 1),
     ),
+
+    // text settings
+    fontFamily: 'Jost',
   );
 
   ThemeData lightTheme = ThemeData(
@@ -42,6 +46,10 @@ class ThemeProvider extends ChangeNotifier {
 
     // text settings
     fontFamily: 'Jost',
+    textTheme: const TextTheme(
+      displayMedium: const TextStyle(
+        color: Colors.black,
+      ),
+    ),
   );
 }
-
