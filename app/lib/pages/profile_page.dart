@@ -1,7 +1,7 @@
 import 'package:app/components/alignment.dart';
 import 'package:flutter/material.dart';
 
-import '../components/cards/profile_card.dart';
+import '../components/passive/profile_card.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -20,7 +20,6 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Column(
         children: [
           addVerticalSpace(50),
-
           Center(
             child: const Text(
               'Profile',
@@ -31,9 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-
           addVerticalSpace(15),
-
           ProfileCard(),
         ],
       ),

@@ -19,9 +19,7 @@ class HomePage extends StatelessWidget {
               fontSize: 30,
             ),
           ),
-
           Image.asset('assets/images/maintenance.png', height: 500),
-
           Center(
             child: ElevatedButton(
               onPressed: () {
