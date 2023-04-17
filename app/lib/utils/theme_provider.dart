@@ -29,23 +29,19 @@ class ThemeProvider extends ChangeNotifier {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: const Color.fromRGBO(248, 234, 165, 1),
       selectedItemColor: const Color.fromRGBO(36, 38, 53, 1),
-      unselectedItemColor: Colors.blueGrey,
-    ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.transparent,
     ),
   );
 
   ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: Colors.white,
+
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: const Color.fromRGBO(248, 234, 165, 1),
       selectedItemColor: const Color.fromRGBO(36, 38, 53, 1),
-      unselectedItemColor: Colors.blueGrey,
     ),
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.transparent,
-    ),
+
+    // text settings
+    fontFamily: 'Jost',
   );
 }
 

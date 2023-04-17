@@ -20,6 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ThemeProvider themeNotifier, child) {
       return Scaffold(
+        extendBodyBehindAppBar: true,
         appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -40,7 +41,6 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             ]
         ),
-        backgroundColor: Colors.white,
         body: Column(
           children: [
             addVerticalSpace(50),
