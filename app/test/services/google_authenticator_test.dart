@@ -10,7 +10,8 @@ void main() {
       googleAuthenticator = MockGoogleSignIn();
     });
 
-    test("should generate an idToken and accessToken when authenticating", () async {
+    test("should generate an idToken and accessToken when authenticating",
+        () async {
       final GoogleSignInAccount? user = await googleAuthenticator.signIn();
       final GoogleSignInAuthentication userAuth = await user!.authentication;
 
@@ -42,7 +43,8 @@ void main() {
       expect(userAuth?.accessToken, isNull);
     });
 
-    test("should return 'null' when the user cancels the authentication", () async {
+    test("should return 'null' when the user cancels the authentication",
+        () async {
       googleAuthenticator.setIsCancelled(true);
 
       final GoogleSignInAccount? user = await googleAuthenticator.signIn();
@@ -59,6 +61,5 @@ void main() {
       expect(userAuth?.idToken, isNull);
       expect(userAuth?.accessToken, isNull);
     });
-
   });
 }

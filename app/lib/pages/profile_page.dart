@@ -1,19 +1,21 @@
-import 'package:app/services/authentication/authenticator.dart';
+import 'package:app/components/alignment.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/cupertino.dart';
 
-import '../services/authentication/google_authenticator.dart';
+import '../components/passive/profile_card.dart';
 import '../utils/theme_provider.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
-  _ProfilePageState createState() => _ProfilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  //User _user;
+
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ThemeProvider themeNotifier, child) {
@@ -38,28 +40,25 @@ class _ProfilePageState extends State<ProfilePage> {
               )
             ]
         ),
-        body: Stack(
-            children: [
-              Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<Authenticator>().signOut();
-                      },
-                      child: Text('Sign Out'),
-                      ),
-                  ],
-
-                )
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            addVerticalSpace(50),
+            Center(
+              child: const Text(
+                'Profile',
+                style: const TextStyle(
+                  fontFamily: 'Jost',
+                  fontSize: 40,
+                  color: Color.fromRGBO(233, 161, 136, 1),
+                ),
               ),
-            ],
+            ),
+            addVerticalSpace(15),
+            ProfileCard(),
+          ],
         ),
       );
     });
   }
 }
-
-
-
