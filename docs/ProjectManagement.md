@@ -34,6 +34,7 @@
 ![Before Iteration #2](https://user-images.githubusercontent.com/93825634/232320806-bf5258b4-f243-4f25-973f-96acf342df6d.png)
 
 ### After
+![After Iteration #2](https://user-images.githubusercontent.com/93825634/232745470-78a77ce8-d630-40c6-a79f-82609bf2ae4d.png)
 
 ### The Four Questions
 
