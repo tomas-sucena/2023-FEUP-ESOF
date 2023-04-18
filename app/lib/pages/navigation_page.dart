@@ -39,7 +39,6 @@ class _NavigationPageState extends State<NavigationPage> {
             activeIcon:
                 SvgPicture.asset('assets/images/icons/COCO_Home_active.svg'),
             label: 'Home',
-
           ),
           BottomNavigationBarItem(
             icon:

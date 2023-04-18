@@ -27,7 +27,9 @@ class CharityNet extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'CharityNet',
-          theme: themeNotifier.isDark ? themeNotifier.darkTheme : themeNotifier.lightTheme,
+          theme: themeNotifier.isDark
+              ? themeNotifier.darkTheme
+              : themeNotifier.lightTheme,
           home: const AuthPage(),
         );
       }),
