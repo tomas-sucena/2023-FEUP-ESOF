@@ -17,6 +17,8 @@ class ThemeManager extends ChangeNotifier {
     _darkMode = await _prefs.then((SharedPreferences prefs) {
       return prefs.getBool('Dark mode') ?? false;
     });
+
+    if (_darkMode) notifyListeners();
   }
 
   ThemeData getTheme() {
