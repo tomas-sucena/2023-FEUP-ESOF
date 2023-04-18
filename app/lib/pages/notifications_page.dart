@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/alignment.dart';
+import '../utils/alignment.dart';
 
 class NotificationsPage extends StatefulWidget {
   const NotificationsPage({Key? key}) : super(key: key);
@@ -20,7 +20,6 @@ class _NotificationsPageState extends State<NotificationsPage> {
             child: const Text(
               'Notifications',
               style: const TextStyle(
-                fontFamily: 'Jost',
                 fontSize: 40,
                 color: Color.fromRGBO(233, 161, 136, 1),
               ),

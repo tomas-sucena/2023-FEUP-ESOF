@@ -1,7 +1,7 @@
-import 'package:app/components/alignment.dart';
 import 'package:flutter/material.dart';
 
 import '../components/passive/profile_card.dart';
+import '../utils/alignment.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -23,7 +23,6 @@ class _ProfilePageState extends State<ProfilePage> {
             child: const Text(
               'Profile',
               style: const TextStyle(
-                fontFamily: 'Jost',
                 fontSize: 40,
                 color: Color.fromRGBO(233, 161, 136, 1),
               ),

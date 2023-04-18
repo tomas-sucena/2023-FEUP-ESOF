@@ -1,4 +1,4 @@
-import 'package:app/components/alignment.dart';
+import 'package:app/utils/alignment.dart';
 import 'package:flutter/material.dart';
 
 class IconText extends StatelessWidget {

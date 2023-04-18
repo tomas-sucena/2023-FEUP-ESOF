@@ -57,7 +57,6 @@ class _NavigationPageState extends State<NavigationPage> {
         onTap: _changePage,
         selectedFontSize: 16,
         unselectedFontSize: 14,
-        selectedLabelStyle: TextStyle(fontFamily: 'Jost'),
       ),
     );
   }

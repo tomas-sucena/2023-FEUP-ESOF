@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../alignment.dart';
+import '../../utils/alignment.dart';
 
 class ProfileCard extends StatefulWidget {
   const ProfileCard({Key? key}) : super(key: key);
