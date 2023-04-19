@@ -34,7 +34,7 @@
 ![Before Iteration #2](https://user-images.githubusercontent.com/93825634/232320806-bf5258b4-f243-4f25-973f-96acf342df6d.png)
 
 ### After
-![After Iteration #2](https://user-images.githubusercontent.com/93825634/232745470-78a77ce8-d630-40c6-a79f-82609bf2ae4d.png)
+![After Iteration #2](https://user-images.githubusercontent.com/93825634/232934899-40a4fa16-6f58-468d-8f3d-66203abf6fc9.png)
 
 ### The Four Questions
 
@@ -44,7 +44,7 @@
 - We continued writing maintainable and modular code, thanks in part to the design patterns we opted to follow (such as Observer).
 
 #### What didn't go well?
-- We overestimated how much time we would have for this iteration. <br>As such, both issues we had planned to tackle were not fully implemented.
+- We overestimated how much time we would have for this iteration. <br>As such, an issue we had planned to tackle was not fully implemented.
 
 #### What have we learned?
 - We learned how to design better UI in Flutter.
@@ -52,5 +52,4 @@
 
 #### What still puzzles us?
 - How to estimate and manage the time we have available.
-- How to properly set up themes in Flutter (e.g. how to change the font color of each theme).
-- How to add data to the database.
+- How to add/fetch data to/from the database.
