@@ -24,22 +24,14 @@ class _ProfileCardState extends State<ProfileCard> {
                 addVerticalSpace(5),
                 Text(
                   'Josefina Gabriela',
-                  style: const TextStyle(
-                    fontFamily: 'Jost',
-                    fontSize: 28,
-                    color: Color.fromRGBO(0, 0, 0, 0.5),
-                  ),
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       '64',
-                      style: const TextStyle(
-                        fontFamily: 'Jost',
-                        fontSize: 50,
-                        color: Color.fromRGBO(0, 0, 0, 0.6),
-                      ),
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                     addHorizontalSpace(15),
                     Column(
@@ -48,12 +40,7 @@ class _ProfileCardState extends State<ProfileCard> {
                         addVerticalSpace(12),
                         Text(
                           'Charity Events\nAttended',
-                          style: const TextStyle(
-                            fontFamily: 'Jost',
-                            fontSize: 20,
-                            color: Color.fromRGBO(0, 0, 0, 0.5),
-                            height: 1.2,
-                          ),
+                          style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ],
                     )
@@ -71,11 +58,7 @@ class _ProfileCardState extends State<ProfileCard> {
         Center(
           child: Text(
             'Recent Events',
-            style: const TextStyle(
-              fontFamily: 'Jost',
-              fontSize: 28,
-              color: Color.fromRGBO(0, 0, 0, 0.5),
-            ),
+            style: Theme.of(context).textTheme.displayMedium,
           ),
         ),
       ],
