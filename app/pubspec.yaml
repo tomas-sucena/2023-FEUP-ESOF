@@ -23,6 +23,7 @@ dependencies:
   firebase_core: ^2.8.0
   google_sign_in: ^5.0.2
 
+  flutter_launcher_icons: ^0.12.0
   flutter_svg: ^2.0.4
   provider: ^6.0.5
   shared_preferences: ^2.1.0
@@ -31,13 +32,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_launcher_icons: ^0.12.0
   flutter_lints: ^2.0.0
   #flutter_native_splash: ^2.2.19
 
   # Unit testing
   firebase_auth_mocks: ^0.11.0
   google_sign_in_mocks: ^0.2.2
+  mockito: ^5.4.0
 
 # The following section sets the application icon.
 flutter_icons:
