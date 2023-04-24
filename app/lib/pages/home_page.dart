@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
 
           GestureDetector(
             child: Container(
-              height: 60,
+              height: 50,
               width: 360,
               decoration: BoxDecoration(
                 color: const Color.fromRGBO(233, 161, 136, 1.0),

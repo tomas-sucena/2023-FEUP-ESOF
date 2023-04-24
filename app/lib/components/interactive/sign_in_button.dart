@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../services/authentication/authenticator.dart';
+import '../../utils/alignment.dart';
 
 class SignInButton extends StatelessWidget {
   late final Authenticator _auth;
@@ -8,6 +9,7 @@ class SignInButton extends StatelessWidget {
   late final String _text;
   late final Color _backgroundColor;
   late final Color _textColor;
+  late final TextDirection _textDirection;
 
   // constructor
   SignInButton(
@@ -15,7 +17,8 @@ class SignInButton extends StatelessWidget {
       required String logoFilename,
       String? name,
       Color? backgroundColor,
-      Color? textColor}) {
+      Color? textColor,
+      TextDirection? textDirection}) {
     _auth = authenticator;
 
     _logo = Image.asset(
@@ -25,10 +28,9 @@ class SignInButton extends StatelessWidget {
     );
 
     _text = "Sign in" + ((name == null) ? "" : " with $name");
-    _backgroundColor =
-        (backgroundColor == null) ? Colors.white : backgroundColor;
-    _textColor =
-        (textColor == null) ? Color.fromRGBO(108, 108, 108, 20) : textColor;
+    _backgroundColor = backgroundColor ?? Colors.white;
+    _textColor = textColor ?? const Color.fromRGBO(108, 108, 108, 20);
+    _textDirection = textDirection ?? TextDirection.ltr;
   }
 
   @override
@@ -53,13 +55,15 @@ class SignInButton extends StatelessWidget {
           ],
         ),
         child: Row(
+          textDirection: _textDirection,
           children: [
-            const SizedBox(width: 10),
+            addHorizontalSpace(10),
             _logo,
-            const SizedBox(width: 15),
+            addHorizontalSpace(15),
             Center(
               child: Text(
                 _text,
+                textDirection: _textDirection,
                 style: TextStyle(
                   color: _textColor,
                   fontFamily: 'Jost',
