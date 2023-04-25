@@ -11,12 +11,12 @@ class LoginPage extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color.fromRGBO(232, 159, 135, 1),
-            Color.fromRGBO(248, 240, 167, 1),
-          ]),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromRGBO(232, 159, 135, 1),
+              Color.fromRGBO(248, 240, 167, 1),
+            ]),
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
