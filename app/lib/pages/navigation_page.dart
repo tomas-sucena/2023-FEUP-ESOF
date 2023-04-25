@@ -17,19 +17,20 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage> {
   late int _currIndex;
-  late Volunteer volunteer;
+  late Volunteer _volunteer;
 
-  final List<Widget> _pages = [
+  late final List<Widget> _pages = [
     HomePage(),
     NotificationsPage(),
-    ProfilePage(),
+    ProfilePage(_volunteer),
   ];
 
   /* CONSTRUCTOR */
   _NavigationPageState() : _currIndex = 0 {
-    volunteer = _fetchVolunteerData();
+    _volunteer = _fetchVolunteerData();
   }
 
+  /* METHODS */
   void _changePage(int pageIndex) {
     setState(() {
       _currIndex = pageIndex;
