@@ -54,7 +54,7 @@ class _ProfileCardState extends State<ProfileCard> {
               ],
             ),
             CircleAvatar(
-              radius: 55,
+              radius: 52.5,
               backgroundImage: widget._volunteer.profilePicture.image,
             ),
           ],
