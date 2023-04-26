@@ -21,7 +21,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       body: Column(
         children: [
-          addVerticalSpace(50),
+          addVerticalSpace(40),
           Center(
             child: const Text(
               'Profile',

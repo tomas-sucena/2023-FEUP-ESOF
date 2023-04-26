@@ -15,7 +15,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
     return Scaffold(
       body: Column(
         children: [
-          addVerticalSpace(50),
+          addVerticalSpace(40),
           Center(
             child: const Text(
               'Notifications',

@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          addVerticalSpace(58),
+          addVerticalSpace(48),
           GestureDetector(
             child: Container(
               height: 50,

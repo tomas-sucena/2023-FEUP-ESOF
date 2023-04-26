@@ -23,13 +23,15 @@ class CharityNet extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ThemeManager(),
-      child: Consumer<ThemeManager>(builder: (context, themeManager, child) {
-        return MaterialApp(
-          home: const AuthPage(),
-          theme: themeManager.getTheme(),
-          debugShowCheckedModeBanner: false,
-        );
-      }),
+      child: Consumer<ThemeManager>(
+        builder: (context, themeManager, child) {
+          return MaterialApp(
+            home: const AuthPage(),
+            theme: themeManager.getTheme(),
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
     );
   }
 }
