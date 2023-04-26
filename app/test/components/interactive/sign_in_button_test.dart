@@ -21,7 +21,8 @@ void main() {
       );
 
       // the button contains the Google logo
-      expect(find.image(const AssetImage("assets/images/google_logo.png")), findsOneWidget);
+      expect(find.image(const AssetImage("assets/images/google_logo.png")),
+          findsOneWidget);
 
       // the button contains some text
       expect(find.text('Sign in with Google'), findsOneWidget);

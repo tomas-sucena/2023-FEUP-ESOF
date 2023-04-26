@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../../models/volunteer.dart';
 import '../../utils/alignment.dart';
 
 class ProfileCard extends StatefulWidget {
-  const ProfileCard({Key? key}) : super(key: key);
+  late final Volunteer _volunteer;
 
+  /* CONSTRUCTOR */
+  ProfileCard(Volunteer volunteer) : _volunteer = volunteer;
+
+  /* METHODS */
   @override
   State<ProfileCard> createState() => _ProfileCardState();
 }
@@ -23,14 +28,14 @@ class _ProfileCardState extends State<ProfileCard> {
               children: [
                 addVerticalSpace(5),
                 Text(
-                  'Josefina Gabriela',
+                  widget._volunteer.name,
                   style: Theme.of(context).textTheme.displayMedium,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '64',
+                      widget._volunteer.eventsAttended.toString(),
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                     addHorizontalSpace(15),
@@ -49,8 +54,8 @@ class _ProfileCardState extends State<ProfileCard> {
               ],
             ),
             CircleAvatar(
-              radius: 55,
-              backgroundImage: AssetImage('assets/images/pedroanime.png'),
+              radius: 52.5,
+              backgroundImage: widget._volunteer.profilePicture.image,
             ),
           ],
         ),

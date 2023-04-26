@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../components/passive/profile_card.dart';
+import '../models/volunteer.dart';
 import '../utils/alignment.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  late final Volunteer _volunteer;
+
+  /* CONSTRUCTOR */
+  ProfilePage(Volunteer volunteer) : _volunteer = volunteer;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  //User _user;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           addVerticalSpace(15),
-          ProfileCard(),
+          ProfileCard(widget._volunteer),
         ],
       ),
     );
