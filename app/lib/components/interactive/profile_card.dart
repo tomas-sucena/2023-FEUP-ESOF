@@ -1,20 +1,23 @@
-import 'dart:io';
-
+import 'package:app/services/data/database_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../models/volunteer.dart';
-import '../../services/files/file_explorer.dart';
+import '../../services/data/file_explorer.dart';
 import '../../utils/alignment.dart';
 import '../passive/icon_text.dart';
 
 class ProfileCard extends StatefulWidget {
   final Volunteer _volunteer;
+  final DatabaseManager _dbManager;
   final FileExplorer _fileExplorer;
 
   /* CONSTRUCTOR */
-  ProfileCard(Volunteer volunteer) : _volunteer = volunteer, _fileExplorer = FileExplorer();
+  ProfileCard(Volunteer volunteer, DatabaseManager dbManager)
+      : _volunteer = volunteer,
+        _dbManager = dbManager,
+        _fileExplorer = FileExplorer();
 
   /* METHODS */
   @override
@@ -26,8 +29,13 @@ class _ProfileCardState extends State<ProfileCard> {
     final _file = await widget._fileExplorer.getImage(ImageSource.gallery);
     if (_file == null) return;
 
+    // add the image to Firestore
+    String _imageURL = await widget._dbManager.addFile(_file, "profile_pictures");
+    widget._dbManager.addVolunteer(widget._volunteer);
+
+    // update the profile
     setState(() {
-      widget._volunteer.profilePicture = Image.file(_file);
+      widget._volunteer.profilePicture = NetworkImage(_imageURL);
     });
   }
 
@@ -83,7 +91,7 @@ class _ProfileCardState extends State<ProfileCard> {
                 addVerticalSpace(5),
                 CircleAvatar(
                   radius: 52.5,
-                  backgroundImage: widget._volunteer.profilePicture.image,
+                  backgroundImage: widget._volunteer.profilePicture,
                 ),
                 addVerticalSpace(5),
                 InkWell(
@@ -91,7 +99,8 @@ class _ProfileCardState extends State<ProfileCard> {
                     _changeProfilePicture();
                   },
                   child: IconText(
-                    icon: SvgPicture.asset("assets/images/icons/COCO_Pencil.svg"),
+                    icon:
+                        SvgPicture.asset("assets/images/icons/COCO_Pencil.svg"),
                     text: Text(
                       "Edit",
                       style: Theme.of(context).textTheme.bodySmall,

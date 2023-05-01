@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../models/volunteer.dart';
+import '../services/data/database_manager.dart';
 import 'home_page.dart';
 import 'notifications_page.dart';
 import 'profile_page.dart';
@@ -16,17 +16,20 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
-  late int _currIndex;
+  int _currIndex;
   late Volunteer _volunteer;
+  final DatabaseManager _dbManager;
 
   late final List<Widget> _pages = [
     HomePage(),
     NotificationsPage(),
-    ProfilePage(_volunteer),
+    ProfilePage(_volunteer, _dbManager),
   ];
 
   /* CONSTRUCTOR */
-  _NavigationPageState() : _currIndex = 0 {
+  _NavigationPageState()
+      : _currIndex = 0,
+        _dbManager = DatabaseManager() {
     _volunteer = _fetchVolunteerData();
   }
 
@@ -38,28 +41,16 @@ class _NavigationPageState extends State<NavigationPage> {
   }
 
   Volunteer _fetchVolunteerData() {
-    var _database = FirebaseFirestore.instance;
     var _user = FirebaseAuth.instance.currentUser;
 
     // fetch the data
-    _database
-        .collection("users")
-        .doc(_user?.email)
-        .get()
-        .then((documentSnapshot) {
-      if (documentSnapshot.exists) {
-        return Volunteer.fromFirestore(documentSnapshot.data());
-      }
-    });
+    Volunteer? volunteer = _dbManager.getVolunteer(_user?.email);
 
     // create a new user
-    Volunteer volunteer = Volunteer.fromGoogle(_user);
-
-    _database
-        .collection("users")
-        .doc(volunteer.email)
-        .set(volunteer.toJSON())
-        .onError((e, _) => print("Error adding a new user: $e"));
+    if (volunteer == null) {
+      volunteer = Volunteer.fromGoogle(_user);
+      _dbManager.addVolunteer(volunteer);
+    }
 
     return volunteer;
   }

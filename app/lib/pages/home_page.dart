@@ -37,8 +37,7 @@ class HomePage extends StatelessWidget {
                 addHorizontalSpace(250), // future search bar
 
                 IconButton(
-                  icon:
-                      SvgPicture.asset("assets/images/icons/COCO_Loupe.svg"),
+                  icon: SvgPicture.asset("assets/images/icons/COCO_Loupe.svg"),
                   onPressed: () => {},
                 ),
               ],

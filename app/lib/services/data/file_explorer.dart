@@ -10,14 +10,17 @@ class FileExplorer {
   FileExplorer() : _imagePicker = ImagePicker();
 
   Future<File?> getImage(ImageSource source) async {
+    File? _file = null;
+
     try {
       final _image = await _imagePicker.pickImage(source: source);
       if (_image == null) return null;
 
-      return File(_image.path);
-    }
-    on PlatformException catch (e) {
+      _file = File(_image.path);
+    } on PlatformException catch (e) {
       print("Failed to select image: $e");
     }
+
+    return _file;
   }
 }
