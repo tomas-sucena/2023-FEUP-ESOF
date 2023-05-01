@@ -5,7 +5,7 @@ class Volunteer {
   late String _name;
   late String _email;
   late String _phoneNumber;
-  late String _photoURL;
+  late Image _profilePicture;
   late int _eventsAttended;
 
   /* CONSTRUCTORS */
@@ -18,7 +18,9 @@ class Volunteer {
 
     // can be null
     _phoneNumber = user.phoneNumber ?? "";
-    _photoURL = user.photoURL ?? "";
+    _profilePicture = (user.photoURL == null)
+        ? Image.asset("assets/images/pedroanime.png")
+        : Image.network(user.photoURL!);
 
     _eventsAttended = 0;
   }
@@ -30,25 +32,25 @@ class Volunteer {
     _name = data["name"];
     _email = data["email"];
     _phoneNumber = data["phoneNumber"];
+    _profilePicture = data["profilePicture"];
     _eventsAttended = 0;
-    _photoURL = data["photoURL"];
   }
 
   /* METHODS */
-  get name => _name;
-  get email => _email;
-  get phoneNumber => _phoneNumber;
-  get eventsAttended => _eventsAttended;
-  get profilePicture => (_photoURL.isEmpty)
-      ? Image.asset("assets/images/pedroanime.png")
-      : Image.network(_photoURL);
+  String get name => _name;
+  String get email => _email;
+  String get phoneNumber => _phoneNumber;
+  Image get profilePicture => _profilePicture;
+  int get eventsAttended => _eventsAttended;
+
+  set profilePicture(Image profilePicture) => _profilePicture = profilePicture;
 
   toJSON() {
     return {
       "name": _name,
       "email": _email,
       "phoneNumber": _phoneNumber,
-      "photoURL": _photoURL
+      "profilePicture": _profilePicture,
     };
   }
 }

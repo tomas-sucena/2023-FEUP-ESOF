@@ -1,13 +1,20 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../models/volunteer.dart';
+import '../../services/files/file_explorer.dart';
 import '../../utils/alignment.dart';
+import '../passive/icon_text.dart';
 
 class ProfileCard extends StatefulWidget {
-  late final Volunteer _volunteer;
+  final Volunteer _volunteer;
+  final FileExplorer _fileExplorer;
 
   /* CONSTRUCTOR */
-  ProfileCard(Volunteer volunteer) : _volunteer = volunteer;
+  ProfileCard(Volunteer volunteer) : _volunteer = volunteer, _fileExplorer = FileExplorer();
 
   /* METHODS */
   @override
@@ -15,6 +22,15 @@ class ProfileCard extends StatefulWidget {
 }
 
 class _ProfileCardState extends State<ProfileCard> {
+  void _changeProfilePicture() async {
+    final _file = await widget._fileExplorer.getImage(ImageSource.gallery);
+    if (_file == null) return;
+
+    setState(() {
+      widget._volunteer.profilePicture = Image.file(_file);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -48,14 +64,41 @@ class _ProfileCardState extends State<ProfileCard> {
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ],
-                    )
+                    ),
                   ],
-                )
+                ),
+                addVerticalSpace(18),
+                IconText(
+                  icon: SvgPicture.asset("assets/images/icons/COCO_Email.svg"),
+                  text: Text(
+                    widget._volunteer.email,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
               ],
             ),
-            CircleAvatar(
-              radius: 52.5,
-              backgroundImage: widget._volunteer.profilePicture.image,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                addVerticalSpace(5),
+                CircleAvatar(
+                  radius: 52.5,
+                  backgroundImage: widget._volunteer.profilePicture.image,
+                ),
+                addVerticalSpace(5),
+                InkWell(
+                  onTap: () {
+                    _changeProfilePicture();
+                  },
+                  child: IconText(
+                    icon: SvgPicture.asset("assets/images/icons/COCO_Pencil.svg"),
+                    text: Text(
+                      "Edit",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
