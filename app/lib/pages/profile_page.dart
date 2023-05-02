@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../components/passive/profile_card.dart';
+import '../components/interactive/profile_card.dart';
 import '../models/volunteer.dart';
+import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
 
 class ProfilePage extends StatefulWidget {
-  late final Volunteer _volunteer;
+  final Volunteer _volunteer;
+  final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
-  ProfilePage(Volunteer volunteer) : _volunteer = volunteer;
+  ProfilePage(Volunteer volunteer, DatabaseManager dbManager)
+      : _volunteer = volunteer,
+        _dbManager = dbManager;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -31,8 +34,8 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             ),
           ),
-          addVerticalSpace(15),
-          ProfileCard(widget._volunteer),
+          addVerticalSpace(10),
+          ProfileCard(widget._volunteer, widget._dbManager),
         ],
       ),
     );

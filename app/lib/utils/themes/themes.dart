@@ -26,6 +26,10 @@ ThemeData lightTheme = ThemeData(
       color: const Color.fromRGBO(126, 126, 125, 1.0),
       height: 1.2,
     ),
+    bodySmall: const TextStyle(
+      fontSize: 16,
+      color: const Color.fromRGBO(126, 126, 125, 1.0),
+    ),
   ),
 );
 
@@ -54,6 +58,10 @@ ThemeData darkTheme = ThemeData(
       fontSize: 20,
       color: const Color.fromRGBO(140, 140, 150, 1.0),
       height: 1.2,
+    ),
+    bodySmall: const TextStyle(
+      fontSize: 16,
+      color: const Color.fromRGBO(140, 140, 150, 1.0),
     ),
   ),
 );

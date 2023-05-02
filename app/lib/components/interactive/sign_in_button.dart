@@ -11,7 +11,7 @@ class SignInButton extends StatelessWidget {
   late final Color _textColor;
   late final TextDirection _textDirection;
 
-  // constructor
+  /* CONSTRUCTOR */
   SignInButton(
       {required Authenticator authenticator,
       required String logoFilename,
@@ -33,6 +33,7 @@ class SignInButton extends StatelessWidget {
     _textDirection = textDirection ?? TextDirection.ltr;
   }
 
+  /* METHOD */
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

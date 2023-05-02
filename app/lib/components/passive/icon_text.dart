@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 
 class IconText extends StatelessWidget {
   final Widget _icon;
-  final String _text;
-  late final double _distance;
+  final Text _text;
+  final double _distance;
 
   // constructor
-  IconText({required Widget icon, required String text, double? distance})
+  IconText({required Widget icon, required Text text, double? distance})
       : _icon = icon,
-        _text = text {
-    _distance = (distance == null) ? 5 : distance;
-  }
+        _text = text,
+        _distance = distance ?? 6;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +18,7 @@ class IconText extends StatelessWidget {
       children: [
         _icon,
         addHorizontalSpace(_distance),
-        Text(
-          _text,
-          style: const TextStyle(
-            fontFamily: 'Jost',
-            fontSize: 16,
-            color: Color.fromRGBO(0, 0, 0, 0.5),
-          ),
-        ),
+        _text,
       ],
     );
   }

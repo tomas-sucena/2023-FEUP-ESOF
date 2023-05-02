@@ -26,7 +26,7 @@ class CharityNet extends StatelessWidget {
       child: Consumer<ThemeManager>(
         builder: (context, themeManager, child) {
           return MaterialApp(
-            home: const AuthPage(),
+            home: AuthPage(),
             theme: themeManager.getTheme(),
             debugShowCheckedModeBanner: false,
           );
