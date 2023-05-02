@@ -15,8 +15,12 @@ class DatabaseManager {
         _storage = FirebaseStorage.instance;
 
   /* METHODS */
-  Volunteer? getVolunteer(String? email) {
-    _database.collection("users").doc(email).get().then((documentSnapshot) {
+  Future<Volunteer?> getVolunteer(String? email) async {
+    await _database
+        .collection("users")
+        .doc(email)
+        .get()
+        .then((documentSnapshot) {
       if (documentSnapshot.exists) {
         return Volunteer.fromFirestore(documentSnapshot.data());
       }
@@ -25,8 +29,8 @@ class DatabaseManager {
     return null;
   }
 
-  void addVolunteer(Volunteer volunteer) {
-    _database
+  Future<void> addVolunteer(Volunteer volunteer) async {
+    await _database
         .collection("users")
         .doc(volunteer.email)
         .set(volunteer.toJSON())

@@ -29,14 +29,15 @@ class _ProfileCardState extends State<ProfileCard> {
     final _file = await widget._fileExplorer.getImage(ImageSource.gallery);
     if (_file == null) return;
 
-    // add the image to Firestore
     String _imageURL = await widget._dbManager.addFile(_file, "profile_pictures");
-    widget._dbManager.addVolunteer(widget._volunteer);
 
     // update the profile
     setState(() {
       widget._volunteer.profilePicture = NetworkImage(_imageURL);
     });
+
+    // update the database
+    widget._dbManager.addVolunteer(widget._volunteer);
   }
 
   @override
