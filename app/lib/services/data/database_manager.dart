@@ -16,17 +16,12 @@ class DatabaseManager {
 
   /* METHODS */
   Future<Volunteer?> getVolunteer(String? email) async {
-    await _database
+    final documentSnapshot = await _database
         .collection("users")
         .doc(email)
-        .get()
-        .then((documentSnapshot) {
-      if (documentSnapshot.exists) {
-        return Volunteer.fromFirestore(documentSnapshot.data());
-      }
-    });
+        .get();
 
-    return null;
+    return (documentSnapshot.exists) ? Volunteer.fromFirestore(documentSnapshot.data()) : null;
   }
 
   Future<void> addVolunteer(Volunteer volunteer) async {

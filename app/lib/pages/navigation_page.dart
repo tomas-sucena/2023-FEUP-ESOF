@@ -9,50 +9,35 @@ import 'notifications_page.dart';
 import 'profile_page.dart';
 
 class NavigationPage extends StatefulWidget {
-  const NavigationPage({Key? key}) : super(key: key);
+  final Volunteer _volunteer;
+  final DatabaseManager _dbManager;
 
+  /* CONSTRUCTOR */
+  const NavigationPage(Volunteer volunteer, DatabaseManager dbManager, {Key? key}) : _volunteer = volunteer, _dbManager = dbManager, super(key: key);
+
+  /* METHOD */
   @override
   State<NavigationPage> createState() => _NavigationPageState();
 }
 
 class _NavigationPageState extends State<NavigationPage> {
   int _currIndex;
-  late Volunteer _volunteer;
-  final DatabaseManager _dbManager;
 
   late final List<Widget> _pages = [
     HomePage(),
     NotificationsPage(),
-    ProfilePage(_volunteer, _dbManager),
+    ProfilePage(widget._volunteer, widget._dbManager),
   ];
 
   /* CONSTRUCTOR */
   _NavigationPageState()
-      : _currIndex = 0,
-        _dbManager = DatabaseManager() {
-    _volunteer = _fetchVolunteerData();
-  }
+      : _currIndex = 0;
 
   /* METHODS */
   void _changePage(int pageIndex) {
     setState(() {
       _currIndex = pageIndex;
     });
-  }
-
-  Volunteer _fetchVolunteerData() {
-    var _user = FirebaseAuth.instance.currentUser;
-
-    // fetch the data
-    Volunteer? volunteer = _dbManager.getVolunteer(_user?.email);
-
-    // create a new user
-    if (volunteer == null) {
-      volunteer = Volunteer.fromGoogle(_user);
-      _dbManager.addVolunteer(volunteer);
-    }
-
-    return volunteer;
   }
 
   @override
