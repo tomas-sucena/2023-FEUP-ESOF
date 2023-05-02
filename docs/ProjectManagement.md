@@ -53,3 +53,25 @@
 #### What still puzzles us?
 - How to estimate and manage the time we have available.
 - How to add/fetch data to/from the database.
+
+## Iteration #3 (v0.4)
+
+### Before
+![Before Iteration #3](https://user-images.githubusercontent.com/93825634/235809283-ffb9ce57-81df-4bf2-90f9-85c9d704d170.png)
+
+### After
+![After Iteration #3](https://user-images.githubusercontent.com/93825634/235809503-7219c0ee-0927-4521-bd12-60b915af2c48.png)
+
+### The Four Questions
+
+#### What went well?
+- TODO
+
+#### What didn't go well?
+- TODO
+
+#### What have we learned?
+- TODO
+
+#### What still puzzles us?
+- TODO
