@@ -6,26 +6,31 @@ import '../services/data/database_manager.dart';
 import 'login_page.dart';
 import 'navigation_page.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
   AuthPage({Key? key}) : _dbManager = DatabaseManager(), super(key: key);
 
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  late final Future<Volunteer> _volunteer;
+
   /* METHODS */
+  @override
+  void initState() {
+    super.initState();
+    _volunteer = _fetchVolunteerData();
+  }
+
   Future<Volunteer> _fetchVolunteerData() async {
     var _user = FirebaseAuth.instance.currentUser;
 
     // fetch the data
-    Volunteer? _volunteer = await _dbManager.getVolunteer(_user?.email);
-
-    // create a new user
-    if (_volunteer == null){
-      _volunteer = Volunteer.fromGoogle(_user);
-      await _dbManager.addVolunteer(_volunteer!);
-    }
-
-    return _volunteer;
+    return await widget._dbManager.getVolunteer(_user);
   }
 
   @override
@@ -39,12 +44,12 @@ class AuthPage extends StatelessWidget {
 
           // user is logged in
           return FutureBuilder<Volunteer>(
-            future: _fetchVolunteerData(),
+            future: _volunteer,
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done)
                 return const SizedBox.shrink();
 
-              return NavigationPage(snapshot.data!, _dbManager);
+              return NavigationPage(snapshot.data!, widget._dbManager);
             },
           );
         },
