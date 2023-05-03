@@ -48,28 +48,28 @@ class _NavigationPageState extends State<NavigationPage> {
         currentIndex: _currIndex,
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/images/icons/COCO_Home.svg'),
+            icon: SvgPicture.asset('assets/images/icons/COCO_Home.svg', height: 38,),
             activeIcon:
-                SvgPicture.asset('assets/images/icons/COCO_Home_active.svg'),
+                SvgPicture.asset('assets/images/icons/COCO_Home_active.svg', height: 38,),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon:
-                SvgPicture.asset('assets/images/icons/COCO_Notifications.svg'),
+                SvgPicture.asset('assets/images/icons/COCO_Notifications.svg', height: 38,),
             activeIcon: SvgPicture.asset(
-                'assets/images/icons/COCO_Notifications_active.svg'),
+                'assets/images/icons/COCO_Notifications_active.svg', height: 38,),
             label: 'Notifications',
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset('assets/images/icons/COCO_Profile.svg'),
+            icon: SvgPicture.asset('assets/images/icons/COCO_Profile.svg', height: 38,),
             activeIcon:
-                SvgPicture.asset('assets/images/icons/COCO_Profile_active.svg'),
+                SvgPicture.asset('assets/images/icons/COCO_Profile_active.svg', height: 38,),
             label: 'Profile',
           ),
         ],
         onTap: _changePage,
-        selectedFontSize: 16,
-        unselectedFontSize: 14,
+        selectedFontSize: 14,
+        unselectedFontSize: 12,
       ),
     );
   }
