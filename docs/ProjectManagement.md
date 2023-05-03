@@ -20,9 +20,9 @@
 - We weren't able to finish all the planned issues for this iteration
 
 #### What have we learned?
-- We learned how to plan an iteration
-- We learned to set up a firebase project and use its authentication service
-- We learned how to work with many flutter widgets, such as the BottomNavigationBar
+- How to plan an iteration
+- How to set up a firebase project and use its authentication service
+- How to work with many Flutter widgets, such as the BottomNavigationBar
 
 #### What still puzzles us?
 - How to manage expectations and plan an iteration accordingly
@@ -47,8 +47,8 @@
 - We overestimated how much time we would have for this iteration. <br>As such, an issue we had planned to tackle was not fully implemented.
 
 #### What have we learned?
-- We learned how to design better UI in Flutter.
-- We learned how to switch themes in Flutter.
+- How to design better UI in Flutter.
+- How to switch themes in Flutter.
 
 #### What still puzzles us?
 - How to estimate and manage the time we have available.
@@ -65,13 +65,16 @@
 ### The Four Questions
 
 #### What went well?
-- TODO
+- We are now very accustomed to Flutter and, as such, we do not face nowhere near as many coding issues as we did in the beginning
 
 #### What didn't go well?
-- TODO
+- Once again, we estimated that we would have more time for this iteration. <br> Consequently, we could not close an issue we had planned to tackle.
+- Even though we eventually figured it out, fetching data from the database proved to be more difficult than anticipated
 
 #### What have we learned?
-- TODO
+- How to manage our database (i.e. read/write data)
+- How to write asynchronous code
 
 #### What still puzzles us?
-- TODO
+- How to properly manage time
+- How to connect to an API
