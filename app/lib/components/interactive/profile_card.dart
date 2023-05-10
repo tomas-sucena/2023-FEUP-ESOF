@@ -7,6 +7,7 @@ import '../../models/volunteer.dart';
 import '../../services/data/file_explorer.dart';
 import '../../utils/alignment.dart';
 import '../passive/icon_text.dart';
+import '../passive/profile_picture.dart';
 
 class ProfileCard extends StatefulWidget {
   final Volunteer _volunteer;
@@ -89,10 +90,10 @@ class _ProfileCardState extends State<ProfileCard> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                addVerticalSpace(5),
-                CircleAvatar(
-                  radius: 52.5,
-                  backgroundImage: widget._volunteer.profilePicture,
+                addVerticalSpace(10),
+                ProfilePicture(
+                  image: widget._volunteer.profilePicture,
+                  size: 105,
                 ),
                 addVerticalSpace(5),
                 InkWell(
