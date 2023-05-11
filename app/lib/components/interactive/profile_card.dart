@@ -30,7 +30,8 @@ class _ProfileCardState extends State<ProfileCard> {
     final _file = await widget._fileExplorer.getImage(ImageSource.gallery);
     if (_file == null) return;
 
-    String _imageURL = await widget._dbManager.addFile(_file, "profile_pictures");
+    String _imageURL =
+        await widget._dbManager.addFile(_file, "profile_pictures");
 
     // update the profile
     setState(() {

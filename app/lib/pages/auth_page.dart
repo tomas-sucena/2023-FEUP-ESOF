@@ -10,7 +10,9 @@ class AuthPage extends StatefulWidget {
   final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
-  AuthPage({Key? key}) : _dbManager = DatabaseManager(), super(key: key);
+  AuthPage({Key? key})
+      : _dbManager = DatabaseManager(),
+        super(key: key);
 
   @override
   State<AuthPage> createState() => _AuthPageState();

@@ -5,8 +5,11 @@ class ProfilePicture extends StatelessWidget {
   final double _size;
 
   /* CONSTRUCTOR */
-  const ProfilePicture({required ImageProvider image, required double size, Key? key})
-      : _image = image, _size = size, super(key: key);
+  const ProfilePicture(
+      {required ImageProvider image, required double size, Key? key})
+      : _image = image,
+        _size = size,
+        super(key: key);
 
   /* METHODS */
   @override
