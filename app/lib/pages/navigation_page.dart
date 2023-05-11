@@ -21,46 +21,29 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
-  late int _currIndex;
-  late final List<Widget> _pages;
-  late final PageController _pageController;
+  int _currIndex;
+
+  late final List<Widget> _pages = [
+    HomePage(),
+    NotificationsPage(),
+    ProfilePage(widget._volunteer, widget._dbManager),
+  ];
+
+  /* CONSTRUCTOR */
+  _NavigationPageState()
+      : _currIndex = 0;
 
   /* METHODS */
-  @override
-  void initState() {
-    super.initState();
-
-    _currIndex = 0;
-    _pages = [
-      HomePage(),
-      NotificationsPage(),
-      ProfilePage(widget._volunteer, widget._dbManager),
-    ];
-    _pageController = PageController(initialPage: _currIndex);
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-
-    super.dispose();
-  }
-
   void _changePage(int pageIndex) {
     setState(() {
       _currIndex = pageIndex;
-      _pageController.jumpToPage(_currIndex);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        physics: NeverScrollableScrollPhysics(),
-        children: _pages,
-      ),
+      body: _pages[_currIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currIndex,
         items: [

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../pages/event_page.dart';
 import '../../utils/alignment.dart';
 import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
@@ -12,12 +11,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const EventPage()),
-        )
-      },
+      onTap: () => {},
       child: Container(
         height: 100,
         width: 360,
