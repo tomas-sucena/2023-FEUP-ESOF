@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 class PageNavigator extends StatelessWidget {
   final Widget _page;
+  final Key _key;
   final bool _isActive;
-  final GlobalKey<NavigatorState> _navigatorKey;
 
   /* CONSTRUCTOR */
-  PageNavigator({required Widget page, required bool isActive, Key? key})
+  PageNavigator(
+      {required Widget page, required Key key, required bool isActive})
       : _page = page,
-        _isActive = isActive,
-        _navigatorKey = GlobalKey<NavigatorState>(),
-        super(key: key);
+        _key = key,
+        _isActive = isActive;
 
   /* METHODS */
   @override
@@ -18,7 +18,7 @@ class PageNavigator extends StatelessWidget {
     return Offstage(
       offstage: !_isActive,
       child: Navigator(
-        key: _navigatorKey,
+        key: _key,
         onGenerateRoute: (routeSettings) => MaterialPageRoute(
           builder: (context) => _page,
         ),

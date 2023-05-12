@@ -26,6 +26,15 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState extends State<NavigationPage> {
   late int _currIndex;
+  final List<Key> _keys;
+
+  /* CONSTRUCTOR */
+  _NavigationPageState()
+      : _keys = [
+          GlobalKey<NavigatorState>(),
+          GlobalKey<NavigatorState>(),
+          GlobalKey<NavigatorState>(),
+        ];
 
   /* METHODS */
   @override
@@ -47,14 +56,17 @@ class _NavigationPageState extends State<NavigationPage> {
         children: [
           PageNavigator(
             page: HomePage(),
+            key: _keys[0],
             isActive: _currIndex == 0,
           ),
           PageNavigator(
             page: NotificationsPage(),
+            key: _keys[1],
             isActive: _currIndex == 1,
           ),
           PageNavigator(
             page: ProfilePage(widget._volunteer, widget._dbManager),
+            key: _keys[2],
             isActive: _currIndex == 2,
           ),
         ],
