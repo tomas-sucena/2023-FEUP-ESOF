@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../pages/event_page.dart';
 import '../../utils/alignment.dart';
 import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
@@ -11,7 +12,12 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {},
+      onTap: () => {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const EventPage()),
+        )
+      },
       child: Container(
         height: 100,
         width: 360,
@@ -21,7 +27,7 @@ class EventCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Color.fromRGBO(0, 0, 0, 0.25),
-              offset: Offset(0,2),
+              offset: Offset(0, 2),
               blurRadius: 2,
             ),
           ],
@@ -42,12 +48,15 @@ class EventCard extends StatelessWidget {
                 Text(
                   "Save the turtles!",
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                    fontSize: 32,
-                  ),
+                        fontSize: 32,
+                      ),
                 ),
                 addVerticalSpace(5),
                 IconText(
-                  icon: SvgPicture.asset("assets/images/icons/COCO_Profile.svg", height: 24,),
+                  icon: SvgPicture.asset(
+                    "assets/images/icons/COCO_Profile.svg",
+                    height: 24,
+                  ),
                   text: Text(
                     "Projeto TAMAR",
                     style: Theme.of(context).textTheme.displaySmall,
