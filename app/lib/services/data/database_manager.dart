@@ -40,4 +40,11 @@ class DatabaseManager {
     await _ref.putFile(file);
     return await _ref.getDownloadURL();
   }
+
+  Future<void> removeFile(String fileURL) async {
+    await _storage
+        .refFromURL(fileURL)
+        .delete()
+        .onError((e, _) => print("Error deleting a file: $e"));
+  }
 }

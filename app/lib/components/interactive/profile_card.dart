@@ -30,16 +30,18 @@ class _ProfileCardState extends State<ProfileCard> {
     final _file = await widget._fileExplorer.getImage(ImageSource.gallery);
     if (_file == null) return;
 
-    String _imageURL =
-        await widget._dbManager.addFile(_file, "profile_pictures");
+    final String _oldImageURL = widget._volunteer.profilePicture.url,
+        _newImageURL =
+            await widget._dbManager.addFile(_file, "profile_pictures");
 
     // update the profile
     setState(() {
-      widget._volunteer.profilePicture = NetworkImage(_imageURL);
+      widget._volunteer.profilePicture = NetworkImage(_newImageURL);
     });
 
     // update the database
     widget._dbManager.addVolunteer(widget._volunteer);
+    widget._dbManager.removeFile(_oldImageURL);
   }
 
   @override
