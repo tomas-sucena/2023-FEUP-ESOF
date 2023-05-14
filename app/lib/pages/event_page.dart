@@ -5,6 +5,7 @@ import '../components/passive/icon_text.dart';
 import '../components/passive/profile_picture.dart';
 import '../models/event.dart';
 import '../utils/alignment.dart';
+import '../utils/icons/coco_icon.dart';
 
 class EventPage extends StatelessWidget {
   final Event _event;
@@ -44,8 +45,8 @@ class EventPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                   IconText(
-                    icon: SvgPicture.asset(
-                      "assets/images/icons/COCO_Profile_active.svg",
+                    icon: COCOIcon(
+                      iconName: "Profile",
                       height: 24,
                     ),
                     text: Text(
@@ -55,8 +56,8 @@ class EventPage extends StatelessWidget {
                   ),
                   addVerticalSpace(30),
                   IconText(
-                    icon: SvgPicture.asset(
-                      "assets/images/icons/COCO_Location.svg",
+                    icon: COCOIcon(
+                      iconName: "Location",
                       height: 24,
                     ),
                     text: Text(
@@ -66,8 +67,8 @@ class EventPage extends StatelessWidget {
                   ),
                   addVerticalSpace(4),
                   IconText(
-                    icon: SvgPicture.asset(
-                      "assets/images/icons/COCO_Email.svg",
+                    icon: COCOIcon(
+                      iconName: "Email",
                       height: 24,
                     ),
                     text: Text(
@@ -77,8 +78,8 @@ class EventPage extends StatelessWidget {
                   ),
                   addVerticalSpace(4),
                   IconText(
-                    icon: SvgPicture.asset(
-                      "assets/images/icons/COCO_Phone.svg",
+                    icon: COCOIcon(
+                      iconName: "Phone",
                       height: 24,
                     ),
                     text: Text(

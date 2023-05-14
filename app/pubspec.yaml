@@ -58,7 +58,9 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/icons/
+    - assets/images/icons/dark_mode/
+    - assets/images/icons/light_mode/
+    - assets/images/icons/others/
 
   fonts:
     - family: Dokdo

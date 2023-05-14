@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/alignment.dart';
+import '../../utils/icons/coco_icon.dart';
 import '../../utils/themes/theme_manager.dart';
 
 class SearchBar extends StatelessWidget {
@@ -35,11 +35,13 @@ class SearchBar extends StatelessWidget {
               );
             },
           ),
-
           addHorizontalSpace(250), // future search bar
-
           IconButton(
-            icon: SvgPicture.asset("assets/images/icons/COCO_Loupe.svg"),
+            icon: COCOIcon(
+              iconName: "Loupe",
+              height: 40,
+              themeDependent: false,
+            ),
             onPressed: () => {},
           ),
         ],

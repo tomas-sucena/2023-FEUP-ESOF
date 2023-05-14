@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../models/volunteer.dart';
 import '../../services/data/file_explorer.dart';
 import '../../utils/alignment.dart';
+import '../../utils/icons/coco_icon.dart';
 import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
 
@@ -82,7 +83,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                 ),
                 addVerticalSpace(18),
                 IconText(
-                  icon: SvgPicture.asset("assets/images/icons/COCO_Email.svg"),
+                  icon: COCOIcon(
+                    iconName: "Email",
+                    height: 24,
+                  ),
                   text: Text(
                     widget._volunteer.email,
                     style: Theme.of(context).textTheme.bodySmall,
@@ -104,8 +108,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     _changeProfilePicture();
                   },
                   child: IconText(
-                    icon:
-                        SvgPicture.asset("assets/images/icons/COCO_Pencil.svg"),
+                    icon: COCOIcon(
+                      iconName: "Pencil",
+                      height: 24,
+                    ),
                     text: Text(
                       "Edit",
                       style: Theme.of(context).textTheme.bodySmall,

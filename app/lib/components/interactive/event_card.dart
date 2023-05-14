@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../models/event.dart';
 import '../../pages/event_page.dart';
 import '../../utils/alignment.dart';
+import '../../utils/icons/coco_icon.dart';
 import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
 
@@ -38,7 +39,7 @@ class EventCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.25),
+              color: const Color.fromRGBO(0, 0, 0, 0.25),
               offset: Offset(0, 2),
               blurRadius: 2,
             ),
@@ -65,9 +66,10 @@ class EventCard extends StatelessWidget {
                 ),
                 addVerticalSpace(5),
                 IconText(
-                  icon: SvgPicture.asset(
-                    "assets/images/icons/COCO_Profile.svg",
+                  icon: COCOIcon(
+                    iconName: "Profile",
                     height: 24,
+                    themeDependent: false,
                   ),
                   text: Text(
                     "Projeto TAMAR",
