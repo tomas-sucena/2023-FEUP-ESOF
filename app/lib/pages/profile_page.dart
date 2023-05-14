@@ -36,6 +36,13 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           addVerticalSpace(10),
           ProfileInfo(widget._volunteer, widget._dbManager),
+          addVerticalSpace(54),
+          Center(
+            child: Text(
+              'Recent Events',
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+          ),
         ],
       ),
     );

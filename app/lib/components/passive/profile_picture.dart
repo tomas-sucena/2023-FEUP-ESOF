@@ -22,6 +22,9 @@ class ProfilePicture extends StatelessWidget {
           image: _image,
           fit: BoxFit.fitHeight,
         ),
+        border: Border.all(
+          color: Color.fromRGBO(157, 157, 157, 1.0),
+        ),
         borderRadius: BorderRadius.circular(10),
       ),
     );

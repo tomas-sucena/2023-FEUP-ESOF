@@ -116,13 +116,6 @@ class _ProfileInfoState extends State<ProfileInfo> {
             ),
           ],
         ),
-        addVerticalSpace(10),
-        Center(
-          child: Text(
-            'Recent Events',
-            style: Theme.of(context).textTheme.displayMedium,
-          ),
-        ),
       ],
     );
   }
