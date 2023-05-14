@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../models/event.dart';
 import '../../pages/event_page.dart';
@@ -39,7 +38,7 @@ class EventCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: const Color.fromRGBO(0, 0, 0, 0.25),
+              color: Theme.of(context).shadowColor,
               offset: Offset(0, 2),
               blurRadius: 2,
             ),

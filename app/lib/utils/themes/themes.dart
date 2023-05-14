@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 ThemeData lightTheme = ThemeData(
   // colors
   scaffoldBackgroundColor: const Color.fromRGBO(252, 252, 249, 1.0),
+  shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
 
   // UI elements
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -34,8 +35,11 @@ ThemeData lightTheme = ThemeData(
 );
 
 ThemeData darkTheme = ThemeData(
+  applyElevationOverlayColor: true,
+
   // colors
   scaffoldBackgroundColor: const Color.fromRGBO(26, 27, 46, 1.0),
+  shadowColor: const Color.fromRGBO(255, 255, 255, 0.25),
 
   // UI elements
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
