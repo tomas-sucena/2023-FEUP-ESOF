@@ -25,7 +25,7 @@ class Volunteer {
 
   Volunteer.fromFirestore(Map<String, dynamic>? data) {
     if (data == null)
-      throw Exception("The document does not contain any data!");
+      throw Exception("The database does not contain this user!");
 
     _name = data["name"];
     _email = data["email"];

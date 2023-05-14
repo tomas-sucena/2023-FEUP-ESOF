@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../components/interactive/profile_card.dart';
+import '../components/interactive/profile_info.dart';
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
@@ -35,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
           addVerticalSpace(10),
-          ProfileCard(widget._volunteer, widget._dbManager),
+          ProfileInfo(widget._volunteer, widget._dbManager),
         ],
       ),
     );

@@ -9,23 +9,23 @@ import '../../utils/alignment.dart';
 import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
 
-class ProfileCard extends StatefulWidget {
+class ProfileInfo extends StatefulWidget {
   final Volunteer _volunteer;
   final DatabaseManager _dbManager;
   final FileExplorer _fileExplorer;
 
   /* CONSTRUCTOR */
-  ProfileCard(Volunteer volunteer, DatabaseManager dbManager)
+  ProfileInfo(Volunteer volunteer, DatabaseManager dbManager)
       : _volunteer = volunteer,
         _dbManager = dbManager,
         _fileExplorer = FileExplorer();
 
   /* METHODS */
   @override
-  State<ProfileCard> createState() => _ProfileCardState();
+  State<ProfileInfo> createState() => _ProfileInfoState();
 }
 
-class _ProfileCardState extends State<ProfileCard> {
+class _ProfileInfoState extends State<ProfileInfo> {
   void _changeProfilePicture() async {
     final _file = await widget._fileExplorer.getImage(ImageSource.gallery);
     if (_file == null) return;
