@@ -19,6 +19,18 @@ class EventPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: COCOIcon(
+            iconName: "Left_arrow",
+            height: 35,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: Column(
         children: [
           addVerticalSpace(40),

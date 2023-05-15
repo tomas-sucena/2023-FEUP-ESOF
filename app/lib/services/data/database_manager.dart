@@ -34,11 +34,11 @@ class DatabaseManager {
   }
 
   Future<String> addFile(File file, String directory, {String? id}) async {
-    String _id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
-    final _ref = _storage.ref().child(directory).child(_id);
+    id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = _storage.ref().child(directory).child(id);
 
-    await _ref.putFile(file);
-    return await _ref.getDownloadURL();
+    await ref.putFile(file);
+    return await ref.getDownloadURL();
   }
 
   Future<void> removeFile(String fileURL) async {
