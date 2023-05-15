@@ -5,9 +5,3 @@ app/.*
 app/build/
 app/analysis_options.yaml
 app/pubspec.lock
-
-# ignore iOS build
-app/ios/
-
-# ignore Windows build
-app/windows/
