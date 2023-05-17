@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../components/interactive/sign_in_button.dart';
 import '../services/authentication/google_authenticator.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _signInWithEmailAndPassword() async {
+    final String email = _emailController.text.trim();
+    final String password = _passwordController.text.trim();
+
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      } catch (e) {
+      print('Sign-in error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +77,43 @@ class LoginPage extends StatelessWidget {
                 logoFilename: "google_logo.png",
                 name: "Google",
               ),
+
+              const SizedBox(height: 20),
+
+              // Email input
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: TextFormField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    labelText: 'Email',
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 10),
+
+              // Password input
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: TextFormField(
+                  controller: _passwordController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // Sign in button
+              ElevatedButton(
+                onPressed: _signInWithEmailAndPassword,
+                child: Text('Sign In'),
+              ),
+
+              const SizedBox(height: 10),
             ],
           ),
         ),
