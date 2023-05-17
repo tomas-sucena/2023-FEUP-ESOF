@@ -40,8 +40,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
     });
 
     // update the database
-    widget._dbManager.addVolunteer(widget._volunteer);
-    widget._dbManager.removeFile(_oldImageURL);
+    await widget._dbManager.addVolunteer(widget._volunteer);
+    await widget._dbManager.removeFile(_oldImageURL);
   }
 
   @override

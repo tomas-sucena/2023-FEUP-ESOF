@@ -18,14 +18,13 @@ class DatabaseManager {
   /* METHODS */
   Future<Volunteer> getVolunteer(User? user) async {
     final documentSnapshot =
-        await _database.collection("users").doc(user?.uid).get();
+        await _database.collection("users").doc(user?.email).get();
 
-    if (documentSnapshot.exists){
-      return Volunteer.fromFirestore(documentSnapshot.data());
-    }
+    if (documentSnapshot.exists)
+      return Volunteer.fromLogin(documentSnapshot.data());
 
-    final Volunteer volunteer = Volunteer.fromGoogle(user);
-    await addVolunteer(volunteer);
+    final Volunteer volunteer = Volunteer.fromRegister(user);
+    addVolunteer(volunteer);
 
     return volunteer;
   }
@@ -33,7 +32,7 @@ class DatabaseManager {
   Future<void> addVolunteer(Volunteer volunteer) async {
     _database
       .collection("users")
-      .doc(volunteer.id)
+      .doc(volunteer.email)
       .set(volunteer.toJSON())
       .onError((e, _) => print("Error adding a new user: $e"));
   }
@@ -47,9 +46,9 @@ class DatabaseManager {
   }
 
   Future<void> removeFile(String fileURL) async {
-    await _storage
-        .refFromURL(fileURL)
-        .delete()
-        .onError((e, _) => print("Error deleting a file: $e"));
+    _storage
+      .refFromURL(fileURL)
+      .delete()
+      .onError((e, _) => print("Error deleting a file: $e"));
   }
 }
