@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
+import '../../models/event.dart';
 import '../../pages/event_page.dart';
 import '../../utils/alignment.dart';
+import '../../utils/icons/coco_icon.dart';
 import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
 
@@ -15,7 +16,18 @@ class EventCard extends StatelessWidget {
       onTap: () => {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const EventPage()),
+          MaterialPageRoute(
+            builder: (context) => EventPage(
+              event: Event(
+                  "Save the turtles!",
+                  "Projeto TAMAR",
+                  "Porto, Portugal",
+                  "tamarproj@gmail.com",
+                  "(+351) 937 200 663",
+                  "https://lh3.googleusercontent.com/ci/AJFM8ry_EaAf7fSLbdIQB6TlX7qaLX57eBR6l0OFVATGZ6OonoIk4xQFqef8xn9V90cbDR9D-RQTTg",
+                  "We will head to the beach in order to help the newborn baby turtles reach the sea.\n\nLet us save the turtles!"),
+            ),
+          ),
         )
       },
       child: Container(
@@ -26,7 +38,7 @@ class EventCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.25),
+              color: Theme.of(context).shadowColor,
               offset: Offset(0, 2),
               blurRadius: 2,
             ),
@@ -53,9 +65,10 @@ class EventCard extends StatelessWidget {
                 ),
                 addVerticalSpace(5),
                 IconText(
-                  icon: SvgPicture.asset(
-                    "assets/images/icons/COCO_Profile.svg",
+                  icon: COCOIcon(
+                    iconName: "Profile",
                     height: 24,
+                    themeDependent: false,
                   ),
                   text: Text(
                     "Projeto TAMAR",

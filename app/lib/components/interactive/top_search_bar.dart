@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/alignment.dart';
+import '../../utils/icons/coco_icon.dart';
 import '../../utils/themes/theme_manager.dart';
 
 class TopSearchBar extends StatelessWidget {
@@ -18,7 +18,7 @@ class TopSearchBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.5),
+            color: Theme.of(context).shadowColor,
             offset: Offset(0, 2),
             blurRadius: 3,
           ),
@@ -35,11 +35,13 @@ class TopSearchBar extends StatelessWidget {
               );
             },
           ),
-
           addHorizontalSpace(250), // future search bar
-
           IconButton(
-            icon: SvgPicture.asset("assets/images/icons/COCO_Loupe.svg"),
+            icon: COCOIcon(
+              iconName: "Loupe",
+              height: 40,
+              themeDependent: false,
+            ),
             onPressed: () => {},
           ),
         ],

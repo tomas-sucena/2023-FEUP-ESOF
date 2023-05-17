@@ -29,10 +29,10 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   Future<Volunteer> _fetchVolunteerData() async {
-    var _user = FirebaseAuth.instance.currentUser;
+    var user = FirebaseAuth.instance.currentUser;
 
     // fetch the data
-    return await widget._dbManager.getVolunteer(_user);
+    return await widget._dbManager.getVolunteer(user);
   }
 
   @override
