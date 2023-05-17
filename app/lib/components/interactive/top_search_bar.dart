@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../../utils/alignment.dart';
 import '../../utils/themes/theme_manager.dart';
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({Key? key}) : super(key: key);
+class TopSearchBar extends StatelessWidget {
+  const TopSearchBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
