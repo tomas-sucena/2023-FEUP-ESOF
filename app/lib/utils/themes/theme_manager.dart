@@ -1,5 +1,5 @@
+import 'package:app/utils/icons/coco_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'themes.dart';
@@ -25,10 +25,18 @@ class ThemeManager extends ChangeNotifier {
     return (_darkMode) ? darkTheme : lightTheme;
   }
 
-  SvgPicture getIcon() {
+  COCOIcon getIcon() {
     return (_darkMode)
-        ? SvgPicture.asset("assets/images/icons/COCO_Sun.svg", height: 40)
-        : SvgPicture.asset("assets/images/icons/COCO_Moon.svg");
+        ? COCOIcon(
+            iconName: "Sun",
+            height: 40,
+            themeDependent: false,
+          )
+        : COCOIcon(
+            iconName: "Moon",
+            height: 40,
+            themeDependent: false,
+          );
   }
 
   void switchTheme() async {

@@ -1,5 +1,5 @@
+import 'package:app/utils/icons/coco_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
@@ -78,35 +78,41 @@ class _NavigationPageState extends State<NavigationPage> {
           onTap: _changePage,
           items: [
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/images/icons/COCO_Home.svg',
+              icon: COCOIcon(
+                iconName: "Home",
                 height: 38,
+                themeDependent: false,
               ),
-              activeIcon: SvgPicture.asset(
-                'assets/images/icons/COCO_Home_active.svg',
+              activeIcon: COCOIcon(
+                iconName: "Home_active",
                 height: 38,
+                themeDependent: false,
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/images/icons/COCO_Notifications.svg',
+              icon: COCOIcon(
+                iconName: "Notifications",
                 height: 38,
+                themeDependent: false,
               ),
-              activeIcon: SvgPicture.asset(
-                'assets/images/icons/COCO_Notifications_active.svg',
+              activeIcon: COCOIcon(
+                iconName: "Notifications_active",
                 height: 38,
+                themeDependent: false,
               ),
               label: 'Notifications',
             ),
             BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/images/icons/COCO_Profile.svg',
+              icon: COCOIcon(
+                iconName: "Profile",
                 height: 38,
+                themeDependent: false,
               ),
-              activeIcon: SvgPicture.asset(
-                'assets/images/icons/COCO_Profile_active.svg',
+              activeIcon: COCOIcon(
+                iconName: "Profile_active",
                 height: 38,
+                themeDependent: false,
               ),
               label: 'Profile',
             ),

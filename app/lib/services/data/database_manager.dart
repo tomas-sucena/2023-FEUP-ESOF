@@ -18,27 +18,32 @@ class DatabaseManager {
   /* METHODS */
   Future<Volunteer> getVolunteer(User? user) async {
     final documentSnapshot =
-        await _database.collection("users").doc(user?.email).get();
+        await _database.collection("users").doc(user?.uid).get();
 
-    return (documentSnapshot.exists)
-        ? Volunteer.fromFirestore(documentSnapshot.data())
-        : Volunteer.fromGoogle(user);
+    if (documentSnapshot.exists){
+      return Volunteer.fromFirestore(documentSnapshot.data());
+    }
+
+    final Volunteer volunteer = Volunteer.fromGoogle(user);
+    await addVolunteer(volunteer);
+
+    return volunteer;
   }
 
   Future<void> addVolunteer(Volunteer volunteer) async {
-    await _database
-        .collection("users")
-        .doc(volunteer.email)
-        .set(volunteer.toJSON())
-        .onError((e, _) => print("Error adding a new user: $e"));
+    _database
+      .collection("users")
+      .doc(volunteer.id)
+      .set(volunteer.toJSON())
+      .onError((e, _) => print("Error adding a new user: $e"));
   }
 
   Future<String> addFile(File file, String directory, {String? id}) async {
-    String _id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
-    final _ref = _storage.ref().child(directory).child(_id);
+    id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = _storage.ref().child(directory).child(id);
 
-    await _ref.putFile(file);
-    return await _ref.getDownloadURL();
+    await ref.putFile(file);
+    return ref.getDownloadURL();
   }
 
   Future<void> removeFile(String fileURL) async {
