@@ -1,6 +1,5 @@
 import 'package:app/utils/icons/coco_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
