@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../components/interactive/event_card.dart';
-import '../components/interactive/search_bar.dart';
+import '../components/interactive/top_search_bar.dart';
 import '../utils/alignment.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         children: [
           addVerticalSpace(48),
           Center(
-            child: SearchBar(),
+            child: TopSearchBar(),
           ),
           addVerticalSpace(20),
           EventCard(),
