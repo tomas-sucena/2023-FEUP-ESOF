@@ -21,7 +21,7 @@ class DatabaseManager {
         await _database.collection("users").doc(user?.email).get();
 
     if (documentSnapshot.exists)
-      return Volunteer.fromLogin(documentSnapshot.data());
+      return Volunteer.fromJSON(documentSnapshot.data());
 
     final Volunteer volunteer = Volunteer.fromGoogle(user);
     addVolunteer(volunteer);

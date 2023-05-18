@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../components/interactive/profile_info.dart';
@@ -42,6 +43,12 @@ class _ProfilePageState extends State<ProfilePage> {
               'Recent Events',
               style: Theme.of(context).textTheme.displayMedium,
             ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+            },
+            child: Text("Sign out"),
           ),
         ],
       ),

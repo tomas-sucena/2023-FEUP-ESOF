@@ -17,6 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController;
   final TextEditingController _passwordController;
+  final TextEditingController _repeatedPasswordController;
   final TextEditingController _nameController;
   late bool _showRegister;
 
@@ -24,6 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   _LoginPageState()
       : _emailController = TextEditingController(),
         _passwordController = TextEditingController(),
+        _repeatedPasswordController = TextEditingController(),
         _nameController = TextEditingController();
 
   /* METHODS */
@@ -37,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _repeatedPasswordController.dispose();
     _nameController.dispose();
     super.dispose();
   }
@@ -46,11 +49,19 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         addVerticalSpace(20),
         ElevatedButton(
-          onPressed: () {
-            EmailAuthenticator(
-              email: _emailController.text,
+          onPressed: () async {
+            final String response = await EmailAuthenticator(
+              email: _emailController.text.trim(),
               password: _passwordController.text,
             ).signIn();
+
+            if (response == "success") return;
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(response),
+              ),
+            );
           },
           child: Text("Sign in"),
         ),
@@ -114,6 +125,16 @@ class _LoginPageState extends State<LoginPage> {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: MyTextFormField(
+            controller: _repeatedPasswordController,
+            inputType: InputType.password,
+            color: const Color.fromRGBO(233, 161, 136, 1),
+            labelText: "Repeat Password",
+          ),
+        ),
+        addVerticalSpace(10),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30),
+          child: MyTextFormField(
             controller: _nameController,
             inputType: InputType.name,
             color: const Color.fromRGBO(233, 161, 136, 1),
@@ -121,14 +142,42 @@ class _LoginPageState extends State<LoginPage> {
         ),
         addVerticalSpace(20),
         ElevatedButton(
-          onPressed: () {
-            EmailAuthenticator(
-              email: _emailController.text,
+          onPressed: () async {
+            final String response = await EmailAuthenticator(
+              email: _emailController.text.trim(),
               password: _passwordController.text,
-              name: _nameController.text,
+              repeatedPassword: _repeatedPasswordController.text,
+              name: _nameController.text.trim(),
             ).register();
+
+            if (response == "success") return;
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(response),
+              ),
+            );
           },
           child: Text("Register"),
+        ),
+        addVerticalSpace(10),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: "Already have an account? ",
+                style: TextStyle(
+                  color: const Color.fromRGBO(0, 0, 0, 125),
+                ),
+              ),
+              TextSpan(
+                text: "Sign in here",
+                style: TextStyle(color: Colors.blue),
+                recognizer: TapGestureRecognizer()
+                  ..onTap = () => _switchBottom(),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -205,7 +254,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: const Color.fromRGBO(233, 161, 136, 1),
                   ),
                 ),
-                (_showRegister) ? _buildRegisterForm() : _buildLoginForm(),
+                _showRegister ? _buildRegisterForm() : _buildLoginForm(),
               ],
             ),
           ),
