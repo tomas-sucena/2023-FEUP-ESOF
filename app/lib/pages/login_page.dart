@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../components/interactive/my_text_field.dart';
 import '../components/interactive/sign_in_button.dart';
 import '../services/authentication/email_authenticator.dart';
 import '../services/authentication/google_authenticator.dart';
@@ -112,11 +113,10 @@ class _LoginPageState extends State<LoginPage> {
         addVerticalSpace(10),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: TextFormField(
+          child: MyTextFormField(
             controller: _nameController,
-            decoration: InputDecoration(
-              labelText: 'Name',
-            ),
+            inputType: InputType.name,
+            color: const Color.fromRGBO(233, 161, 136, 1),
           ),
         ),
         addVerticalSpace(20),
@@ -190,23 +190,19 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: TextFormField(
+                  child: MyTextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(
-                      labelText: 'Email',
-                    ),
+                    inputType: InputType.email,
+                    color: const Color.fromRGBO(233, 161, 136, 1),
                   ),
                 ),
                 addVerticalSpace(10),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: TextFormField(
+                  child: MyTextFormField(
                     controller: _passwordController,
-                    obscureText: true,
-                    autocorrect: false,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                    ),
+                    inputType: InputType.password,
+                    color: const Color.fromRGBO(233, 161, 136, 1),
                   ),
                 ),
                 (_showRegister) ? _buildRegisterForm() : _buildLoginForm(),

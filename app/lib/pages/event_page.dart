@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../components/passive/icon_text.dart';
 import '../components/passive/profile_picture.dart';
@@ -39,7 +38,7 @@ class EventPage extends StatelessWidget {
               'Event',
               style: const TextStyle(
                 fontSize: 40,
-                color: Color.fromRGBO(233, 161, 136, 1),
+                color: const Color.fromRGBO(233, 161, 136, 1),
               ),
             ),
           ),
