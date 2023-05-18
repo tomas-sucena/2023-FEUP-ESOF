@@ -23,7 +23,7 @@ class DatabaseManager {
     if (documentSnapshot.exists)
       return Volunteer.fromLogin(documentSnapshot.data());
 
-    final Volunteer volunteer = Volunteer.fromRegister(user);
+    final Volunteer volunteer = Volunteer.fromGoogle(user);
     addVolunteer(volunteer);
 
     return volunteer;
@@ -31,10 +31,10 @@ class DatabaseManager {
 
   Future<void> addVolunteer(Volunteer volunteer) async {
     _database
-      .collection("users")
-      .doc(volunteer.email)
-      .set(volunteer.toJSON())
-      .onError((e, _) => print("Error adding a new user: $e"));
+        .collection("users")
+        .doc(volunteer.email)
+        .set(volunteer.toJSON())
+        .onError((e, _) => print("Error adding a new user: $e"));
   }
 
   Future<String> addFile(File file, String directory, {String? id}) async {
@@ -47,8 +47,8 @@ class DatabaseManager {
 
   Future<void> removeFile(String fileURL) async {
     _storage
-      .refFromURL(fileURL)
-      .delete()
-      .onError((e, _) => print("Error deleting a file: $e"));
+        .refFromURL(fileURL)
+        .delete()
+        .onError((e, _) => print("Error deleting a file: $e"));
   }
 }

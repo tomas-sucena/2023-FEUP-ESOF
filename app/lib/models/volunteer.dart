@@ -9,7 +9,7 @@ class Volunteer {
   late int _eventsAttended;
 
   /* CONSTRUCTORS */
-  Volunteer.fromRegister(User? user) {
+  Volunteer.fromGoogle(User? user) {
     if (user == null) throw Exception("The user does not contain any data!");
 
     // cannot be null

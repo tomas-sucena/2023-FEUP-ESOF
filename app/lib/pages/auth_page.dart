@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
-import 'login_buttons_page.dart';
+import 'login_page.dart';
 import 'navigation_page.dart';
 
 class AuthPage extends StatefulWidget {
@@ -42,7 +42,7 @@ class _AuthPageState extends State<AuthPage> {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           // user is NOT logged in
-          if (!snapshot.hasData) return LoginButtonsPage();
+          if (!snapshot.hasData) return LoginPage();
 
           // user is logged in
           return FutureBuilder<Volunteer>(

@@ -30,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
               'Profile',
               style: const TextStyle(
                 fontSize: 40,
-                color: Color.fromRGBO(233, 161, 136, 1),
+                color: const Color.fromRGBO(233, 161, 136, 1),
               ),
             ),
           ),
