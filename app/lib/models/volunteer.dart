@@ -8,8 +8,11 @@ class Volunteer {
   late NetworkImage _profilePicture;
   late int _eventsAttended;
 
+  static final String _defaultProfilePictureURL =
+      "https://i.pinimg.com/736x/c2/cf/2d/c2cf2dc539707a77ca40b8afe64ab1c1--pikachu-raichu-cute-pikachu.jpg";
+
   /* CONSTRUCTORS */
-  Volunteer.fromRegister(User? user) {
+  Volunteer.fromGoogle(User? user) {
     if (user == null) throw Exception("The user does not contain any data!");
 
     // cannot be null
@@ -23,14 +26,19 @@ class Volunteer {
     _eventsAttended = 0;
   }
 
-  Volunteer.fromLogin(Map<String, dynamic>? data) {
+  Volunteer.fromJSON(Map<String, dynamic>? data) {
     if (data == null)
       throw Exception("The database does not contain this user!");
 
+    // cannot be null
     _name = data["name"];
     _email = data["email"];
-    _phoneNumber = data["phoneNumber"];
-    _profilePicture = NetworkImage(data["profilePictureURL"]);
+
+    // can be null
+    _phoneNumber = data["phoneNumber"] ?? "";
+    _profilePicture =
+        NetworkImage(data["profilePictureURL"] ?? _defaultProfilePictureURL);
+
     _eventsAttended = 0;
   }
 

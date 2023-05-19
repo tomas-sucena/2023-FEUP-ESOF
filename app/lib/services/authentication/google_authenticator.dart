@@ -3,12 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import 'authenticator.dart';
 
-class GoogleAuthenticator implements Authenticator {
-  final FirebaseAuth _auth;
-
-  /* CONSTRUCTOR */
-  GoogleAuthenticator() : _auth = FirebaseAuth.instance;
-
+class GoogleAuthenticator extends Authenticator {
   /* METHODS */
   @override
   signIn() async {
@@ -26,11 +21,6 @@ class GoogleAuthenticator implements Authenticator {
     );
 
     // sign in
-    return await _auth.signInWithCredential(credential);
-  }
-
-  @override
-  void signOut() async {
-    _auth.signOut();
+    await auth.signInWithCredential(credential);
   }
 }
