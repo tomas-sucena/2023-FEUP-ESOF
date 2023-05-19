@@ -73,7 +73,7 @@ class _NavigationPageState extends State<NavigationPage> {
         body: Stack(
           children: [
             PageNavigator(
-              page: HomePage(),
+              page: HomePage(volunteer: snapshot.data!),
               key: _keys[0],
               isActive: _currPageIndex == 0,
             ),
@@ -96,12 +96,12 @@ class _NavigationPageState extends State<NavigationPage> {
             BottomNavigationBarItem(
               icon: COCOIcon(
                 iconName: "Home",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Home_active",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               label: 'Home',
@@ -109,12 +109,12 @@ class _NavigationPageState extends State<NavigationPage> {
             BottomNavigationBarItem(
               icon: COCOIcon(
                 iconName: "Notifications",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Notifications_active",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               label: 'Notifications',
@@ -122,19 +122,19 @@ class _NavigationPageState extends State<NavigationPage> {
             BottomNavigationBarItem(
               icon: COCOIcon(
                 iconName: "Profile",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Profile_active",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               label: 'Profile',
             ),
           ],
-          selectedFontSize: 14,
-          unselectedFontSize: 12,
+          selectedFontSize: 12,
+          unselectedFontSize: 10,
         ),
       ),
     );

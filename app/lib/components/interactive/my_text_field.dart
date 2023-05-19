@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
 
-enum InputType { email, password, name }
+enum InputType { text, password, description }
 
 class MyTextFormField extends StatefulWidget {
   final TextEditingController _controller;
   final InputType _inputType;
   final Color _color;
+  final Color _focusedColor;
   final String? _labelText;
+  final double _padding;
+  final OutlineInputBorder? _border;
 
   /* CONSTRUCTOR */
   MyTextFormField(
       {required TextEditingController controller,
-      required InputType inputType,
       required Color color,
+      Color? focusedColor,
+      InputType? inputType,
       String? labelText,
+      double? padding,
+      OutlineInputBorder? border,
       Key? key})
       : _controller = controller,
-        _inputType = inputType,
         _color = color,
-        _labelText = labelText,
+        _focusedColor = focusedColor ?? color,
+        _inputType = inputType ?? InputType.text,
+        _labelText = labelText ?? '',
+        _padding = 30,
+        _border = border,
         super(key: key);
 
   /* METHODS */
@@ -27,34 +36,36 @@ class MyTextFormField extends StatefulWidget {
 }
 
 class _MyTextFormFieldState extends State<MyTextFormField> {
-  final Map<InputType, String> _labelTexts;
-
-  /* CONSTRUCTOR */
-  _MyTextFormFieldState()
-      : _labelTexts = {
-          InputType.email: "Email",
-          InputType.password: "Password",
-          InputType.name: "Name",
-        };
-
-  /* METHODS */
+  /* METHOD */
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: widget._controller,
-      obscureText: (widget._inputType == InputType.password),
-      decoration: InputDecoration(
-        labelText: widget._labelText ?? _labelTexts[widget._inputType],
-        labelStyle: TextStyle(color: const Color.fromRGBO(0, 0, 0, 125)),
-        floatingLabelStyle: TextStyle(color: widget._color),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: widget._color,
-            width: 1.2,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: widget._padding),
+      child: TextFormField(
+        controller: widget._controller,
+        obscureText: (widget._inputType == InputType.password),
+        decoration: InputDecoration(
+          labelText: widget._labelText,
+          labelStyle: TextStyle(color: widget._color),
+          floatingLabelStyle: TextStyle(color: widget._focusedColor),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: widget._color,
+              width: 1.2,
+            ),
           ),
+          focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+              color: widget._focusedColor,
+              width: 1.2,
+            ),
+          ),
+          border: widget._border,
         ),
+        cursorColor: widget._focusedColor,
+        cursorWidth: 1.0,
+        style: TextStyle(color: widget._focusedColor),
       ),
-      cursorColor: widget._color,
     );
   }
 }

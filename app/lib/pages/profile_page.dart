@@ -27,11 +27,11 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           addVerticalSpace(40),
           Center(
-            child: const Text(
+            child: Text(
               'Profile',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 40,
-                color: const Color.fromRGBO(233, 161, 136, 1),
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),

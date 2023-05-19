@@ -63,6 +63,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
           child: Text("Sign in"),
         ),
         addVerticalSpace(10),
@@ -77,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextSpan(
                 text: "Register here",
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Theme.of(context).primaryColor),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _switchBottom(),
               ),
@@ -122,23 +125,19 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: [
         addVerticalSpace(10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: MyTextFormField(
-            controller: _repeatedPasswordController,
-            inputType: InputType.password,
-            color: const Color.fromRGBO(233, 161, 136, 1),
-            labelText: "Repeat Password",
-          ),
+        MyTextFormField(
+          controller: _repeatedPasswordController,
+          inputType: InputType.password,
+          color: const Color.fromRGBO(0, 0, 0, 125),
+          //focusedColor: Theme.of(context).primaryColor,
+          labelText: "Repeat password",
         ),
         addVerticalSpace(10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: MyTextFormField(
-            controller: _nameController,
-            inputType: InputType.name,
-            color: const Color.fromRGBO(233, 161, 136, 1),
-          ),
+        MyTextFormField(
+          controller: _nameController,
+          color: const Color.fromRGBO(0, 0, 0, 125),
+          //focusedColor: Theme.of(context).primaryColor,
+          labelText: "Name",
         ),
         addVerticalSpace(20),
         ElevatedButton(
@@ -158,6 +157,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).primaryColor,
+          ),
           child: Text("Register"),
         ),
         addVerticalSpace(10),
@@ -172,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextSpan(
                 text: "Sign in here",
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Theme.of(context).primaryColor),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _switchBottom(),
               ),
@@ -237,22 +239,19 @@ class _LoginPageState extends State<LoginPage> {
                     height: 1,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: MyTextFormField(
-                    controller: _emailController,
-                    inputType: InputType.email,
-                    color: const Color.fromRGBO(233, 161, 136, 1),
-                  ),
+                MyTextFormField(
+                  controller: _emailController,
+                  color: const Color.fromRGBO(0, 0, 0, 125),
+                  //focusedColor: Theme.of(context).primaryColor,
+                  labelText: "Email",
                 ),
                 addVerticalSpace(10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: MyTextFormField(
-                    controller: _passwordController,
-                    inputType: InputType.password,
-                    color: const Color.fromRGBO(233, 161, 136, 1),
-                  ),
+                MyTextFormField(
+                  controller: _passwordController,
+                  inputType: InputType.password,
+                  color: const Color.fromRGBO(0, 0, 0, 125),
+                  //focusedColor: Theme.of(context).primaryColor,
+                  labelText: "Password",
                 ),
                 _showRegister ? _buildRegisterForm() : _buildLoginForm(),
               ],
