@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../models/volunteer.dart';
@@ -16,17 +15,14 @@ class DatabaseManager {
         _storage = FirebaseStorage.instance;
 
   /* METHODS */
-  Future<Volunteer> getVolunteer(User? user) async {
+  Future<Volunteer> getVolunteer(String email) async {
     final documentSnapshot =
-        await _database.collection("users").doc(user?.email).get();
+        await _database.collection("users").doc(email).get();
 
-    if (documentSnapshot.exists)
-      return Volunteer.fromJSON(documentSnapshot.data());
+    if (!documentSnapshot.exists)
+      throw Exception("The user with email $email does not exist!");
 
-    final Volunteer volunteer = Volunteer.fromGoogle(user);
-    addVolunteer(volunteer);
-
-    return volunteer;
+    return Volunteer.fromJSON(documentSnapshot.data());
   }
 
   Future<void> addVolunteer(Volunteer volunteer) async {

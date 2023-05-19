@@ -1,4 +1,5 @@
 import 'package:app/utils/icons/coco_icon.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../models/volunteer.dart';
@@ -9,14 +10,11 @@ import 'notifications_page.dart';
 import 'profile_page.dart';
 
 class NavigationPage extends StatefulWidget {
-  final Volunteer _volunteer;
   final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
-  const NavigationPage(Volunteer volunteer, DatabaseManager dbManager,
-      {Key? key})
-      : _volunteer = volunteer,
-        _dbManager = dbManager,
+  const NavigationPage(DatabaseManager dbManager, {Key? key})
+      : _dbManager = dbManager,
         super(key: key);
 
   /* METHOD */
@@ -25,7 +23,8 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
-  late int _currIndex;
+  late final Future<Volunteer> _volunteer;
+  late int _currPageIndex;
   final List<GlobalKey<NavigatorState>> _keys;
 
   /* CONSTRUCTOR */
@@ -40,41 +39,58 @@ class _NavigationPageState extends State<NavigationPage> {
   @override
   void initState() {
     super.initState();
-    _currIndex = 0;
+    _currPageIndex = 0;
+    _fetchVolunteerData();
+  }
+
+  Future<void> _fetchVolunteerData() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) throw Exception("The current user has no data!");
+
+    final String email = user.email!;
+    _volunteer = widget._dbManager.getVolunteer(email);
   }
 
   void _changePage(int pageIndex) {
     setState(() {
-      _currIndex = pageIndex;
+      _currPageIndex = pageIndex;
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildLoadingScreen() {
+    return const Center(
+      child: const CircularProgressIndicator(
+        color: const Color.fromRGBO(233, 161, 136, 1),
+      ),
+    );
+  }
+
+  Widget _buildNavigationBar(AsyncSnapshot snapshot) {
     return WillPopScope(
-      onWillPop: () async => !await _keys[_currIndex].currentState!.maybePop(),
+      onWillPop: () async =>
+          !await _keys[_currPageIndex].currentState!.maybePop(),
       child: Scaffold(
         body: Stack(
           children: [
             PageNavigator(
               page: HomePage(),
               key: _keys[0],
-              isActive: _currIndex == 0,
+              isActive: _currPageIndex == 0,
             ),
             PageNavigator(
               page: NotificationsPage(),
               key: _keys[1],
-              isActive: _currIndex == 1,
+              isActive: _currPageIndex == 1,
             ),
             PageNavigator(
-              page: ProfilePage(widget._volunteer, widget._dbManager),
+              page: ProfilePage(snapshot.data!, widget._dbManager),
               key: _keys[2],
-              isActive: _currIndex == 2,
+              isActive: _currPageIndex == 2,
             ),
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currIndex,
+          currentIndex: _currPageIndex,
           onTap: _changePage,
           items: [
             BottomNavigationBarItem(
@@ -121,6 +137,18 @@ class _NavigationPageState extends State<NavigationPage> {
           unselectedFontSize: 12,
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<Volunteer>(
+      future: _volunteer,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return _buildLoadingScreen();
+
+        return _buildNavigationBar(snapshot);
+      },
     );
   }
 }

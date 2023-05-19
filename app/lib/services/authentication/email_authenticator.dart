@@ -55,11 +55,9 @@ class EmailAuthenticator extends Authenticator {
   }
 
   Future<String> register() async {
-    if (_password != _repeatedPassword)
-      return "The passwords do not match!";
+    if (_password != _repeatedPassword) return "The passwords do not match!";
 
-    if (_name.length > 18)
-      return "Name is too long!";
+    if (_name.length > 18) return "Name is too long!";
 
     try {
       await auth.createUserWithEmailAndPassword(
