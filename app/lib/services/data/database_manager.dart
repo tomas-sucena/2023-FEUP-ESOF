@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../../models/event.dart';
 import '../../models/volunteer.dart';
 
 class DatabaseManager {
@@ -15,21 +16,42 @@ class DatabaseManager {
         _storage = FirebaseStorage.instance;
 
   /* METHODS */
-  Future<Volunteer> getVolunteer(String email) async {
-    final documentSnapshot =
-        await _database.collection("users").doc(email).get();
+  Future<Volunteer> getVolunteer(String id) async {
+    final documentSnapshot = await _database.collection("users").doc(id).get();
+    final data = documentSnapshot.data();
 
-    if (!documentSnapshot.exists)
-      throw Exception("The user with email $email does not exist!");
+    if (!documentSnapshot.exists || data == null)
+      throw Exception("The user with id $id does not exist!");
 
-    return Volunteer.fromJSON(documentSnapshot.data());
+    return Volunteer.fromJSON(data);
   }
 
   Future<void> addVolunteer(Volunteer volunteer) async {
     _database
         .collection("users")
-        .doc(volunteer.email)
+        .doc(volunteer.id)
         .set(volunteer.toJSON())
+        .onError((e, _) => print("Error adding a new user: $e"));
+  }
+
+  Future<MyEvent> getEvent(String id) async {
+    final documentSnapshot = await _database.collection("events").doc(id).get();
+    final data = documentSnapshot.data();
+
+    if (!documentSnapshot.exists || data == null)
+      throw Exception("The event with id $id does not exist!");
+
+    final MyEvent event = MyEvent.fromJSON(data);
+    event.organizer = await getVolunteer(data["organizerId"]);
+
+    return event;
+  }
+
+  Future<void> addEvent(MyEvent event) async {
+    _database
+        .collection("users")
+        .doc(event.id)
+        .set(event.toJSON())
         .onError((e, _) => print("Error adding a new user: $e"));
   }
 

@@ -23,8 +23,12 @@ class EmailAuthenticator extends Authenticator {
 
   /* METHODS */
   Future<void> _updateDatabase() async {
+    User? user = auth.currentUser;
+    if (user == null) return;
+
     DatabaseManager().addVolunteer(
       Volunteer.fromJSON({
+        "id": user.uid,
         "name": _name,
         "email": _email,
       }),

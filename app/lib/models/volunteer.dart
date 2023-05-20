@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Volunteer {
+  late String _id;
   late String _name;
   late String _email;
   late String _phoneNumber;
@@ -16,6 +17,7 @@ class Volunteer {
     if (user == null) throw Exception("The user does not contain any data!");
 
     // cannot be null
+    _id = user.uid;
     _name = user.displayName!;
     _email = user.email!;
     _profilePicture = NetworkImage(user.photoURL!);
@@ -26,11 +28,9 @@ class Volunteer {
     _eventsAttended = 0;
   }
 
-  Volunteer.fromJSON(Map<String, dynamic>? data) {
-    if (data == null)
-      throw Exception("The database does not contain this user!");
-
+  Volunteer.fromJSON(Map<String, dynamic> data) {
     // cannot be null
+    _id = data["id"];
     _name = data["name"];
     _email = data["email"];
 
@@ -43,6 +43,7 @@ class Volunteer {
   }
 
   /* METHODS */
+  String get id => _id;
   String get name => _name;
   String get email => _email;
   String get phoneNumber => _phoneNumber;
@@ -54,6 +55,7 @@ class Volunteer {
 
   Map<String, dynamic> toJSON() {
     return {
+      "id": _id,
       "name": _name,
       "email": _email,
       "phoneNumber": _phoneNumber,

@@ -8,8 +8,14 @@ import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
 
 class EventCard extends StatelessWidget {
-  const EventCard({Key? key}) : super(key: key);
+  final MyEvent _event;
 
+  /* CONSTRUCTOR */
+  const EventCard({required MyEvent event, Key? key})
+      : _event = event,
+        super(key: key);
+
+  /* METHOD */
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -17,16 +23,7 @@ class EventCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EventPage(
-              event: Event(
-                  "Save the turtles!",
-                  "Projeto TAMAR",
-                  "Porto, Portugal",
-                  "tamarproj@gmail.com",
-                  "(+351) 937 200 663",
-                  "https://lh3.googleusercontent.com/ci/AJFM8ry_EaAf7fSLbdIQB6TlX7qaLX57eBR6l0OFVATGZ6OonoIk4xQFqef8xn9V90cbDR9D-RQTTg",
-                  "We will head to the beach in order to help the newborn baby turtles reach the sea.\n\nLet us save the turtles!"),
-            ),
+            builder: (context) => EventPage(event: _event),
           ),
         )
       },

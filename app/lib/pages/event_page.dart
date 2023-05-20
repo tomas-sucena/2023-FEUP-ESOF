@@ -7,10 +7,10 @@ import '../utils/alignment.dart';
 import '../utils/icons/coco_icon.dart';
 
 class EventPage extends StatelessWidget {
-  final Event _event;
+  final MyEvent _event;
 
   /* CONSTRUCTOR */
-  const EventPage({required Event event, Key? key})
+  const EventPage({required MyEvent event, Key? key})
       : _event = event,
         super(key: key);
 
@@ -61,7 +61,7 @@ class EventPage extends StatelessWidget {
                       height: 24,
                     ),
                     text: Text(
-                      _event.organizer,
+                      _event.organizer.name,
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
@@ -103,7 +103,7 @@ class EventPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: ProfilePicture(
-                  image: _event.profilePicture,
+                  image: _event.organizer.profilePicture,
                   size: 105,
                 ),
               ),

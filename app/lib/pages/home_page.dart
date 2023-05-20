@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../components/interactive/event_card.dart';
 import '../components/interactive/my_search_bar.dart';
+import '../models/event.dart';
 import '../models/volunteer.dart';
 import '../utils/alignment.dart';
 
@@ -34,7 +35,18 @@ class HomePage extends StatelessWidget {
             child: const MySearchBar(),
           ),
           addVerticalSpace(20),
-          EventCard(),
+          EventCard(
+            event: MyEvent(
+              name: "Save the turtles!",
+              organizer: _volunteer,
+              date: DateTime.now(),
+              location: "Porto, Portugal",
+              email: "projetotamar@gmail.com",
+              phoneNumber: '(+351) 936 635 466',
+              description:
+                  "We are heading to the beach in order to help the baby turtles reach the sea.\n\nLet's save the turtles!",
+            ),
+          ),
         ],
       ),
     );
