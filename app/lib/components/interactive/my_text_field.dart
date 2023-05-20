@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-enum InputType { text, password, description }
-
 class MyTextFormField extends StatefulWidget {
   final TextEditingController _controller;
-  final InputType _inputType;
   final Color _color;
   final Color _focusedColor;
+  final bool _hideText;
   final String? _labelText;
   final double _padding;
   final OutlineInputBorder? _border;
@@ -16,15 +14,15 @@ class MyTextFormField extends StatefulWidget {
       {required TextEditingController controller,
       required Color color,
       Color? focusedColor,
-      InputType? inputType,
       String? labelText,
+      bool? hideText,
       double? padding,
       OutlineInputBorder? border,
       Key? key})
       : _controller = controller,
         _color = color,
         _focusedColor = focusedColor ?? color,
-        _inputType = inputType ?? InputType.text,
+        _hideText = hideText ?? false,
         _labelText = labelText ?? '',
         _padding = 30,
         _border = border,
@@ -36,18 +34,45 @@ class MyTextFormField extends StatefulWidget {
 }
 
 class _MyTextFormFieldState extends State<MyTextFormField> {
-  /* METHOD */
+  final FocusNode _focusNode;
+  late Color _currColor;
+
+  /* CONSTRUCTOR */
+  _MyTextFormFieldState() : _focusNode = FocusNode();
+
+  /* METHODS */
+  @override
+  void initState() {
+    super.initState();
+    _currColor = widget._color;
+    _focusNode.addListener(_switchColor);
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _switchColor() {
+    setState(() {
+      _currColor = _focusNode.hasFocus ? widget._focusedColor : widget._color;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: widget._padding),
       child: TextFormField(
         controller: widget._controller,
-        obscureText: (widget._inputType == InputType.password),
+        focusNode: _focusNode,
+        onTap: _switchColor,
+        obscureText: widget._hideText,
         decoration: InputDecoration(
           labelText: widget._labelText,
-          labelStyle: TextStyle(color: widget._color),
-          floatingLabelStyle: TextStyle(color: widget._focusedColor),
+          labelStyle: TextStyle(color: _currColor),
+          floatingLabelStyle: TextStyle(color: _currColor),
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
               color: widget._color,
@@ -64,7 +89,7 @@ class _MyTextFormFieldState extends State<MyTextFormField> {
         ),
         cursorColor: widget._focusedColor,
         cursorWidth: 1.0,
-        style: TextStyle(color: widget._focusedColor),
+        style: TextStyle(color: _currColor),
       ),
     );
   }

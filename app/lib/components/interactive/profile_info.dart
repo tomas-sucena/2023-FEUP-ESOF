@@ -31,8 +31,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
     if (file == null) return;
 
     final String oldImageURL = widget._volunteer.profilePicture.url,
-        newImageURL =
-            await widget._dbManager.addFile(file, "profile_pictures");
+        newImageURL = await widget._dbManager.addFile(file, "profile_pictures");
 
     // update the profile
     setState(() {

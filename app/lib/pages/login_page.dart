@@ -127,9 +127,9 @@ class _LoginPageState extends State<LoginPage> {
         addVerticalSpace(10),
         MyTextFormField(
           controller: _repeatedPasswordController,
-          inputType: InputType.password,
           color: const Color.fromRGBO(0, 0, 0, 125),
           //focusedColor: Theme.of(context).primaryColor,
+          hideText: true,
           labelText: "Repeat password",
         ),
         addVerticalSpace(10),
@@ -248,9 +248,9 @@ class _LoginPageState extends State<LoginPage> {
                 addVerticalSpace(10),
                 MyTextFormField(
                   controller: _passwordController,
-                  inputType: InputType.password,
                   color: const Color.fromRGBO(0, 0, 0, 125),
                   //focusedColor: Theme.of(context).primaryColor,
+                  hideText: true,
                   labelText: "Password",
                 ),
                 _showRegister ? _buildRegisterForm() : _buildLoginForm(),

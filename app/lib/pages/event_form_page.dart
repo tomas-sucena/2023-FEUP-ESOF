@@ -58,7 +58,6 @@ class _EventFormPageState extends State<EventFormPage> {
           addVerticalSpace(20),
           MyTextFormField(
             controller: _nameController,
-            inputType: InputType.text,
             color: const Color.fromRGBO(162, 163, 170, 1.0),
             focusedColor: Theme.of(context).primaryColor,
             labelText: "Name",
@@ -67,7 +66,6 @@ class _EventFormPageState extends State<EventFormPage> {
           MyTextFormField(
             controller: _descriptionController,
             color: const Color.fromRGBO(162, 163, 170, 1.0),
-            inputType: InputType.description,
           )
         ],
       ),
