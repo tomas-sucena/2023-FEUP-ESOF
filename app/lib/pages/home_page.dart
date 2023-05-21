@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../components/interactive/event_card.dart';
 import '../components/interactive/my_search_bar.dart';
-import '../models/my_event.dart';
+import '../models/charity_event.dart';
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
           ),
           addVerticalSpace(20),
           EventCard(
-            event: MyEvent(
+            event: CharityEvent(
               name: "Save the turtles!",
               organizer: _volunteer,
               date: DateTime.now(),

@@ -1,6 +1,6 @@
 import 'volunteer.dart';
 
-class MyEvent {
+class CharityEvent {
   late String _id;
   late String _name;
   late Volunteer _organizer;
@@ -11,7 +11,7 @@ class MyEvent {
   late String _description;
 
   /* CONSTRUCTORS */
-  MyEvent(
+  CharityEvent(
       {String? id,
       required String name,
       required Volunteer organizer,
@@ -29,7 +29,7 @@ class MyEvent {
         _phoneNumber = phoneNumber,
         _description = description;
 
-  MyEvent.fromJSON(Map<String, dynamic>? data) {
+  CharityEvent.fromJSON(Map<String, dynamic>? data) {
     if (data == null)
       throw Exception("The database does not contain this event!");
 

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../components/interactive/my_text_box.dart';
 import '../components/interactive/my_text_field.dart';
 import '../components/passive/icon_text.dart';
-import '../models/my_event.dart';
+import '../models/charity_event.dart';
 import '../models/volunteer.dart';
 import '../utils/alignment.dart';
 import '../utils/icons/coco_icon.dart';
@@ -91,7 +91,7 @@ class _EventFormPageState extends State<EventFormPage> {
   void _submitEvent() async {
     if (!_validateUserInput()) return;
 
-    final MyEvent event = MyEvent(
+    final CharityEvent event = CharityEvent(
       name: _nameController.text.trim(),
       organizer: widget._organizer,
       date: _eventDate,

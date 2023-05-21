@@ -63,7 +63,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget._volunteer.eventsAttended.toString(),
+                      widget._volunteer.organizedEvents.length.toString(),
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                     addHorizontalSpace(15),
@@ -72,7 +72,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       children: [
                         addVerticalSpace(12),
                         Text(
-                          'Charity Events\nAttended',
+                          'Charity Events\nOrganized',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ],

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-import '../../models/my_event.dart';
+import '../../models/charity_event.dart';
 import '../../models/volunteer.dart';
 
 class DatabaseManager {
@@ -16,6 +16,18 @@ class DatabaseManager {
         _storage = FirebaseStorage.instance;
 
   /* METHODS */
+  Future<Volunteer> _parseVolunteerData(Map<String, dynamic> data) async {
+    final Volunteer volunteer = Volunteer.fromJSON(data);
+
+    for (String eventID in data["organizedEvents"])
+      volunteer.organizedEvents.add(await getEvent(eventID));
+
+    for (String eventID in data["favoriteEvents"])
+      volunteer.favoriteEvents.add(await getEvent(eventID));
+
+    return volunteer;
+  }
+
   Future<Volunteer> getVolunteer(String id) async {
     final documentSnapshot = await _database.collection("users").doc(id).get();
     final data = documentSnapshot.data();
@@ -23,7 +35,7 @@ class DatabaseManager {
     if (!documentSnapshot.exists || data == null)
       throw Exception("The user with id $id does not exist!");
 
-    return Volunteer.fromJSON(data);
+    return await _parseVolunteerData(data);
   }
 
   Future<void> addVolunteer(Volunteer volunteer) async {
@@ -34,20 +46,20 @@ class DatabaseManager {
         .onError((e, _) => print("Error adding a new user: $e"));
   }
 
-  Future<MyEvent> getEvent(String id) async {
+  Future<CharityEvent> getEvent(String id) async {
     final documentSnapshot = await _database.collection("events").doc(id).get();
     final data = documentSnapshot.data();
 
     if (!documentSnapshot.exists || data == null)
       throw Exception("The event with id $id does not exist!");
 
-    final MyEvent event = MyEvent.fromJSON(data);
+    final CharityEvent event = CharityEvent.fromJSON(data);
     event.organizer = await getVolunteer(data["organizerId"]);
 
     return event;
   }
 
-  Future<void> addEvent(MyEvent event) async {
+  Future<void> addEvent(CharityEvent event) async {
     _database
         .collection("users")
         .doc(event.id)

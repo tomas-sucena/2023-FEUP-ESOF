@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/my_event.dart';
+import '../../models/charity_event.dart';
 import '../../pages/event_page.dart';
 import '../../utils/alignment.dart';
 import '../../utils/icons/coco_icon.dart';
@@ -8,10 +8,10 @@ import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
 
 class EventCard extends StatelessWidget {
-  final MyEvent _event;
+  final CharityEvent _event;
 
   /* CONSTRUCTOR */
-  const EventCard({required MyEvent event, Key? key})
+  const EventCard({required CharityEvent event, Key? key})
       : _event = event,
         super(key: key);
 

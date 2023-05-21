@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../components/passive/icon_text.dart';
 import '../components/passive/profile_picture.dart';
-import '../models/my_event.dart';
+import '../models/charity_event.dart';
 import '../utils/alignment.dart';
 import '../utils/icons/coco_icon.dart';
 
 class EventPage extends StatelessWidget {
-  final MyEvent _event;
+  final CharityEvent _event;
 
   /* CONSTRUCTOR */
-  const EventPage({required MyEvent event, Key? key})
+  const EventPage({required CharityEvent event, Key? key})
       : _event = event,
         super(key: key);
 
