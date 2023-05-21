@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../models/event.dart';
+import '../../models/my_event.dart';
 import '../../pages/event_page.dart';
 import '../../utils/alignment.dart';
 import '../../utils/icons/coco_icon.dart';

@@ -1,17 +1,25 @@
+import 'package:app/services/data/database_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../components/interactive/my_text_box.dart';
 import '../components/interactive/my_text_field.dart';
 import '../components/passive/icon_text.dart';
+import '../models/my_event.dart';
 import '../models/volunteer.dart';
 import '../utils/alignment.dart';
 import '../utils/icons/coco_icon.dart';
 
 class EventFormPage extends StatefulWidget {
-  final Volunteer _volunteer;
+  final Volunteer _organizer;
+  final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
-  const EventFormPage({required Volunteer volunteer, Key? key})
-      : _volunteer = volunteer,
+  const EventFormPage(
+      {required Volunteer organizer,
+      required DatabaseManager dbManager,
+      Key? key})
+      : _organizer = organizer,
+        _dbManager = dbManager,
         super(key: key);
 
   /* METHOD */
@@ -26,6 +34,7 @@ class _EventFormPageState extends State<EventFormPage> {
   final TextEditingController _phoneNumberController;
   final TextEditingController _descriptionController;
   DateTime _eventDate;
+  final List<GlobalKey<FormState>> _keys;
 
   /* CONSTRUCTOR */
   _EventFormPageState()
@@ -34,7 +43,14 @@ class _EventFormPageState extends State<EventFormPage> {
         _emailController = TextEditingController(),
         _phoneNumberController = TextEditingController(),
         _descriptionController = TextEditingController(),
-        _eventDate = DateTime.now();
+        _eventDate = DateTime.now(),
+        _keys = [
+          GlobalKey<FormState>(),
+          GlobalKey<FormState>(),
+          GlobalKey<FormState>(),
+          GlobalKey<FormState>(),
+          GlobalKey<FormState>(),
+        ];
 
   /* METHODS */
   @override
@@ -45,6 +61,16 @@ class _EventFormPageState extends State<EventFormPage> {
     _phoneNumberController.dispose();
     _descriptionController.dispose();
     super.dispose();
+  }
+
+  bool _validateUserInput() {
+    for (GlobalKey<FormState> key in _keys) {
+      FormState? state = key.currentState;
+
+      if (state == null || !state.validate()) return false;
+    }
+
+    return true;
   }
 
   void _changeEventDate() async {
@@ -62,6 +88,20 @@ class _EventFormPageState extends State<EventFormPage> {
     });
   }
 
+  void _submitEvent() async {
+    if (!_validateUserInput()) return;
+
+    final MyEvent event = MyEvent(
+      name: _nameController.text.trim(),
+      organizer: widget._organizer,
+      date: _eventDate,
+      location: _locationController.text.trim(),
+      email: _emailController.text.trim(),
+      phoneNumber: _phoneNumberController.text.trim(),
+      description: _descriptionController.text.trim(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,74 +117,85 @@ class _EventFormPageState extends State<EventFormPage> {
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
-      body: Column(
-        children: [
-          addVerticalSpace(40),
-          Center(
-            child: Text(
-              'New event',
-              style: TextStyle(
-                fontSize: 40,
-                color: Theme.of(context).primaryColor,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            addVerticalSpace(40),
+            Center(
+              child: Text(
+                'New event',
+                style: TextStyle(
+                  fontSize: 40,
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
             ),
-          ),
-          addVerticalSpace(20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: Row(
-              children: [
-                InkWell(
-                  onTap: _changeEventDate,
-                  child: IconText(
-                    icon: COCOIcon(
-                      iconName: "Calendar",
-                      height: 24,
-                    ),
-                    text: Text(
-                      "${_eventDate.day}/${_eventDate.month}/${_eventDate.year}",
-                      style: Theme.of(context).textTheme.bodySmall,
+            addVerticalSpace(10),
+            MyTextField(
+              controller: _nameController,
+              inputType: MyInputType.name,
+              key: _keys[0],
+              color: const Color.fromRGBO(162, 163, 170, 1.0),
+              focusedColor: Theme.of(context).primaryColor,
+            ),
+            addVerticalSpace(5),
+            MyTextField(
+              controller: _locationController,
+              inputType: MyInputType.name,
+              key: _keys[1],
+              color: const Color.fromRGBO(162, 163, 170, 1.0),
+              focusedColor: Theme.of(context).primaryColor,
+              label: "Location",
+            ),
+            addVerticalSpace(5),
+            MyTextField(
+              controller: _emailController,
+              inputType: MyInputType.email,
+              key: _keys[2],
+              color: const Color.fromRGBO(162, 163, 170, 1.0),
+              focusedColor: Theme.of(context).primaryColor,
+              hint: widget._organizer.email,
+            ),
+            addVerticalSpace(5),
+            MyTextField(
+              controller: _phoneNumberController,
+              inputType: MyInputType.phoneNumber,
+              key: _keys[3],
+              color: const Color.fromRGBO(162, 163, 170, 1.0),
+              focusedColor: Theme.of(context).primaryColor,
+              hint: widget._organizer.phoneNumber,
+            ),
+            addVerticalSpace(25),
+            MyTextBox(
+              controller: _descriptionController,
+              color: const Color.fromRGBO(162, 163, 170, 1.0),
+              focusedColor: Theme.of(context).primaryColor,
+              label: "Description",
+              hint: "Write a brief description of your event.",
+            ),
+            addVerticalSpace(20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: _changeEventDate,
+                    child: IconText(
+                      icon: COCOIcon(
+                        iconName: "Calendar",
+                        height: 24,
+                      ),
+                      text: Text(
+                        "${_eventDate.day}/${_eventDate.month}/${_eventDate.year}",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          MyTextFormField(
-            controller: _nameController,
-            color: const Color.fromRGBO(162, 163, 170, 1.0),
-            focusedColor: Theme.of(context).primaryColor,
-            labelText: "Name",
-          ),
-          addVerticalSpace(10),
-          MyTextFormField(
-            controller: _locationController,
-            color: const Color.fromRGBO(162, 163, 170, 1.0),
-            focusedColor: Theme.of(context).primaryColor,
-            labelText: "Location",
-          ),
-          addVerticalSpace(10),
-          MyTextFormField(
-            controller: _emailController,
-            color: const Color.fromRGBO(162, 163, 170, 1.0),
-            focusedColor: Theme.of(context).primaryColor,
-            labelText: "Email",
-          ),
-          addVerticalSpace(10),
-          MyTextFormField(
-            controller: _phoneNumberController,
-            color: const Color.fromRGBO(162, 163, 170, 1.0),
-            focusedColor: Theme.of(context).primaryColor,
-            labelText: "Phone Number",
-          ),
-          addVerticalSpace(10),
-          MyTextFormField(
-            controller: _descriptionController,
-            color: const Color.fromRGBO(162, 163, 170, 1.0),
-            focusedColor: Theme.of(context).primaryColor,
-            labelText: "Description",
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -11,9 +11,13 @@ class ProfilePage extends StatefulWidget {
   final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
-  ProfilePage(Volunteer volunteer, DatabaseManager dbManager)
+  ProfilePage(
+      {required Volunteer volunteer,
+      required DatabaseManager dbManager,
+      Key? key})
       : _volunteer = volunteer,
-        _dbManager = dbManager;
+        _dbManager = dbManager,
+        super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();

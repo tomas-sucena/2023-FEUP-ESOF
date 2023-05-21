@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../components/passive/icon_text.dart';
 import '../components/passive/profile_picture.dart';
-import '../models/event.dart';
+import '../models/my_event.dart';
 import '../utils/alignment.dart';
 import '../utils/icons/coco_icon.dart';
 

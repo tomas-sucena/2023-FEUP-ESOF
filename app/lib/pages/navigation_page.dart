@@ -74,7 +74,10 @@ class _NavigationPageState extends State<NavigationPage> {
         body: Stack(
           children: [
             PageNavigator(
-              page: HomePage(volunteer: snapshot.data!),
+              page: HomePage(
+                volunteer: snapshot.data!,
+                dbManager: widget._dbManager,
+              ),
               key: _keys[0],
               isActive: _currPageIndex == 0,
             ),
@@ -84,7 +87,10 @@ class _NavigationPageState extends State<NavigationPage> {
               isActive: _currPageIndex == 1,
             ),
             PageNavigator(
-              page: ProfilePage(snapshot.data!, widget._dbManager),
+              page: ProfilePage(
+                volunteer: snapshot.data!,
+                dbManager: widget._dbManager,
+              ),
               key: _keys[2],
               isActive: _currPageIndex == 2,
             ),

@@ -6,7 +6,7 @@ import 'authenticator.dart';
 class GoogleAuthenticator extends Authenticator {
   /* METHODS */
   @override
-  signIn() async {
+  void signIn() async {
     // get Google account
     final GoogleSignInAccount? user =
         await GoogleSignIn(scopes: <String>["email"]).signIn();

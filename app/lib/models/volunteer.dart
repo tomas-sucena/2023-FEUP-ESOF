@@ -5,7 +5,7 @@ class Volunteer {
   late String _id;
   late String _name;
   late String _email;
-  late String _phoneNumber;
+  late String? _phoneNumber;
   late NetworkImage _profilePicture;
   late int _eventsAttended;
 
@@ -35,7 +35,7 @@ class Volunteer {
     _email = data["email"];
 
     // can be null
-    _phoneNumber = data["phoneNumber"] ?? "";
+    _phoneNumber = data["phoneNumber"];
     _profilePicture =
         NetworkImage(data["profilePictureURL"] ?? _defaultProfilePictureURL);
 
@@ -46,7 +46,7 @@ class Volunteer {
   String get id => _id;
   String get name => _name;
   String get email => _email;
-  String get phoneNumber => _phoneNumber;
+  String? get phoneNumber => _phoneNumber;
   NetworkImage get profilePicture => _profilePicture;
   int get eventsAttended => _eventsAttended;
 

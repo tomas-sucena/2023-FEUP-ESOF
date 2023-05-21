@@ -90,6 +90,17 @@ class _ProfileInfoState extends State<ProfileInfo> {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
+                addVerticalSpace(6),
+                IconText(
+                  icon: COCOIcon(
+                    iconName: "Phone",
+                    height: 24,
+                  ),
+                  text: Text(
+                    widget._volunteer.phoneNumber ?? "(NOT SPECIFIED)",
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
               ],
             ),
             Column(

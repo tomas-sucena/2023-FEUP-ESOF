@@ -3,16 +3,22 @@ import 'package:flutter/material.dart';
 
 import '../components/interactive/event_card.dart';
 import '../components/interactive/my_search_bar.dart';
-import '../models/event.dart';
+import '../models/my_event.dart';
 import '../models/volunteer.dart';
+import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
 
 class HomePage extends StatelessWidget {
   final Volunteer _volunteer;
+  final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
-  const HomePage({required Volunteer volunteer, Key? key})
-      : _volunteer = volunteer,
+  const HomePage({
+    required Volunteer volunteer,
+    required DatabaseManager dbManager,
+    Key? key,
+  })  : _volunteer = volunteer,
+        _dbManager = dbManager,
         super(key: key);
 
   @override
@@ -23,7 +29,10 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => EventFormPage(volunteer: _volunteer),
+              builder: (context) => EventFormPage(
+                organizer: _volunteer,
+                dbManager: _dbManager,
+              ),
             ),
           );
         },
