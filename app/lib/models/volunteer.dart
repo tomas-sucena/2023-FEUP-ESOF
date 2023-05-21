@@ -65,8 +65,7 @@ class Volunteer {
       organizedEventIDs.add(event.id);
 
     List<String> favoriteEventIDs = [];
-    for (CharityEvent event in _favoriteEvents)
-      favoriteEventIDs.add(event.id);
+    for (CharityEvent event in _favoriteEvents) favoriteEventIDs.add(event.id);
 
     return {
       "id": _id,

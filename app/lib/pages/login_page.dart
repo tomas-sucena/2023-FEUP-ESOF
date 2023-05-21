@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../components/interactive/my_button.dart';
 import '../components/interactive/my_text_field.dart';
 import '../components/interactive/sign_in_button.dart';
 import '../services/authentication/email_authenticator.dart';
@@ -104,12 +105,9 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: [
         addVerticalSpace(20),
-        ElevatedButton(
-          onPressed: _signIn,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          child: Text("Sign in"),
+        MyButton(
+          onTap: _signIn,
+          text: "Sign in",
         ),
         addVerticalSpace(10),
         RichText(
@@ -193,12 +191,9 @@ class _LoginPageState extends State<LoginPage> {
           //focusedColor: Theme.of(context).primaryColor,
         ),
         addVerticalSpace(20),
-        ElevatedButton(
-          onPressed: _register,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Theme.of(context).primaryColor,
-          ),
-          child: Text("Register"),
+        MyButton(
+          onTap: _register,
+          text: "Register",
         ),
         addVerticalSpace(10),
         RichText(
