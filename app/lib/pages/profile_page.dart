@@ -62,9 +62,12 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 330,
               width: 360,
               child: ListView.builder(
+                padding: EdgeInsets.zero,
                 itemCount: widget._volunteer.organizedEvents.length,
-                itemBuilder: (context, index) =>
-                    EventCard(event: widget._volunteer.organizedEvents[index]),
+                itemBuilder: (context, index) => EventCard(
+                  event: widget._volunteer.organizedEvents[index],
+                  dbManager: widget._dbManager,
+                ),
               ),
             ),
             MyButton(

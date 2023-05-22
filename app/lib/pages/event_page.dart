@@ -3,20 +3,51 @@ import 'package:flutter/material.dart';
 import '../components/passive/icon_text.dart';
 import '../components/passive/profile_picture.dart';
 import '../models/charity_event.dart';
+import '../models/volunteer.dart';
+import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
 import '../utils/icons/coco_icon.dart';
 
-class EventPage extends StatelessWidget {
+class EventPage extends StatefulWidget {
   final CharityEvent _event;
+  final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
-  const EventPage({required CharityEvent event, Key? key})
+  const EventPage(
+      {required CharityEvent event,
+      required DatabaseManager dbManager,
+      Key? key})
       : _event = event,
+        _dbManager = dbManager,
         super(key: key);
 
-  /* METHODS */
   @override
-  Widget build(BuildContext context) {
+  State<EventPage> createState() => _EventPageState();
+}
+
+class _EventPageState extends State<EventPage> {
+  late final Future<Volunteer> _organizer;
+
+  /* METHODS */
+  Future<void> _fetchOrganizerData() async {
+    _organizer = widget._dbManager.getVolunteer(widget._event.organizerID);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchOrganizerData();
+  }
+
+  Widget _buildLoadingScreen() {
+    return const Center(
+      child: const CircularProgressIndicator(
+        color: const Color.fromRGBO(233, 161, 136, 1),
+      ),
+    );
+  }
+
+  Widget _buildPage() {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -52,7 +83,7 @@ class EventPage extends StatelessWidget {
                 children: [
                   addVerticalSpace(5),
                   Text(
-                    _event.name,
+                    widget._event.name,
                     style: Theme.of(context).textTheme.displayMedium,
                   ),
                   IconText(
@@ -61,7 +92,7 @@ class EventPage extends StatelessWidget {
                       height: 24,
                     ),
                     text: Text(
-                      _event.organizerName,
+                      widget._event.organizerName,
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
@@ -72,7 +103,7 @@ class EventPage extends StatelessWidget {
                       height: 24,
                     ),
                     text: Text(
-                      _event.location,
+                      widget._event.location,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -83,7 +114,7 @@ class EventPage extends StatelessWidget {
                       height: 24,
                     ),
                     text: Text(
-                      _event.email,
+                      widget._event.email,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -94,7 +125,7 @@ class EventPage extends StatelessWidget {
                       height: 24,
                     ),
                     text: Text(
-                      _event.phoneNumber,
+                      widget._event.phoneNumber,
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
@@ -103,7 +134,7 @@ class EventPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: ProfilePicture(
-                  image: _event.profilePicture,
+                  image: widget._event.profilePicture,
                   size: 105,
                 ),
               ),
@@ -123,13 +154,25 @@ class EventPage extends StatelessWidget {
               right: 32,
             ),
             child: Text(
-              _event.description,
+              widget._event.description,
               style: Theme.of(context).textTheme.displaySmall,
               textAlign: TextAlign.justify,
             ),
           ),
         ],
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<Volunteer>(
+      future: _organizer,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return _buildLoadingScreen();
+
+        return _buildPage();
+      },
     );
   }
 }

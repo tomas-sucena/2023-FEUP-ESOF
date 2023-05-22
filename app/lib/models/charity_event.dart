@@ -51,6 +51,7 @@ class CharityEvent {
       data["hour"],
       data["minute"],
     );
+    _location = data["location"];
     _email = data["email"];
     _phoneNumber = data["phoneNumber"];
     _description = data["description"];

@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
                   "We are heading to the beach in order to help the baby turtles reach the sea.\n\nLet's save the turtles!",
               profilePicture: _volunteer.profilePicture,
             ),
+            dbManager: _dbManager,
           ),
         ],
       ),

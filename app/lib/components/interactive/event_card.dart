@@ -1,3 +1,4 @@
+import 'package:app/services/data/database_manager.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/charity_event.dart';
@@ -9,10 +10,15 @@ import '../passive/profile_picture.dart';
 
 class EventCard extends StatelessWidget {
   final CharityEvent _event;
+  final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
-  const EventCard({required CharityEvent event, Key? key})
+  const EventCard(
+      {required CharityEvent event,
+      required DatabaseManager dbManager,
+      Key? key})
       : _event = event,
+        _dbManager = dbManager,
         super(key: key);
 
   /* METHOD */
@@ -23,7 +29,8 @@ class EventCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EventPage(event: _event),
+            builder: (context) =>
+                EventPage(event: _event, dbManager: _dbManager),
           ),
         )
       },
