@@ -146,12 +146,14 @@ class _EventFormPageState extends State<EventFormPage> {
 
     final CharityEvent event = CharityEvent(
       name: _nameController.text.trim(),
-      organizer: widget._organizer,
+      organizerID: widget._organizer.id,
+      organizerName: widget._organizer.name,
       date: _eventDate,
       location: _locationController.text.trim(),
       email: _emailController.text.trim(),
       phoneNumber: _phoneNumberController.text.trim(),
       description: _descriptionController.text.trim(),
+      profilePicture: widget._organizer.profilePicture,
     );
 
     _showLoadingScreen();

@@ -61,7 +61,7 @@ class EventPage extends StatelessWidget {
                       height: 24,
                     ),
                     text: Text(
-                      _event.organizer.name,
+                      _event.organizerName,
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ),
@@ -103,7 +103,7 @@ class EventPage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: ProfilePicture(
-                  image: _event.organizer.profilePicture,
+                  image: _event.profilePicture,
                   size: 105,
                 ),
               ),

@@ -53,10 +53,7 @@ class DatabaseManager {
     if (!documentSnapshot.exists || data == null)
       throw Exception("The event with id $id does not exist!");
 
-    final CharityEvent event = CharityEvent.fromJSON(data);
-    event.organizer = await getVolunteer(data["organizerId"]);
-
-    return event;
+    return CharityEvent.fromJSON(data);
   }
 
   Future<void> addEvent(CharityEvent event) async {

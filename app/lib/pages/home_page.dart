@@ -47,13 +47,15 @@ class HomePage extends StatelessWidget {
           EventCard(
             event: CharityEvent(
               name: "Save the turtles!",
-              organizer: _volunteer,
+              organizerID: _volunteer.id,
+              organizerName: _volunteer.name,
               date: DateTime.now(),
               location: "Porto, Portugal",
               email: "projetotamar@gmail.com",
               phoneNumber: '(+351) 936 635 466',
               description:
                   "We are heading to the beach in order to help the baby turtles reach the sea.\n\nLet's save the turtles!",
+              profilePicture: _volunteer.profilePicture,
             ),
           ),
         ],
