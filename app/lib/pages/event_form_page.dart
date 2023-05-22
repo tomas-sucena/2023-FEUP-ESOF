@@ -130,12 +130,9 @@ class _EventFormPageState extends State<EventFormPage> {
   void _showLoadingScreen() {
     showDialog(
       context: context,
-      builder: (context) => WillPopScope(
-        onWillPop: () async => false,
-        child: const Center(
-          child: const CircularProgressIndicator(
-            color: const Color.fromRGBO(233, 161, 136, 1),
-          ),
+      builder: (context) => const Center(
+        child: const CircularProgressIndicator(
+          color: const Color.fromRGBO(233, 161, 136, 1),
         ),
       ),
     );
@@ -163,8 +160,10 @@ class _EventFormPageState extends State<EventFormPage> {
     await widget._dbManager.addEvent(event);
     await widget._dbManager.addVolunteer(widget._organizer);
 
-    Navigator.of(context).pop(); // discard the loading screen
-    Navigator.of(context).pop(); // return to the home page
+    Navigator.of(
+      context,
+      rootNavigator: true,
+    ).pop(); // discard the loading screen
   }
 
   @override

@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import '../components/interactive/event_card.dart';
 import '../components/interactive/my_button.dart';
 import '../components/interactive/profile_info.dart';
-import '../models/charity_event.dart';
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
-import '../utils/icons/coco_icon.dart';
 
 class ProfilePage extends StatefulWidget {
   final Volunteer _volunteer;
@@ -62,6 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(
               height: 330,
+              width: 360,
               child: ListView.builder(
                 itemCount: widget._volunteer.organizedEvents.length,
                 itemBuilder: (context, index) =>

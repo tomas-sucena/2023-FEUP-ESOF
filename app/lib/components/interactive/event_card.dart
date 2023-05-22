@@ -45,8 +45,8 @@ class EventCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             addHorizontalSpace(12),
-            const ProfilePicture(
-              image: AssetImage("assets/images/pedroanime.png"),
+            ProfilePicture(
+              image: _event.profilePicture,
               size: 80,
             ),
             addHorizontalSpace(20),
@@ -55,7 +55,7 @@ class EventCard extends StatelessWidget {
               children: [
                 addVerticalSpace(8),
                 Text(
-                  "Save the turtles!",
+                  _event.name,
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
                         fontSize: 32,
                       ),
@@ -68,7 +68,7 @@ class EventCard extends StatelessWidget {
                     themeDependent: false,
                   ),
                   text: Text(
-                    "Projeto TAMAR",
+                    _event.organizerName,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                 ),

@@ -71,8 +71,9 @@ class CharityEvent {
 
   Map<String, dynamic> toJSON() {
     return {
+      "id": _id,
       "name": _name,
-      "organizerId": _organizerID,
+      "organizerID": _organizerID,
       "organizerName": _organizerName,
       "year": _date.year,
       "month": _date.month,
