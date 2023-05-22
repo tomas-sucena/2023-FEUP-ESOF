@@ -1,6 +1,7 @@
 import 'package:app/services/data/database_manager.dart';
 import 'package:flutter/material.dart';
 
+import '../components/interactive/my_button.dart';
 import '../components/interactive/my_text_box.dart';
 import '../components/interactive/my_text_field.dart';
 import '../components/passive/icon_text.dart';
@@ -63,16 +64,6 @@ class _EventFormPageState extends State<EventFormPage> {
     super.dispose();
   }
 
-  bool _validateUserInput() {
-    for (GlobalKey<FormState> key in _keys) {
-      FormState? state = key.currentState;
-
-      if (state == null || !state.validate()) return false;
-    }
-
-    return true;
-  }
-
   void _changeEventDate() async {
     DateTime? newDate = await showDatePicker(
       context: context,
@@ -88,8 +79,56 @@ class _EventFormPageState extends State<EventFormPage> {
     });
   }
 
+  bool _validateUserInput() {
+    for (GlobalKey<FormState> key in _keys) {
+      FormState? state = key.currentState;
+
+      if (state == null || !state.validate()) return false;
+    }
+
+    return true;
+  }
+
+  Future<bool> _showWarning() async {
+    late bool answer;
+
+    await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: const Text(
+          "Please note that any event submitted cannot be changed.\n"
+          '\n'
+          "Are you sure you want to proceed?",
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              answer = true;
+            },
+            child: Text(
+              "Yes",
+              style: TextStyle(
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              answer = false;
+            },
+            child: const Text("No"),
+          ),
+        ],
+      ),
+    );
+
+    return answer;
+  }
+
   void _submitEvent() async {
-    if (!_validateUserInput()) return;
+    if (!_validateUserInput() || !await _showWarning()) return;
 
     final CharityEvent event = CharityEvent(
       name: _nameController.text.trim(),
@@ -100,6 +139,12 @@ class _EventFormPageState extends State<EventFormPage> {
       phoneNumber: _phoneNumberController.text.trim(),
       description: _descriptionController.text.trim(),
     );
+
+    widget._organizer.organizedEvents.add(event);
+
+    // update the database
+    await widget._dbManager.addEvent(event);
+    await widget._dbManager.addVolunteer(widget._organizer);
   }
 
   @override
@@ -193,6 +238,11 @@ class _EventFormPageState extends State<EventFormPage> {
                   ),
                 ],
               ),
+            ),
+            addVerticalSpace(20),
+            MyButton(
+              onTap: _submitEvent,
+              text: const Text("Submit"),
             ),
           ],
         ),

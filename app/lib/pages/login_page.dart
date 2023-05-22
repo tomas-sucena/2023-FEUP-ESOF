@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
         addVerticalSpace(20),
         MyButton(
           onTap: _signIn,
-          text: "Sign in",
+          text: const Text("Sign in"),
         ),
         addVerticalSpace(10),
         RichText(
@@ -193,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
         addVerticalSpace(20),
         MyButton(
           onTap: _register,
-          text: "Register",
+          text: const Text("Register"),
         ),
         addVerticalSpace(10),
         RichText(

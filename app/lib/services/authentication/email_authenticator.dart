@@ -25,20 +25,6 @@ class EmailAuthenticator extends Authenticator {
         _phoneNumber = phoneNumber ?? '';
 
   /* METHODS */
-  Future<void> _updateDatabase() async {
-    User? user = auth.currentUser;
-    if (user == null) return;
-
-    DatabaseManager().addVolunteer(
-      Volunteer.fromJSON({
-        "id": user.uid,
-        "name": _name,
-        "email": _email,
-        "phoneNumber": _phoneNumber,
-      }),
-    );
-  }
-
   @override
   Future<String> signIn() async {
     try {
@@ -85,7 +71,19 @@ class EmailAuthenticator extends Authenticator {
       }
     }
 
-    await _updateDatabase();
+    // update the database
+    User? user = auth.currentUser;
+    if (user == null) return "Authentication error! Please, try again.";
+
+    await DatabaseManager().addVolunteer(
+      Volunteer.fromJSON({
+        "id": user.uid,
+        "name": _name,
+        "email": _email,
+        "phoneNumber": _phoneNumber,
+      }),
+    );
+
     return "success";
   }
 }

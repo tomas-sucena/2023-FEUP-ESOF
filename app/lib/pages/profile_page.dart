@@ -70,7 +70,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             MyButton(
               onTap: _signOut,
-              text: "Sign out",
+              text: const Text("Sign out"),
             ),
           ],
         ),

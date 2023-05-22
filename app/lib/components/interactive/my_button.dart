@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
-  final String _text;
+  final Text _text;
   final void Function()? _onTap;
   final Color? _color;
 
   /* CONSTRUCTOR */
   const MyButton(
-      {required String text,
+      {required Text text,
       required void Function()? onTap,
       Color? color,
       Key? key})
@@ -24,7 +24,7 @@ class MyButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: _color ?? Theme.of(context).primaryColor,
       ),
-      child: Text(_text),
+      child: _text,
     );
   }
 }

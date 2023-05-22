@@ -139,6 +139,7 @@ class _MyTextFieldState extends State<MyTextField> {
             hintText: widget._hint,
             hintStyle: TextStyle(color: _currColor.withOpacity(0.5)),
             floatingLabelStyle: TextStyle(color: _currColor),
+            errorStyle: TextStyle(fontSize: 12),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(
                 color: widget._color,

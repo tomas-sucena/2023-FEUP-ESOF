@@ -61,10 +61,10 @@ class DatabaseManager {
 
   Future<void> addEvent(CharityEvent event) async {
     _database
-        .collection("users")
+        .collection("events")
         .doc(event.id)
         .set(event.toJSON())
-        .onError((e, _) => print("Error adding a new user: $e"));
+        .onError((e, _) => print("Error adding a new event: $e"));
   }
 
   Future<String> addFile(File file, String directory, {String? id}) async {
