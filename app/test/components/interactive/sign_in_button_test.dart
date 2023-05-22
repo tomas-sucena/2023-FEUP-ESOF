@@ -4,17 +4,23 @@ import 'package:mockito/mockito.dart';
 
 import '../../../lib/components/interactive/sign_in_button.dart';
 import '../../../lib/services/authentication/authenticator.dart';
-import '../../../lib/services/authentication/google_authenticator.dart';
 
 // Mock class
 class MockAuthenticator extends Mock implements Authenticator {}
 
 void main() {
   group("Google sign-in button", () {
+    late MockAuthenticator authenticator;
+
+    setUp(() {
+      authenticator = MockAuthenticator();
+      when(authenticator.signIn()).thenReturn("Signing in with Google");
+    });
+
     testWidgets('should display the Google logo and some text', (tester) async {
       await tester.pumpWidget(
         SignInButton(
-          authenticator: GoogleAuthenticator(),
+          authenticator: authenticator,
           logoFilename: "google_logo.png",
           name: "Google",
         ),
@@ -29,12 +35,9 @@ void main() {
     });
 
     testWidgets('should trigger the authenticator when tapped', (tester) async {
-      var _authenticator = MockAuthenticator();
-      when(_authenticator.signIn()).thenReturn("Signing in with Google");
-
       await tester.pumpWidget(
         SignInButton(
-          authenticator: _authenticator,
+          authenticator: authenticator,
           logoFilename: "google_logo.png",
           name: "Google",
         ),
@@ -43,7 +46,7 @@ void main() {
       await tester.tap(find.text('Sign in with Google'));
 
       // the authenticator attempts to sign the user in
-      verify(_authenticator.signIn()).called(1);
+      verify(authenticator.signIn()).called(1);
     });
   });
 }
