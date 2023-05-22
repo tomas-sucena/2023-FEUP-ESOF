@@ -127,6 +127,20 @@ class _EventFormPageState extends State<EventFormPage> {
     return answer;
   }
 
+  void _showLoadingScreen() {
+    showDialog(
+      context: context,
+      builder: (context) => WillPopScope(
+        onWillPop: () async => false,
+        child: const Center(
+          child: const CircularProgressIndicator(
+            color: const Color.fromRGBO(233, 161, 136, 1),
+          ),
+        ),
+      ),
+    );
+  }
+
   void _submitEvent() async {
     if (!_validateUserInput() || !await _showWarning()) return;
 
@@ -140,11 +154,15 @@ class _EventFormPageState extends State<EventFormPage> {
       description: _descriptionController.text.trim(),
     );
 
+    _showLoadingScreen();
     widget._organizer.organizedEvents.add(event);
 
     // update the database
     await widget._dbManager.addEvent(event);
     await widget._dbManager.addVolunteer(widget._organizer);
+
+    Navigator.of(context).pop(); // discard the loading screen
+    Navigator.of(context).pop(); // return to the home page
   }
 
   @override
@@ -213,6 +231,7 @@ class _EventFormPageState extends State<EventFormPage> {
             addVerticalSpace(25),
             MyTextBox(
               controller: _descriptionController,
+              key: _keys[4],
               color: const Color.fromRGBO(162, 163, 170, 1.0),
               focusedColor: Theme.of(context).primaryColor,
               label: "Description",

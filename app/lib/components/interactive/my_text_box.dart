@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class MyTextBox extends StatefulWidget {
   final TextEditingController _controller;
+  final Key _key;
   final Color _color;
   final Color _focusedColor;
   final String? _label;
@@ -12,12 +12,14 @@ class MyTextBox extends StatefulWidget {
   /* CONSTRUCTOR */
   MyTextBox(
       {required TextEditingController controller,
+      required Key key,
       required Color color,
       Color? focusedColor,
       String? label,
       String? hint,
       double? padding})
       : _controller = controller,
+        _key = key,
         _color = color,
         _focusedColor = focusedColor ?? color,
         _label = label,
@@ -56,41 +58,67 @@ class _MyTextBoxState extends State<MyTextBox> {
     });
   }
 
+  String? _validateText(String? text) {
+    if (text == null || text.isEmpty)
+      return "${widget._label ?? "Text"} cannot be empty!";
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: widget._padding),
-      child: TextFormField(
-        controller: widget._controller,
-        focusNode: _focusNode,
-        onTap: _switchColor,
-        keyboardType: TextInputType.multiline,
-        decoration: InputDecoration(
-          labelText: widget._label,
-          labelStyle: TextStyle(color: _currColor),
-          hintText: widget._hint,
-          hintStyle: TextStyle(color: _currColor.withOpacity(0.5)),
-          alignLabelWithHint: true,
-          floatingLabelStyle: TextStyle(color: _currColor),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: widget._color,
-              width: 1.2,
+    return Form(
+      key: widget._key,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: widget._padding),
+        child: TextFormField(
+          controller: widget._controller,
+          focusNode: _focusNode,
+          validator: _validateText,
+          onTap: _switchColor,
+          keyboardType: TextInputType.multiline,
+          decoration: InputDecoration(
+            labelText: widget._label,
+            labelStyle: TextStyle(color: _currColor),
+            hintText: widget._hint,
+            hintStyle: TextStyle(color: _currColor.withOpacity(0.5)),
+            alignLabelWithHint: true,
+            floatingLabelStyle: TextStyle(color: _currColor),
+            errorStyle: TextStyle(fontSize: 12),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: widget._color,
+                width: 1.2,
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: widget._focusedColor,
+                width: 1.2,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 1.2,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(
+                color: Colors.red,
+                width: 1.2,
+              ),
             ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(
-              color: widget._focusedColor,
-              width: 1.2,
-            ),
-          ),
+          cursorColor: widget._focusedColor,
+          cursorWidth: 1.0,
+          style: TextStyle(color: _currColor),
+          maxLines: 8,
         ),
-        cursorColor: widget._focusedColor,
-        cursorWidth: 1.0,
-        style: TextStyle(color: _currColor),
-        maxLines: 8,
       ),
     );
   }
