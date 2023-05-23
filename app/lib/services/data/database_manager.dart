@@ -9,6 +9,7 @@ import '../../models/volunteer.dart';
 class DatabaseManager {
   final FirebaseFirestore _database;
   final FirebaseStorage _storage;
+  late final DocumentReference<Map<String, dynamic>> _currUserRef;
 
   /* CONSTRUCTOR */
   DatabaseManager()
@@ -29,7 +30,9 @@ class DatabaseManager {
   }
 
   Future<Volunteer> getVolunteer(String id) async {
-    final documentSnapshot = await _database.collection("users").doc(id).get();
+    final documentSnapshot = (id == _currUserRef.id)
+        ? await _currUserRef.get()
+        : await _database.collection("users").doc(id).get();
     final data = documentSnapshot.data();
 
     if (!documentSnapshot.exists || data == null)
@@ -76,6 +79,14 @@ class DatabaseManager {
         .doc(event.id)
         .set(event.toJSON())
         .onError((e, _) => print("Error adding a new event: $e"));
+  }
+
+  Future<void> setCurrentUser(String id) async {
+    _currUserRef = _database.collection("users").doc(id);
+  }
+
+  Future<void> updateCurrentUser({required String field, required value}) async {
+    _currUserRef.update({field: value});
   }
 
   Future<String> addFile(File file, String directory, {String? id}) async {

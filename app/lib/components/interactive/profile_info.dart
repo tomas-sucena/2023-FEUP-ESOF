@@ -39,7 +39,10 @@ class _ProfileInfoState extends State<ProfileInfo> {
     });
 
     // update the database
-    await widget._dbManager.addVolunteer(widget._volunteer);
+    await widget._dbManager.updateCurrentUser(
+      field: "profilePictureURL",
+      value: widget._volunteer.profilePicture.url,
+    );
     await widget._dbManager.removeFile(oldImageURL);
   }
 

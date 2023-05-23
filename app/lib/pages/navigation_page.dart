@@ -49,6 +49,8 @@ class _NavigationPageState extends State<NavigationPage> {
     if (user == null) throw Exception("The current user has no data!");
 
     final String id = user.uid;
+    await widget._dbManager.setCurrentUser(id);
+
     return widget._dbManager.getVolunteer(id);
   }
 
