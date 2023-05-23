@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 
 import '../components/interactive/event_card.dart';
 import '../components/interactive/my_search_bar.dart';
+import 'loading_page.dart';
 import '../models/charity_event.dart';
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   final Volunteer _volunteer;
   final DatabaseManager _dbManager;
 
@@ -22,7 +23,18 @@ class HomePage extends StatelessWidget {
         super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late Future<List<CharityEvent>> _events;
+
+  /* METHODS */
+  Future<void> _fetchEvents() async {
+    _events = widget._dbManager.getEvents();
+  }
+
+  Widget _buildHomePage(AsyncSnapshot snapshot) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
@@ -30,8 +42,8 @@ class HomePage extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => EventFormPage(
-                organizer: _volunteer,
-                dbManager: _dbManager,
+                organizer: widget._volunteer,
+                dbManager: widget._dbManager,
               ),
             ),
           );
@@ -44,23 +56,38 @@ class HomePage extends StatelessWidget {
             child: const MySearchBar(),
           ),
           addVerticalSpace(20),
-          EventCard(
-            event: CharityEvent(
-              name: "Save the turtles!",
-              organizerID: _volunteer.id,
-              organizerName: _volunteer.name,
-              date: DateTime.now(),
-              location: "Porto, Portugal",
-              email: "projetotamar@gmail.com",
-              phoneNumber: '(+351) 936 635 466',
-              description:
-                  "We are heading to the beach in order to help the baby turtles reach the sea.\n\nLet's save the turtles!",
-              profilePicture: _volunteer.profilePicture,
+          SizedBox(
+            width: 360,
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) => EventCard(
+                event: snapshot.data[index],
+                dbManager: widget._dbManager,
+              ),
             ),
-            dbManager: _dbManager,
           ),
         ],
       ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchEvents();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _events,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LoadingPage();
+
+        return _buildHomePage(snapshot);
+      }
     );
   }
 }

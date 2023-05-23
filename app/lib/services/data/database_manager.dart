@@ -64,6 +64,18 @@ class DatabaseManager {
         .onError((e, _) => print("Error adding a new event: $e"));
   }
 
+  Future<List<CharityEvent>> getEvents() async {
+    final querySnapshots = await _database.collection("events")
+                                      .limit(20)
+                                      .get();
+
+    final List<CharityEvent> recentEvents = [];
+    for (var documentSnapshot in querySnapshots.docs)
+      recentEvents.add(CharityEvent.fromJSON(documentSnapshot.data()));
+
+    return recentEvents;
+  }
+
   Future<String> addFile(File file, String directory, {String? id}) async {
     id = id ?? DateTime.now().millisecondsSinceEpoch.toString();
     final ref = _storage.ref().child(directory).child(id);

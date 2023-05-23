@@ -1,9 +1,10 @@
-import 'package:app/utils/icons/coco_icon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'loading_page.dart';
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
+import '../utils/icons/coco_icon.dart';
 import '../utils/page_navigator.dart';
 import 'home_page.dart';
 import 'notifications_page.dart';
@@ -57,15 +58,7 @@ class _NavigationPageState extends State<NavigationPage> {
     });
   }
 
-  Widget _buildLoadingScreen() {
-    return const Center(
-      child: const CircularProgressIndicator(
-        color: const Color.fromRGBO(233, 161, 136, 1),
-      ),
-    );
-  }
-
-  Widget _buildNavigationBar(AsyncSnapshot snapshot) {
+  Widget _buildNavigationPage(AsyncSnapshot snapshot) {
     return WillPopScope(
       onWillPop: () async =>
           !await _keys[_currPageIndex].currentState!.maybePop(),
@@ -151,9 +144,9 @@ class _NavigationPageState extends State<NavigationPage> {
     return FutureBuilder<Volunteer>(
       future: _volunteer,
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return _buildLoadingScreen();
+        if (!snapshot.hasData) return LoadingPage();
 
-        return _buildNavigationBar(snapshot);
+        return _buildNavigationPage(snapshot);
       },
     );
   }
