@@ -9,28 +9,22 @@ class EmailAuthenticator extends Authenticator {
   final String _password;
   final String _repeatedPassword;
   final String _name;
+  final String _phoneNumber;
 
   /* CONSTRUCTOR */
   EmailAuthenticator(
       {required String email,
       required String password,
       String? repeatedPassword,
-      String? name})
+      String? name,
+      String? phoneNumber})
       : _email = email,
         _password = password,
-        _repeatedPassword = repeatedPassword ?? "",
-        _name = name ?? "";
+        _repeatedPassword = repeatedPassword ?? '',
+        _name = name ?? '',
+        _phoneNumber = phoneNumber ?? '';
 
   /* METHODS */
-  Future<void> _updateDatabase() async {
-    DatabaseManager().addVolunteer(
-      Volunteer.fromJSON({
-        "name": _name,
-        "email": _email,
-      }),
-    );
-  }
-
   @override
   Future<String> signIn() async {
     try {
@@ -73,11 +67,23 @@ class EmailAuthenticator extends Authenticator {
         case "weak-password":
           return "The password provided is too weak!";
         default:
-          return "Error signing in!";
+          return "Network error!";
       }
     }
 
-    await _updateDatabase();
+    // update the database
+    User? user = auth.currentUser;
+    if (user == null) return "Authentication error! Please, try again.";
+
+    await DatabaseManager().addVolunteer(
+      Volunteer.fromJSON({
+        "id": user.uid,
+        "name": _name,
+        "email": _email,
+        "phoneNumber": _phoneNumber,
+      }),
+    );
+
     return "success";
   }
 }

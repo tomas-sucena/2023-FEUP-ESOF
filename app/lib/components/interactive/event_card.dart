@@ -1,6 +1,7 @@
+import 'package:app/services/data/database_manager.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/event.dart';
+import '../../models/charity_event.dart';
 import '../../pages/event_page.dart';
 import '../../utils/alignment.dart';
 import '../../utils/icons/coco_icon.dart';
@@ -8,8 +9,19 @@ import '../passive/icon_text.dart';
 import '../passive/profile_picture.dart';
 
 class EventCard extends StatelessWidget {
-  const EventCard({Key? key}) : super(key: key);
+  final CharityEvent _event;
+  final DatabaseManager _dbManager;
 
+  /* CONSTRUCTOR */
+  const EventCard(
+      {required CharityEvent event,
+      required DatabaseManager dbManager,
+      Key? key})
+      : _event = event,
+        _dbManager = dbManager,
+        super(key: key);
+
+  /* METHOD */
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -17,16 +29,8 @@ class EventCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => EventPage(
-              event: Event(
-                  "Save the turtles!",
-                  "Projeto TAMAR",
-                  "Porto, Portugal",
-                  "tamarproj@gmail.com",
-                  "(+351) 937 200 663",
-                  "https://lh3.googleusercontent.com/ci/AJFM8ry_EaAf7fSLbdIQB6TlX7qaLX57eBR6l0OFVATGZ6OonoIk4xQFqef8xn9V90cbDR9D-RQTTg",
-                  "We will head to the beach in order to help the newborn baby turtles reach the sea.\n\nLet us save the turtles!"),
-            ),
+            builder: (context) =>
+                EventPage(event: _event, dbManager: _dbManager),
           ),
         )
       },
@@ -48,8 +52,8 @@ class EventCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             addHorizontalSpace(12),
-            const ProfilePicture(
-              image: AssetImage("assets/images/pedroanime.png"),
+            ProfilePicture(
+              image: _event.profilePicture,
               size: 80,
             ),
             addHorizontalSpace(20),
@@ -58,7 +62,7 @@ class EventCard extends StatelessWidget {
               children: [
                 addVerticalSpace(8),
                 Text(
-                  "Save the turtles!",
+                  _event.name,
                   style: Theme.of(context).textTheme.displayMedium?.copyWith(
                         fontSize: 32,
                       ),
@@ -71,7 +75,7 @@ class EventCard extends StatelessWidget {
                     themeDependent: false,
                   ),
                   text: Text(
-                    "Projeto TAMAR",
+                    _event.organizerName,
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                 ),

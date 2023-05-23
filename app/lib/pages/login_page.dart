@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../components/interactive/my_button.dart';
 import '../components/interactive/my_text_field.dart';
 import '../components/interactive/sign_in_button.dart';
 import '../services/authentication/email_authenticator.dart';
@@ -15,18 +16,28 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late bool _showRegister;
   final TextEditingController _emailController;
   final TextEditingController _passwordController;
   final TextEditingController _repeatedPasswordController;
   final TextEditingController _nameController;
-  late bool _showRegister;
+  final TextEditingController _phoneNumberController;
+  final List<GlobalKey<FormState>> _keys;
 
   /* CONSTRUCTOR */
   _LoginPageState()
       : _emailController = TextEditingController(),
         _passwordController = TextEditingController(),
         _repeatedPasswordController = TextEditingController(),
-        _nameController = TextEditingController();
+        _nameController = TextEditingController(),
+        _phoneNumberController = TextEditingController(),
+        _keys = [
+          GlobalKey<FormState>(),
+          GlobalKey<FormState>(),
+          GlobalKey<FormState>(),
+          GlobalKey<FormState>(),
+          GlobalKey<FormState>(),
+        ];
 
   /* METHODS */
   @override
@@ -41,29 +52,62 @@ class _LoginPageState extends State<LoginPage> {
     _passwordController.dispose();
     _repeatedPasswordController.dispose();
     _nameController.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
+  }
+
+  bool _validateUserInput() {
+    for (GlobalKey<FormState> key in _keys) {
+      FormState? state = key.currentState;
+
+      if (state == null || !state.validate()) return false;
+    }
+
+    return true;
+  }
+
+  void _signIn() async {
+    final String response = await EmailAuthenticator(
+      email: _emailController.text.trim(),
+      password: _passwordController.text,
+    ).signIn();
+
+    if (response == "success") return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(response),
+      ),
+    );
+  }
+
+  void _register() async {
+    if (!_validateUserInput()) return;
+
+    final String response = await EmailAuthenticator(
+      email: _emailController.text.trim(),
+      password: _passwordController.text,
+      repeatedPassword: _repeatedPasswordController.text,
+      name: _nameController.text.trim(),
+      phoneNumber: _phoneNumberController.text.trim(),
+    ).register();
+
+    if (response == "success") return;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(response),
+      ),
+    );
   }
 
   Widget _buildLoginForm() {
     return Column(
       children: [
         addVerticalSpace(20),
-        ElevatedButton(
-          onPressed: () async {
-            final String response = await EmailAuthenticator(
-              email: _emailController.text.trim(),
-              password: _passwordController.text,
-            ).signIn();
-
-            if (response == "success") return;
-
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(response),
-              ),
-            );
-          },
-          child: Text("Sign in"),
+        MyButton(
+          onTap: _signIn,
+          text: const Text("Sign in"),
         ),
         addVerticalSpace(10),
         RichText(
@@ -77,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextSpan(
                 text: "Register here",
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Theme.of(context).primaryColor),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _switchBottom(),
               ),
@@ -121,44 +165,35 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildRegisterForm() {
     return Column(
       children: [
-        addVerticalSpace(10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: MyTextFormField(
-            controller: _repeatedPasswordController,
-            inputType: InputType.password,
-            color: const Color.fromRGBO(233, 161, 136, 1),
-            labelText: "Repeat Password",
-          ),
+        addVerticalSpace(5),
+        MyTextField(
+          controller: _repeatedPasswordController,
+          inputType: MyInputType.password,
+          key: _keys[2],
+          color: const Color.fromRGBO(0, 0, 0, 125),
+          //focusedColor: Theme.of(context).primaryColor,
+          label: "Repeat password",
         ),
-        addVerticalSpace(10),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: MyTextFormField(
-            controller: _nameController,
-            inputType: InputType.name,
-            color: const Color.fromRGBO(233, 161, 136, 1),
-          ),
+        addVerticalSpace(5),
+        MyTextField(
+          controller: _nameController,
+          inputType: MyInputType.name,
+          key: _keys[3],
+          color: const Color.fromRGBO(0, 0, 0, 125),
+          //focusedColor: Theme.of(context).primaryColor,
+        ),
+        addVerticalSpace(5),
+        MyTextField(
+          controller: _phoneNumberController,
+          inputType: MyInputType.phoneNumber,
+          key: _keys[4],
+          color: const Color.fromRGBO(0, 0, 0, 125),
+          //focusedColor: Theme.of(context).primaryColor,
         ),
         addVerticalSpace(20),
-        ElevatedButton(
-          onPressed: () async {
-            final String response = await EmailAuthenticator(
-              email: _emailController.text.trim(),
-              password: _passwordController.text,
-              repeatedPassword: _repeatedPasswordController.text,
-              name: _nameController.text.trim(),
-            ).register();
-
-            if (response == "success") return;
-
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(response),
-              ),
-            );
-          },
-          child: Text("Register"),
+        MyButton(
+          onTap: _register,
+          text: const Text("Register"),
         ),
         addVerticalSpace(10),
         RichText(
@@ -172,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               TextSpan(
                 text: "Sign in here",
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Theme.of(context).primaryColor),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () => _switchBottom(),
               ),
@@ -237,22 +272,20 @@ class _LoginPageState extends State<LoginPage> {
                     height: 1,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: MyTextFormField(
-                    controller: _emailController,
-                    inputType: InputType.email,
-                    color: const Color.fromRGBO(233, 161, 136, 1),
-                  ),
+                MyTextField(
+                  controller: _emailController,
+                  key: _keys[0],
+                  inputType: MyInputType.email,
+                  color: const Color.fromRGBO(0, 0, 0, 125),
+                  //focusedColor: Theme.of(context).primaryColor,
                 ),
-                addVerticalSpace(10),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: MyTextFormField(
-                    controller: _passwordController,
-                    inputType: InputType.password,
-                    color: const Color.fromRGBO(233, 161, 136, 1),
-                  ),
+                addVerticalSpace(5),
+                MyTextField(
+                  controller: _passwordController,
+                  key: _keys[1],
+                  inputType: MyInputType.password,
+                  color: const Color.fromRGBO(0, 0, 0, 125),
+                  //focusedColor: Theme.of(context).primaryColor,
                 ),
                 _showRegister ? _buildRegisterForm() : _buildLoginForm(),
               ],

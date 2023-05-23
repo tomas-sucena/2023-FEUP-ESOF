@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
   // colors
+  primaryColor: const Color.fromRGBO(233, 161, 136, 1),
   scaffoldBackgroundColor: const Color.fromRGBO(252, 252, 249, 1.0),
   shadowColor: const Color.fromRGBO(0, 0, 0, 0.25),
 
@@ -38,6 +39,7 @@ ThemeData darkTheme = ThemeData(
   applyElevationOverlayColor: true,
 
   // colors
+  primaryColor: const Color.fromRGBO(233, 161, 136, 1),
   scaffoldBackgroundColor: const Color.fromRGBO(26, 27, 46, 1.0),
   shadowColor: const Color.fromRGBO(255, 255, 255, 0.25),
 

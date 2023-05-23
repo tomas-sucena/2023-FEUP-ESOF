@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
+import '../../models/charity_event.dart';
 import '../../models/volunteer.dart';
 
 class DatabaseManager {
@@ -15,22 +16,66 @@ class DatabaseManager {
         _storage = FirebaseStorage.instance;
 
   /* METHODS */
-  Future<Volunteer> getVolunteer(String email) async {
-    final documentSnapshot =
-        await _database.collection("users").doc(email).get();
+  Future<Volunteer> _parseVolunteerData(Map<String, dynamic> data) async {
+    final Volunteer volunteer = Volunteer.fromJSON(data);
 
-    if (!documentSnapshot.exists)
-      throw Exception("The user with email $email does not exist!");
+    for (String eventID in data["organizedEvents"])
+      volunteer.organizedEvents.add(await getEvent(eventID));
 
-    return Volunteer.fromJSON(documentSnapshot.data());
+    for (String eventID in data["favoriteEvents"])
+      volunteer.favoriteEvents.add(await getEvent(eventID));
+
+    return volunteer;
+  }
+
+  Future<Volunteer> getVolunteer(String id) async {
+    final documentSnapshot = await _database.collection("users").doc(id).get();
+    final data = documentSnapshot.data();
+
+    if (!documentSnapshot.exists || data == null)
+      throw Exception("The user with id $id does not exist!");
+
+    return await _parseVolunteerData(data);
   }
 
   Future<void> addVolunteer(Volunteer volunteer) async {
     _database
         .collection("users")
-        .doc(volunteer.email)
+        .doc(volunteer.id)
         .set(volunteer.toJSON())
         .onError((e, _) => print("Error adding a new user: $e"));
+  }
+
+  Future<CharityEvent> getEvent(String id) async {
+    final documentSnapshot = await _database.collection("events").doc(id).get();
+    final data = documentSnapshot.data();
+
+    if (!documentSnapshot.exists || data == null)
+      throw Exception("The event with id $id does not exist!");
+
+    return CharityEvent.fromJSON(data);
+  }
+
+  Future<List<CharityEvent>> getEvents() async {
+    final querySnapshots = await _database
+        .collection("events")
+        .orderBy("id", descending: true)
+        .limit(20)
+        .get();
+
+    final List<CharityEvent> recentEvents = [];
+    for (var documentSnapshot in querySnapshots.docs)
+      recentEvents.add(CharityEvent.fromJSON(documentSnapshot.data()));
+
+    return recentEvents;
+  }
+
+  Future<void> addEvent(CharityEvent event) async {
+    _database
+        .collection("events")
+        .doc(event.id)
+        .set(event.toJSON())
+        .onError((e, _) => print("Error adding a new event: $e"));
   }
 
   Future<String> addFile(File file, String directory, {String? id}) async {

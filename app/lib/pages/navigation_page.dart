@@ -1,9 +1,10 @@
-import 'package:app/utils/icons/coco_icon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import 'loading_page.dart';
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
+import '../utils/icons/coco_icon.dart';
 import '../utils/page_navigator.dart';
 import 'home_page.dart';
 import 'notifications_page.dart';
@@ -40,15 +41,15 @@ class _NavigationPageState extends State<NavigationPage> {
   void initState() {
     super.initState();
     _currPageIndex = 0;
-    _fetchVolunteerData();
+    _volunteer = _fetchVolunteerData();
   }
 
-  Future<void> _fetchVolunteerData() async {
+  Future<Volunteer> _fetchVolunteerData() async {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user == null) throw Exception("The current user has no data!");
 
-    final String email = user.email!;
-    _volunteer = widget._dbManager.getVolunteer(email);
+    final String id = user.uid;
+    return widget._dbManager.getVolunteer(id);
   }
 
   void _changePage(int pageIndex) {
@@ -57,15 +58,7 @@ class _NavigationPageState extends State<NavigationPage> {
     });
   }
 
-  Widget _buildLoadingScreen() {
-    return const Center(
-      child: const CircularProgressIndicator(
-        color: const Color.fromRGBO(233, 161, 136, 1),
-      ),
-    );
-  }
-
-  Widget _buildNavigationBar(AsyncSnapshot snapshot) {
+  Widget _buildNavigationPage(AsyncSnapshot snapshot) {
     return WillPopScope(
       onWillPop: () async =>
           !await _keys[_currPageIndex].currentState!.maybePop(),
@@ -73,7 +66,10 @@ class _NavigationPageState extends State<NavigationPage> {
         body: Stack(
           children: [
             PageNavigator(
-              page: HomePage(),
+              page: HomePage(
+                volunteer: snapshot.data!,
+                dbManager: widget._dbManager,
+              ),
               key: _keys[0],
               isActive: _currPageIndex == 0,
             ),
@@ -83,7 +79,10 @@ class _NavigationPageState extends State<NavigationPage> {
               isActive: _currPageIndex == 1,
             ),
             PageNavigator(
-              page: ProfilePage(snapshot.data!, widget._dbManager),
+              page: ProfilePage(
+                volunteer: snapshot.data!,
+                dbManager: widget._dbManager,
+              ),
               key: _keys[2],
               isActive: _currPageIndex == 2,
             ),
@@ -96,12 +95,12 @@ class _NavigationPageState extends State<NavigationPage> {
             BottomNavigationBarItem(
               icon: COCOIcon(
                 iconName: "Home",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Home_active",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               label: 'Home',
@@ -109,12 +108,12 @@ class _NavigationPageState extends State<NavigationPage> {
             BottomNavigationBarItem(
               icon: COCOIcon(
                 iconName: "Notifications",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Notifications_active",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               label: 'Notifications',
@@ -122,19 +121,19 @@ class _NavigationPageState extends State<NavigationPage> {
             BottomNavigationBarItem(
               icon: COCOIcon(
                 iconName: "Profile",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Profile_active",
-                height: 38,
+                height: 30,
                 themeDependent: false,
               ),
               label: 'Profile',
             ),
           ],
-          selectedFontSize: 14,
-          unselectedFontSize: 12,
+          selectedFontSize: 12,
+          unselectedFontSize: 10,
         ),
       ),
     );
@@ -145,9 +144,9 @@ class _NavigationPageState extends State<NavigationPage> {
     return FutureBuilder<Volunteer>(
       future: _volunteer,
       builder: (context, snapshot) {
-        if (!snapshot.hasData) return _buildLoadingScreen();
+        if (!snapshot.hasData) return LoadingPage();
 
-        return _buildNavigationBar(snapshot);
+        return _buildNavigationPage(snapshot);
       },
     );
   }

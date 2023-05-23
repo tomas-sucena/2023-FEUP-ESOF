@@ -1,25 +1,103 @@
+import 'package:app/pages/event_form_page.dart';
 import 'package:flutter/material.dart';
 
-import '../components/interactive/event_card.dart';
-import '../components/interactive/top_search_bar.dart';
+import '../components/interactive/event_card_viewer.dart';
+import '../components/interactive/my_search_bar.dart';
+import '../models/charity_event.dart';
+import '../models/volunteer.dart';
+import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
+import 'loading_page.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  final Volunteer _volunteer;
+  final DatabaseManager _dbManager;
+
+  /* CONSTRUCTOR */
+  const HomePage({
+    required Volunteer volunteer,
+    required DatabaseManager dbManager,
+    Key? key,
+  })  : _volunteer = volunteer,
+        _dbManager = dbManager,
+        super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late Future<List<CharityEvent>> _events;
+
+  /* METHODS */
+  Future<List<CharityEvent>> _fetchEvents() async {
+    return widget._dbManager.getEvents();
+  }
+
+  Future<void> _refresh() async {
+    final List<CharityEvent> newEvents = await _fetchEvents();
+
+    setState(() {
+      _events = Future.value(newEvents);
+    });
+  }
+
+  Widget _buildHomePage(AsyncSnapshot snapshot) {
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => EventFormPage(
+                organizer: widget._volunteer,
+                dbManager: widget._dbManager,
+              ),
+            ),
+          );
+        },
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            addVerticalSpace(48),
+            Center(
+              child: const MySearchBar(),
+            ),
+            addVerticalSpace(20),
+            SizedBox(
+              height: 660,
+              width: 360,
+              child: RefreshIndicator(
+                onRefresh: _refresh,
+                color: Theme.of(context).primaryColor,
+                child: EventCardViewer(
+                  events: snapshot.data,
+                  dbManager: widget._dbManager,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _events = _fetchEvents();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          addVerticalSpace(48),
-          Center(
-            child: TopSearchBar(),
-          ),
-          addVerticalSpace(20),
-          EventCard(),
-        ],
-      ),
+    return FutureBuilder(
+      future: _events,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LoadingPage();
+
+        return _buildHomePage(snapshot);
+      },
     );
   }
 }

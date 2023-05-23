@@ -27,21 +27,20 @@ class ProfileInfo extends StatefulWidget {
 
 class _ProfileInfoState extends State<ProfileInfo> {
   void _changeProfilePicture() async {
-    final _file = await widget._fileExplorer.getImage(ImageSource.gallery);
-    if (_file == null) return;
+    final file = await widget._fileExplorer.getImage(ImageSource.gallery);
+    if (file == null) return;
 
-    final String _oldImageURL = widget._volunteer.profilePicture.url,
-        _newImageURL =
-            await widget._dbManager.addFile(_file, "profile_pictures");
+    final String oldImageURL = widget._volunteer.profilePicture.url,
+        newImageURL = await widget._dbManager.addFile(file, "profile_pictures");
 
     // update the profile
     setState(() {
-      widget._volunteer.profilePicture = NetworkImage(_newImageURL);
+      widget._volunteer.profilePicture = NetworkImage(newImageURL);
     });
 
     // update the database
     await widget._dbManager.addVolunteer(widget._volunteer);
-    await widget._dbManager.removeFile(_oldImageURL);
+    await widget._dbManager.removeFile(oldImageURL);
   }
 
   @override
@@ -64,7 +63,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      widget._volunteer.eventsAttended.toString(),
+                      widget._volunteer.organizedEvents.length.toString(),
                       style: Theme.of(context).textTheme.displayLarge,
                     ),
                     addHorizontalSpace(15),
@@ -73,7 +72,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                       children: [
                         addVerticalSpace(12),
                         Text(
-                          'Charity Events\nAttended',
+                          'Charity Events\nOrganized',
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
                       ],
@@ -88,6 +87,17 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   ),
                   text: Text(
                     widget._volunteer.email,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+                addVerticalSpace(6),
+                IconText(
+                  icon: COCOIcon(
+                    iconName: "Phone",
+                    height: 24,
+                  ),
+                  text: Text(
+                    widget._volunteer.phoneNumber ?? "(NOT SPECIFIED)",
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),

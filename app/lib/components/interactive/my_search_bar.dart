@@ -5,9 +5,11 @@ import '../../utils/alignment.dart';
 import '../../utils/icons/coco_icon.dart';
 import '../../utils/themes/theme_manager.dart';
 
-class TopSearchBar extends StatelessWidget {
-  const TopSearchBar({Key? key}) : super(key: key);
+class MySearchBar extends StatelessWidget {
+  /* CONSTRUCTOR */
+  const MySearchBar({Key? key}) : super(key: key);
 
+  /* METHODS */
   @override
   Widget build(BuildContext context) {
     return Container(
