@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../components/interactive/event_card.dart';
+import '../components/interactive/event_card_viewer.dart';
 import '../components/interactive/my_button.dart';
 import '../components/interactive/profile_info.dart';
 import '../models/volunteer.dart';
@@ -61,13 +61,9 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(
               height: 330,
               width: 360,
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: widget._volunteer.organizedEvents.length,
-                itemBuilder: (context, index) => EventCard(
-                  event: widget._volunteer.organizedEvents[index],
-                  dbManager: widget._dbManager,
-                ),
+              child: EventCardViewer(
+                events: widget._volunteer.organizedEvents,
+                dbManager: widget._dbManager,
               ),
             ),
             MyButton(

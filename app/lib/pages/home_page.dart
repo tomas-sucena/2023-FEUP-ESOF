@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage> {
             ),
             addVerticalSpace(20),
             SizedBox(
+              height: 660,
               width: 360,
               child: RefreshIndicator(
                 onRefresh: _refresh,

@@ -56,26 +56,26 @@ class DatabaseManager {
     return CharityEvent.fromJSON(data);
   }
 
-  Future<void> addEvent(CharityEvent event) async {
-    _database
-        .collection("events")
-        .doc(event.id)
-        .set(event.toJSON())
-        .onError((e, _) => print("Error adding a new event: $e"));
-  }
-
   Future<List<CharityEvent>> getEvents() async {
     final querySnapshots = await _database
-                                     .collection("events")
-                                     .orderBy("id", descending: true)
-                                     .limit(20)
-                                     .get();
+        .collection("events")
+        .orderBy("id", descending: true)
+        .limit(20)
+        .get();
 
     final List<CharityEvent> recentEvents = [];
     for (var documentSnapshot in querySnapshots.docs)
       recentEvents.add(CharityEvent.fromJSON(documentSnapshot.data()));
 
     return recentEvents;
+  }
+
+  Future<void> addEvent(CharityEvent event) async {
+    _database
+        .collection("events")
+        .doc(event.id)
+        .set(event.toJSON())
+        .onError((e, _) => print("Error adding a new event: $e"));
   }
 
   Future<String> addFile(File file, String directory, {String? id}) async {
