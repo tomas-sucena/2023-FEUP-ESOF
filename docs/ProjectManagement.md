@@ -78,3 +78,8 @@
 #### What still puzzles us?
 - How to properly manage time
 - How to connect to an API
+
+## Iteration #4 (v0.5)
+
+### Before
+![Before Iteration #4](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/assets/93825634/0732fe38-2645-4263-ab9b-954547881630)
