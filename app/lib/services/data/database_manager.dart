@@ -30,9 +30,7 @@ class DatabaseManager {
   }
 
   Future<Volunteer> getVolunteer(String id) async {
-    final documentSnapshot = (id == _currUserRef.id)
-        ? await _currUserRef.get()
-        : await _database.collection("users").doc(id).get();
+    final documentSnapshot = await _database.collection("users").doc(id).get();
     final data = documentSnapshot.data();
 
     if (!documentSnapshot.exists || data == null)
