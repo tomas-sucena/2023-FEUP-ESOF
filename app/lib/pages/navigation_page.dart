@@ -41,15 +41,15 @@ class _NavigationPageState extends State<NavigationPage> {
   void initState() {
     super.initState();
     _currPageIndex = 0;
-    _fetchVolunteerData();
+    _volunteer = _fetchVolunteerData();
   }
 
-  Future<void> _fetchVolunteerData() async {
+  Future<Volunteer> _fetchVolunteerData() async {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user == null) throw Exception("The current user has no data!");
 
     final String id = user.uid;
-    _volunteer = widget._dbManager.getVolunteer(id);
+    return widget._dbManager.getVolunteer(id);
   }
 
   void _changePage(int pageIndex) {

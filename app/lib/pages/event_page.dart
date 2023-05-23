@@ -29,14 +29,14 @@ class _EventPageState extends State<EventPage> {
   late final Future<Volunteer> _organizer;
 
   /* METHODS */
-  Future<void> _fetchOrganizerData() async {
-    _organizer = widget._dbManager.getVolunteer(widget._event.organizerID);
+  Future<Volunteer> _fetchOrganizerData() async {
+    return widget._dbManager.getVolunteer(widget._event.organizerID);
   }
 
   @override
   void initState() {
     super.initState();
-    _fetchOrganizerData();
+    _organizer = _fetchOrganizerData();
   }
 
   Widget _buildLoadingScreen() {

@@ -65,9 +65,11 @@ class DatabaseManager {
   }
 
   Future<List<CharityEvent>> getEvents() async {
-    final querySnapshots = await _database.collection("events")
-                                      .limit(20)
-                                      .get();
+    final querySnapshots = await _database
+                                     .collection("events")
+                                     .orderBy("id", descending: true)
+                                     .limit(20)
+                                     .get();
 
     final List<CharityEvent> recentEvents = [];
     for (var documentSnapshot in querySnapshots.docs)
