@@ -32,6 +32,10 @@ class _ProfilePageState extends State<ProfilePage> {
     await FirebaseAuth.instance.signOut();
   }
 
+  Future<void> _refresh() async {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,6 +68,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: EventCardViewer(
                 events: widget._volunteer.organizedEvents,
                 dbManager: widget._dbManager,
+                onRefresh: _refresh,
               ),
             ),
             MyButton(

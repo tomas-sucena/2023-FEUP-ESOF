@@ -40,12 +40,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
     });
 
     // update the database
-    await widget._dbManager.updateCurrentUser(
-      field: "profilePictureURL",
-      value: widget._volunteer.profilePicture.url,
-    );
+    await widget._dbManager.addVolunteer(widget._volunteer);
 
-    for (CharityEvent event in widget._volunteer.organizedEvents){
+    for (CharityEvent event in widget._volunteer.organizedEvents) {
       event.profilePicture = widget._volunteer.profilePicture;
       await widget._dbManager.addEvent(event);
     }

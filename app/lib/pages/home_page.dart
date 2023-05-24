@@ -68,13 +68,10 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 660,
               width: 360,
-              child: RefreshIndicator(
+              child: EventCardViewer(
+                events: snapshot.data,
+                dbManager: widget._dbManager,
                 onRefresh: _refresh,
-                color: Theme.of(context).primaryColor,
-                child: EventCardViewer(
-                  events: snapshot.data,
-                  dbManager: widget._dbManager,
-                ),
               ),
             ),
           ],

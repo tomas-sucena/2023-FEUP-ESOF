@@ -158,10 +158,7 @@ class _EventFormPageState extends State<EventFormPage> {
 
     // update the database
     await widget._dbManager.addEvent(event);
-    await widget._dbManager.updateCurrentUser(
-      field: "organizedEvents",
-      value: widget._organizer.organizedEvents,
-    );
+    await widget._dbManager.addVolunteer(widget._organizer);
 
     Navigator.of(
       context,
