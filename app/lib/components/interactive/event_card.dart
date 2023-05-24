@@ -35,12 +35,15 @@ class EventCard extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (context) => EventPage(
-                event: _event, volunteer: _volunteer, dbManager: _dbManager),
+              event: _event,
+              volunteer: _volunteer,
+              dbManager: _dbManager,
+            ),
           ),
         )
       },
       child: Container(
-        height: 100,
+        height: 99,
         width: 360,
         decoration: BoxDecoration(
           color: const Color.fromRGBO(232, 232, 232, 1.0),

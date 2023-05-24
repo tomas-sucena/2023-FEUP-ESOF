@@ -8,6 +8,7 @@ import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
 import '../utils/icons/coco_icon.dart';
 import 'loading_page.dart';
+import 'profile_page.dart';
 
 class EventPage extends StatefulWidget {
   final CharityEvent _event;
@@ -30,12 +31,34 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  late final Future<Volunteer> _organizer;
   late bool _isFavorite;
 
   /* METHODS */
-  Future<Volunteer> _fetchOrganizerData() async {
-    return widget._dbManager.getVolunteer(widget._event.organizerID);
+  Future<void> _showOrganizer() async {
+    // show a loading screen
+    showDialog(
+      context: context,
+      builder: (context) => const LoadingPage(),
+    );
+
+    final Volunteer organizer =
+        await widget._dbManager.getVolunteer(widget._event.organizerID);
+
+    // discard the loading screen
+    Navigator.of(
+      context,
+      rootNavigator: true,
+    ).pop();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfilePage(
+          volunteer: organizer,
+          dbManager: widget._dbManager,
+        ),
+      ),
+    );
   }
 
   Future<void> _favoriteEvent() async {
@@ -62,7 +85,14 @@ class _EventPageState extends State<EventPage> {
     ).pop(); // discard the loading screen
   }
 
-  Widget _buildPage() {
+  @override
+  void initState() {
+    super.initState();
+    _isFavorite = false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -106,14 +136,17 @@ class _EventPageState extends State<EventPage> {
                       widget._event.name,
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
-                    IconText(
-                      icon: COCOIcon(
-                        iconName: "Profile",
-                        height: 24,
-                      ),
-                      text: Text(
-                        widget._event.organizerName,
-                        style: Theme.of(context).textTheme.displaySmall,
+                    InkWell(
+                      onTap: _showOrganizer,
+                      child: IconText(
+                        icon: COCOIcon(
+                          iconName: "Profile",
+                          height: 24,
+                        ),
+                        text: Text(
+                          widget._event.organizerName,
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
                       ),
                     ),
                     addVerticalSpace(30),
@@ -153,9 +186,12 @@ class _EventPageState extends State<EventPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: ProfilePicture(
-                    image: widget._event.profilePicture,
-                    size: 105,
+                  child: GestureDetector(
+                    onTap: _showOrganizer,
+                    child: ProfilePicture(
+                      image: widget._event.profilePicture,
+                      size: 105,
+                    ),
                   ),
                 ),
               ],
@@ -182,25 +218,6 @@ class _EventPageState extends State<EventPage> {
           ],
         ),
       ),
-    );
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _organizer = _fetchOrganizerData();
-    _isFavorite = false;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<Volunteer>(
-      future: _organizer,
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LoadingPage();
-
-        return _buildPage();
-      },
     );
   }
 }

@@ -84,6 +84,7 @@ class _NavigationPageState extends State<NavigationPage> {
               page: ProfilePage(
                 volunteer: snapshot.data!,
                 dbManager: widget._dbManager,
+                canEdit: true,
               ),
               key: _keys[2],
               isActive: _currPageIndex == 2,
@@ -137,7 +138,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Volunteer>(
+    return FutureBuilder(
       future: _volunteer,
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LoadingPage();

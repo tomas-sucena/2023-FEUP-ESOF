@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             ),
             addVerticalSpace(20),
             SizedBox(
-              height: 660,
+              height: 650,
               width: 360,
               child: EventCardViewer(
                 events: snapshot.data,
