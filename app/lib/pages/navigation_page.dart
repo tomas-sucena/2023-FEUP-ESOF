@@ -98,12 +98,10 @@ class _NavigationPageState extends State<NavigationPage> {
               icon: COCOIcon(
                 iconName: "Home",
                 height: 30,
-                themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Home_active",
                 height: 30,
-                themeDependent: false,
               ),
               label: 'Home',
             ),
@@ -111,12 +109,10 @@ class _NavigationPageState extends State<NavigationPage> {
               icon: COCOIcon(
                 iconName: "Notifications",
                 height: 30,
-                themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Notifications_active",
                 height: 30,
-                themeDependent: false,
               ),
               label: 'Notifications',
             ),
@@ -124,18 +120,16 @@ class _NavigationPageState extends State<NavigationPage> {
               icon: COCOIcon(
                 iconName: "Profile",
                 height: 30,
-                themeDependent: false,
               ),
               activeIcon: COCOIcon(
                 iconName: "Profile_active",
                 height: 30,
-                themeDependent: false,
               ),
               label: 'Profile',
             ),
           ],
           selectedFontSize: 12,
-          unselectedFontSize: 10,
+          unselectedFontSize: 11,
         ),
       ),
     );

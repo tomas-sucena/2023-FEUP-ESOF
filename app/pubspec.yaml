@@ -29,22 +29,19 @@ dependencies:
   # Google sign-in
   google_sign_in: ^5.0.2
 
-  # Navigation bar
-  google_nav_bar: ^5.0.6
-
   # Resize text
   auto_size_text: ^3.0.0
-
-  # SVG reader
-  flutter_svg: ^2.0.4
 
   # Select image from storage
   image_picker: ^0.8.7+4
 
+  # SVG reader
+  flutter_svg: ^2.0.4
+
   # Observer pattern
   provider: ^6.0.5
 
-  # Save preferences in storage
+  # Save data in storage
   shared_preferences: ^2.1.0
 
 dev_dependencies:

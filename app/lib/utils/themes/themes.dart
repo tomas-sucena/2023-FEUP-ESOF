@@ -8,8 +8,13 @@ ThemeData lightTheme = ThemeData(
 
   // UI elements
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: const Color.fromRGBO(247, 233, 165, 1.0),
-    selectedItemColor: const Color.fromRGBO(36, 38, 53, 1.0),
+    backgroundColor: const Color.fromRGBO(252, 252, 249, 1.0),
+    selectedItemColor: const Color.fromRGBO(26, 27, 46, 1.0),
+    unselectedItemColor: const Color.fromRGBO(26, 27, 46, 1.0),
+    selectedLabelStyle: const TextStyle(
+      color: const Color.fromRGBO(26, 27, 46, 1.0),
+      fontWeight: FontWeight.bold,
+    ),
   ),
 
   // text
@@ -45,8 +50,13 @@ ThemeData darkTheme = ThemeData(
 
   // UI elements
   bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: const Color.fromRGBO(247, 233, 165, 1.0),
-    selectedItemColor: const Color.fromRGBO(36, 38, 53, 1.0),
+    backgroundColor: const Color.fromRGBO(26, 27, 46, 1.0),
+    selectedItemColor: const Color.fromRGBO(208, 214, 218, 1.0),
+    unselectedItemColor: const Color.fromRGBO(208, 214, 218, 1.0),
+    selectedLabelStyle: const TextStyle(
+      color: Color.fromRGBO(208, 214, 218, 1.0),
+      fontWeight: FontWeight.bold,
+    ),
   ),
 
   // text
