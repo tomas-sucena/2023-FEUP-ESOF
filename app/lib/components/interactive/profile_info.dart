@@ -2,6 +2,7 @@ import 'package:app/services/data/database_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../models/charity_event.dart';
 import '../../models/volunteer.dart';
 import '../../services/data/file_explorer.dart';
 import '../../utils/alignment.dart';
@@ -43,6 +44,12 @@ class _ProfileInfoState extends State<ProfileInfo> {
       field: "profilePictureURL",
       value: widget._volunteer.profilePicture.url,
     );
+
+    for (CharityEvent event in widget._volunteer.organizedEvents){
+      event.profilePicture = widget._volunteer.profilePicture;
+      await widget._dbManager.addEvent(event);
+    }
+
     await widget._dbManager.removeFile(oldImageURL);
   }
 

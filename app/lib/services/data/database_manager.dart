@@ -83,7 +83,8 @@ class DatabaseManager {
     _currUserRef = _database.collection("users").doc(id);
   }
 
-  Future<void> updateCurrentUser({required String field, required value}) async {
+  Future<void> updateCurrentUser(
+      {required String field, required value}) async {
     _currUserRef.update({field: value});
   }
 

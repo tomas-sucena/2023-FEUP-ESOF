@@ -70,6 +70,9 @@ class CharityEvent {
   String get description => _description;
   NetworkImage get profilePicture => _profilePicture;
 
+  set profilePicture(NetworkImage profilePicture) =>
+      _profilePicture = profilePicture;
+
   Map<String, dynamic> toJSON() {
     return {
       "id": _id,

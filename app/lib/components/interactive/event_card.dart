@@ -1,4 +1,5 @@
 import 'package:app/services/data/database_manager.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/charity_event.dart';
@@ -60,23 +61,34 @@ class EventCard extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                addVerticalSpace(8),
-                Text(
+                addVerticalSpace(4),
+                AutoSizeText(
                   _event.name,
-                  style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                        fontSize: 32,
-                      ),
+                  maxFontSize: 32,
+                  minFontSize: 18,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
-                addVerticalSpace(5),
                 IconText(
                   icon: COCOIcon(
                     iconName: "Profile",
-                    height: 24,
+                    height: 20,
                     themeDependent: false,
                   ),
                   text: Text(
                     _event.organizerName,
-                    style: Theme.of(context).textTheme.displaySmall,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ),
+                IconText(
+                  icon: COCOIcon(
+                    iconName: "Calendar",
+                    height: 20,
+                    themeDependent: false,
+                  ),
+                  text: Text(
+                    "${_event.date.day}/${_event.date.month}/${_event.date.year}",
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
               ],
