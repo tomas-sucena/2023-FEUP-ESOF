@@ -2,21 +2,25 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/charity_event.dart';
+import '../../models/volunteer.dart';
 import '../../services/data/database_manager.dart';
 import 'event_card.dart';
 
 class EventCardViewer extends StatelessWidget {
   final List<CharityEvent> _events;
+  final Volunteer _volunteer;
   final DatabaseManager _dbManager;
   final Future<void> Function() _onRefresh;
 
   /* CONSTRUCTOR */
   const EventCardViewer(
       {required List<CharityEvent> events,
+      required Volunteer volunteer,
       required DatabaseManager dbManager,
       required Future<void> Function() onRefresh,
       Key? key})
       : _events = events,
+        _volunteer = volunteer,
         _dbManager = dbManager,
         _onRefresh = onRefresh,
         super(key: key);
@@ -33,6 +37,7 @@ class EventCardViewer extends StatelessWidget {
         itemCount: _events.length,
         itemBuilder: (_, index) => EventCard(
           event: _events[index],
+          volunteer: _volunteer,
           dbManager: _dbManager,
         ),
         separatorBuilder: (_, __) => const SizedBox(height: 10),

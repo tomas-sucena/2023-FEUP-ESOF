@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../components/interactive/event_card_viewer.dart';
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
@@ -17,11 +18,17 @@ class FavoritesPage extends StatefulWidget {
         _dbManager = dbManager,
         super(key: key);
 
+  /* METHODS */
   @override
   _FavoritesPageState createState() => _FavoritesPageState();
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
+  /* METHODS */
+  Future<void> _refresh() async {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +46,16 @@ class _FavoritesPageState extends State<FavoritesPage> {
               ),
             ),
             addVerticalSpace(10),
-
+            SizedBox(
+              height: 700,
+              width: 360,
+              child: EventCardViewer(
+                events: widget._volunteer.favoriteEvents,
+                volunteer: widget._volunteer,
+                dbManager: widget._dbManager,
+                onRefresh: _refresh,
+              ),
+            ),
           ],
         ),
       ),

@@ -9,6 +9,7 @@ import '../models/charity_event.dart';
 import '../models/volunteer.dart';
 import '../utils/alignment.dart';
 import '../utils/icons/coco_icon.dart';
+import 'loading_page.dart';
 
 class EventFormPage extends StatefulWidget {
   final Volunteer _organizer;
@@ -127,19 +128,14 @@ class _EventFormPageState extends State<EventFormPage> {
     return answer;
   }
 
-  void _showLoadingScreen() {
-    showDialog(
-      context: context,
-      builder: (context) => const Center(
-        child: const CircularProgressIndicator(
-          color: const Color.fromRGBO(233, 161, 136, 1),
-        ),
-      ),
-    );
-  }
-
   void _submitEvent() async {
     if (!_validateUserInput() || !await _showWarning()) return;
+
+    // show a loading screen
+    showDialog(
+      context: context,
+      builder: (context) => const LoadingPage(),
+    );
 
     final CharityEvent event = CharityEvent(
       name: _nameController.text.trim(),
@@ -153,7 +149,6 @@ class _EventFormPageState extends State<EventFormPage> {
       profilePicture: widget._organizer.profilePicture,
     );
 
-    _showLoadingScreen();
     widget._organizer.organizedEvents.add(event);
 
     // update the database

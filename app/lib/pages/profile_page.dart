@@ -67,6 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
               width: 360,
               child: EventCardViewer(
                 events: widget._volunteer.organizedEvents,
+                volunteer: widget._volunteer,
                 dbManager: widget._dbManager,
                 onRefresh: _refresh,
               ),

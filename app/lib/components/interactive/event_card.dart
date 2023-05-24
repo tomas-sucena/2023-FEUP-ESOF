@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/charity_event.dart';
+import '../../models/volunteer.dart';
 import '../../pages/event_page.dart';
 import '../../utils/alignment.dart';
 import '../../utils/icons/coco_icon.dart';
@@ -11,14 +12,17 @@ import '../passive/profile_picture.dart';
 
 class EventCard extends StatelessWidget {
   final CharityEvent _event;
+  final Volunteer _volunteer;
   final DatabaseManager _dbManager;
 
   /* CONSTRUCTOR */
   const EventCard(
       {required CharityEvent event,
+      required Volunteer volunteer,
       required DatabaseManager dbManager,
       Key? key})
       : _event = event,
+        _volunteer = volunteer,
         _dbManager = dbManager,
         super(key: key);
 
@@ -30,8 +34,8 @@ class EventCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                EventPage(event: _event, dbManager: _dbManager),
+            builder: (context) => EventPage(
+                event: _event, volunteer: _volunteer, dbManager: _dbManager),
           ),
         )
       },

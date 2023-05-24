@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Widget _buildHomePage(AsyncSnapshot snapshot) {
+  Widget _buildPage(AsyncSnapshot snapshot) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
               width: 360,
               child: EventCardViewer(
                 events: snapshot.data,
+                volunteer: widget._volunteer,
                 dbManager: widget._dbManager,
                 onRefresh: _refresh,
               ),
@@ -93,7 +94,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LoadingPage();
 
-        return _buildHomePage(snapshot);
+        return _buildPage(snapshot);
       },
     );
   }
