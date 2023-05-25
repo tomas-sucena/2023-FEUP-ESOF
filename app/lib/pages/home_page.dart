@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  Widget _buildHomePage(AsyncSnapshot snapshot) {
+  Widget _buildPage(AsyncSnapshot snapshot) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
@@ -66,15 +66,13 @@ class _HomePageState extends State<HomePage> {
             ),
             addVerticalSpace(20),
             SizedBox(
-              height: 660,
+              height: 650,
               width: 360,
-              child: RefreshIndicator(
+              child: EventCardViewer(
+                events: snapshot.data,
+                volunteer: widget._volunteer,
+                dbManager: widget._dbManager,
                 onRefresh: _refresh,
-                color: Theme.of(context).primaryColor,
-                child: EventCardViewer(
-                  events: snapshot.data,
-                  dbManager: widget._dbManager,
-                ),
               ),
             ),
           ],
@@ -96,7 +94,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LoadingPage();
 
-        return _buildHomePage(snapshot);
+        return _buildPage(snapshot);
       },
     );
   }

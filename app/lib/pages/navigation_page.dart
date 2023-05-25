@@ -7,7 +7,7 @@ import '../services/data/database_manager.dart';
 import '../utils/icons/coco_icon.dart';
 import '../utils/page_navigator.dart';
 import 'home_page.dart';
-import 'notifications_page.dart';
+import 'favorites_page.dart';
 import 'profile_page.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -48,10 +48,7 @@ class _NavigationPageState extends State<NavigationPage> {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user == null) throw Exception("The current user has no data!");
 
-    final String id = user.uid;
-    await widget._dbManager.setCurrentUser(id);
-
-    return widget._dbManager.getVolunteer(id);
+    return widget._dbManager.getVolunteer(user.uid);
   }
 
   void _changePage(int pageIndex) {
@@ -76,7 +73,10 @@ class _NavigationPageState extends State<NavigationPage> {
               isActive: _currPageIndex == 0,
             ),
             PageNavigator(
-              page: NotificationsPage(),
+              page: FavoritesPage(
+                volunteer: snapshot.data!,
+                dbManager: widget._dbManager,
+              ),
               key: _keys[1],
               isActive: _currPageIndex == 1,
             ),
@@ -84,6 +84,7 @@ class _NavigationPageState extends State<NavigationPage> {
               page: ProfilePage(
                 volunteer: snapshot.data!,
                 dbManager: widget._dbManager,
+                canEdit: true,
               ),
               key: _keys[2],
               isActive: _currPageIndex == 2,
@@ -103,18 +104,18 @@ class _NavigationPageState extends State<NavigationPage> {
                 iconName: "Home_active",
                 height: 30,
               ),
-              label: 'Home',
+              label: "Home",
             ),
             BottomNavigationBarItem(
               icon: COCOIcon(
-                iconName: "Notifications",
+                iconName: "Star",
                 height: 30,
               ),
               activeIcon: COCOIcon(
-                iconName: "Notifications_active",
+                iconName: "Star_active",
                 height: 30,
               ),
-              label: 'Notifications',
+              label: "Favorites",
             ),
             BottomNavigationBarItem(
               icon: COCOIcon(
@@ -125,7 +126,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 iconName: "Profile_active",
                 height: 30,
               ),
-              label: 'Profile',
+              label: "Profile",
             ),
           ],
           selectedFontSize: 12,
@@ -137,7 +138,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Volunteer>(
+    return FutureBuilder(
       future: _volunteer,
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LoadingPage();

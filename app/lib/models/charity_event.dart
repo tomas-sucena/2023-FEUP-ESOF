@@ -73,6 +73,9 @@ class CharityEvent {
   set profilePicture(NetworkImage profilePicture) =>
       _profilePicture = profilePicture;
 
+  @override
+  bool operator== (other) => (other is CharityEvent) && (_id == other.id);
+
   Map<String, dynamic> toJSON() {
     return {
       "id": _id,

@@ -14,12 +14,17 @@ class ProfileInfo extends StatefulWidget {
   final Volunteer _volunteer;
   final DatabaseManager _dbManager;
   final FileExplorer _fileExplorer;
+  final bool _canEdit;
 
   /* CONSTRUCTOR */
-  ProfileInfo(Volunteer volunteer, DatabaseManager dbManager)
+  ProfileInfo(
+      {required Volunteer volunteer,
+      required DatabaseManager dbManager,
+      bool? canEdit})
       : _volunteer = volunteer,
         _dbManager = dbManager,
-        _fileExplorer = FileExplorer();
+        _fileExplorer = FileExplorer(),
+        _canEdit = canEdit ?? false;
 
   /* METHODS */
   @override
@@ -40,12 +45,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
     });
 
     // update the database
-    await widget._dbManager.updateCurrentUser(
-      field: "profilePictureURL",
-      value: widget._volunteer.profilePicture.url,
-    );
+    await widget._dbManager.addVolunteer(widget._volunteer);
 
-    for (CharityEvent event in widget._volunteer.organizedEvents){
+    for (CharityEvent event in widget._volunteer.organizedEvents) {
       event.profilePicture = widget._volunteer.profilePicture;
       await widget._dbManager.addEvent(event);
     }
@@ -122,21 +124,23 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   size: 105,
                 ),
                 addVerticalSpace(5),
-                InkWell(
-                  onTap: () {
-                    _changeProfilePicture();
-                  },
-                  child: IconText(
-                    icon: COCOIcon(
-                      iconName: "Pencil",
-                      height: 24,
-                    ),
-                    text: Text(
-                      "Edit",
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ),
-                ),
+                (widget._canEdit)
+                    ? InkWell(
+                        onTap: () {
+                          _changeProfilePicture();
+                        },
+                        child: IconText(
+                          icon: COCOIcon(
+                            iconName: "Pencil",
+                            height: 24,
+                          ),
+                          text: Text(
+                            "Edit",
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ),
+                      )
+                    : SizedBox.shrink(),
               ],
             ),
           ],
