@@ -104,18 +104,18 @@ class _NavigationPageState extends State<NavigationPage> {
                 iconName: "Home_active",
                 height: 30,
               ),
-              label: 'Home',
+              label: "Home",
             ),
             BottomNavigationBarItem(
               icon: COCOIcon(
-                iconName: "Notifications",
+                iconName: "Star",
                 height: 30,
               ),
               activeIcon: COCOIcon(
-                iconName: "Notifications_active",
+                iconName: "Star_active",
                 height: 30,
               ),
-              label: 'Notifications',
+              label: "Favorites",
             ),
             BottomNavigationBarItem(
               icon: COCOIcon(
@@ -126,7 +126,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 iconName: "Profile_active",
                 height: 30,
               ),
-              label: 'Profile',
+              label: "Profile",
             ),
           ],
           selectedFontSize: 12,
