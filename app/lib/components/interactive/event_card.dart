@@ -65,40 +65,44 @@ class EventCard extends StatelessWidget {
               size: 80,
             ),
             addHorizontalSpace(20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                addVerticalSpace(4),
-                AutoSizeText(
-                  _event.name,
-                  maxFontSize: 32,
-                  minFontSize: 18,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.displayMedium,
-                ),
-                IconText(
-                  icon: COCOIcon(
-                    iconName: "Profile",
-                    height: 20,
-                    themeDependent: false,
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  addVerticalSpace(4),
+                  Flexible(
+                    child: AutoSizeText(
+                      _event.name,
+                      maxFontSize: 28,
+                      minFontSize: 18,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.displayMedium,
+                    ),
                   ),
-                  text: Text(
-                    _event.organizerName,
-                    style: Theme.of(context).textTheme.bodySmall,
+                  IconText(
+                    icon: COCOIcon(
+                      iconName: "Profile",
+                      height: 20,
+                      themeDependent: false,
+                    ),
+                    text: Text(
+                      _event.organizerName,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
-                ),
-                IconText(
-                  icon: COCOIcon(
-                    iconName: "Calendar",
-                    height: 20,
-                    themeDependent: false,
+                  IconText(
+                    icon: COCOIcon(
+                      iconName: "Calendar",
+                      height: 20,
+                      themeDependent: false,
+                    ),
+                    text: Text(
+                      "${_event.date.day}/${_event.date.month}/${_event.date.year}",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
-                  text: Text(
-                    "${_event.date.day}/${_event.date.month}/${_event.date.year}",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
