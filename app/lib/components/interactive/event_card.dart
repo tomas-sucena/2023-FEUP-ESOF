@@ -65,12 +65,12 @@ class EventCard extends StatelessWidget {
               size: 80,
             ),
             addHorizontalSpace(20),
-            Flexible(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   addVerticalSpace(4),
-                  Flexible(
+                  Expanded(
                     child: AutoSizeText(
                       _event.name,
                       maxFontSize: 28,
@@ -101,6 +101,7 @@ class EventCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
+                  addVerticalSpace(8),
                 ],
               ),
             ),

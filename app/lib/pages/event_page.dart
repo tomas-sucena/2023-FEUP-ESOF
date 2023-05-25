@@ -111,7 +111,7 @@ class _EventPageState extends State<EventPage> {
         onPressed: _favoriteEvent,
         child: COCOIcon(
           iconName: _isFavorite ? "Star_active" : "Star",
-          height: 38,
+          height: _isFavorite ? 41 : 38,
           themeDependent: false,
         ),
       ),
