@@ -63,7 +63,7 @@ class _EventPageState extends State<EventPage> {
 
   Future<void> _favoriteEvent() async {
     setState(() {
-      _isFavorite != _isFavorite;
+      _isFavorite = !_isFavorite;
     });
 
     _isFavorite
@@ -88,7 +88,7 @@ class _EventPageState extends State<EventPage> {
   @override
   void initState() {
     super.initState();
-    _isFavorite = false;
+    _isFavorite = widget._volunteer.favoriteEvents.contains(widget._event);
   }
 
   @override
@@ -109,6 +109,11 @@ class _EventPageState extends State<EventPage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: _favoriteEvent,
+        child: COCOIcon(
+          iconName: _isFavorite ? "Star_active" : "Star",
+          height: 38,
+          themeDependent: false,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(

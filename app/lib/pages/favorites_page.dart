@@ -54,6 +54,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 volunteer: widget._volunteer,
                 dbManager: widget._dbManager,
                 onRefresh: _refresh,
+                reverse: true,
               ),
             ),
           ],

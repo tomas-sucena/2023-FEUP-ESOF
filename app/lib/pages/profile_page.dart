@@ -92,6 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 volunteer: widget._volunteer,
                 dbManager: widget._dbManager,
                 onRefresh: _refresh,
+                reverse: true,
               ),
             ),
             (widget._canEdit)

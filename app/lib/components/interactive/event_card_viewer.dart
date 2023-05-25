@@ -11,6 +11,7 @@ class EventCardViewer extends StatelessWidget {
   final Volunteer _volunteer;
   final DatabaseManager _dbManager;
   final Future<void> Function() _onRefresh;
+  final bool _reverse;
 
   /* CONSTRUCTOR */
   const EventCardViewer(
@@ -18,11 +19,13 @@ class EventCardViewer extends StatelessWidget {
       required Volunteer volunteer,
       required DatabaseManager dbManager,
       required Future<void> Function() onRefresh,
+      bool? reverse,
       Key? key})
       : _events = events,
         _volunteer = volunteer,
         _dbManager = dbManager,
         _onRefresh = onRefresh,
+        _reverse = reverse ?? false,
         super(key: key);
 
   /* METHODS */
@@ -34,6 +37,7 @@ class EventCardViewer extends StatelessWidget {
       child: ListView.separated(
         padding: EdgeInsets.zero,
         physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+        reverse: _reverse,
         itemCount: _events.length,
         itemBuilder: (_, index) => EventCard(
           event: _events[index],
