@@ -31,16 +31,17 @@ class EventCardViewer extends StatelessWidget {
   /* METHODS */
   @override
   Widget build(BuildContext context) {
+    final int numEvents = _events.length;
+
     return RefreshIndicator(
       onRefresh: _onRefresh,
       color: Theme.of(context).primaryColor,
       child: ListView.separated(
         padding: EdgeInsets.zero,
         physics: AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-        reverse: _reverse,
         itemCount: _events.length,
         itemBuilder: (_, index) => EventCard(
-          event: _events[index],
+          event: _events[_reverse ? (numEvents - 1 - index) : index],
           volunteer: _volunteer,
           dbManager: _dbManager,
         ),

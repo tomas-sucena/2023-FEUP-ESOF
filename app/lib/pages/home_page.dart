@@ -7,6 +7,7 @@ import '../models/charity_event.dart';
 import '../models/volunteer.dart';
 import '../services/data/database_manager.dart';
 import '../utils/alignment.dart';
+import '../utils/icons/coco_icon.dart';
 import 'loading_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -56,6 +57,11 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         },
+        child: COCOIcon(
+          iconName: "Plus",
+          height: 38,
+          themeDependent: false,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
