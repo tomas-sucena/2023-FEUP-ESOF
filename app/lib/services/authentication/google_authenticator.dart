@@ -1,26 +1,44 @@
+import 'package:app/services/data/database_manager.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../models/volunteer.dart';
 import 'authenticator.dart';
 
 class GoogleAuthenticator extends Authenticator {
+  final DatabaseManager _dbManager;
+
+  /* CONSTRUCTOR */
+  GoogleAuthenticator({DatabaseManager? dbManager})
+      : _dbManager = dbManager ?? DatabaseManager();
+
   /* METHODS */
   @override
   void signIn() async {
     // get Google account
-    final GoogleSignInAccount? user =
+    final GoogleSignInAccount? googleSignInAccount =
         await GoogleSignIn(scopes: <String>["email"]).signIn();
 
     // obtain the authentication details
-    final GoogleSignInAuthentication userAuth = await user!.authentication;
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount!.authentication;
 
     // create a new credential
     final credential = GoogleAuthProvider.credential(
-      accessToken: userAuth.accessToken,
-      idToken: userAuth.idToken,
+      accessToken: googleSignInAuthentication.accessToken,
+      idToken: googleSignInAuthentication.idToken,
     );
 
     // sign in
     await auth.signInWithCredential(credential);
+
+    // update the database
+    final User? user = auth.currentUser;
+
+    try {
+      await _dbManager.getVolunteer(user!.uid);
+    } catch (e) {
+      await _dbManager.addVolunteer(Volunteer.fromGoogle(user));
+    }
   }
 }

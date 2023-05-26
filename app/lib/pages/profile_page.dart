@@ -98,13 +98,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           reverse: true,
                         ),
                       ),
-                      (widget._canEdit)
-                          ? MyButton(
-                              onTap: _signOut,
-                              text: const Text("Sign out"),
-                            )
-                          : SizedBox.shrink(),
                     ],
+                  )
+                : SizedBox.shrink(),
+            (widget._canEdit)
+                ? MyButton(
+                    onTap: _signOut,
+                    text: const Text("Sign out"),
                   )
                 : SizedBox.shrink(),
           ],

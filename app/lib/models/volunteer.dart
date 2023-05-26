@@ -27,7 +27,7 @@ class Volunteer {
     _profilePicture = NetworkImage(user.photoURL!);
 
     // can be null
-    _phoneNumber = user.phoneNumber ?? "";
+    _phoneNumber = user.phoneNumber ?? "(NOT SPECIFIED)";
     _isOrganizer = false;
 
     _organizedEvents = [];
