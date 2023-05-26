@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 import '../../models/charity_event.dart';
@@ -28,14 +29,24 @@ class DatabaseManager {
     return volunteer;
   }
 
-  Future<Volunteer> getVolunteer(String id) async {
+  Future<Volunteer> _getVolunteerFromAuth(User user) async {
+    Volunteer volunteer = Volunteer.fromFirebaseAuth(user);
+    await addVolunteer(volunteer);
+
+    return volunteer;
+  }
+
+  Future<Volunteer> getVolunteer(String id, {User? user}) async {
     final documentSnapshot = await _database.collection("users").doc(id).get();
     final data = documentSnapshot.data();
 
-    if (!documentSnapshot.exists || data == null)
+    if (documentSnapshot.exists && data != null)
+      return _parseVolunteerData(data);
+
+    if (user == null)
       throw Exception("The user with id $id does not exist!");
 
-    return await _parseVolunteerData(data);
+    return _getVolunteerFromAuth(user);
   }
 
   Future<void> addVolunteer(Volunteer volunteer) async {

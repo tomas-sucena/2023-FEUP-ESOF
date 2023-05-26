@@ -48,7 +48,7 @@ class _NavigationPageState extends State<NavigationPage> {
     final User? user = FirebaseAuth.instance.currentUser;
     if (user == null) throw Exception("The current user has no data!");
 
-    return widget._dbManager.getVolunteer(user.uid);
+    return widget._dbManager.getVolunteer(user.uid, user: user);
   }
 
   void _changePage(int pageIndex) {

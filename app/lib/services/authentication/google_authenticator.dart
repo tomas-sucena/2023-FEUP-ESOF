@@ -31,14 +31,5 @@ class GoogleAuthenticator extends Authenticator {
 
     // sign in
     await auth.signInWithCredential(credential);
-
-    // update the database
-    final User? user = auth.currentUser;
-
-    try {
-      await _dbManager.getVolunteer(user!.uid);
-    } catch (e) {
-      await _dbManager.addVolunteer(Volunteer.fromGoogle(user));
-    }
   }
 }

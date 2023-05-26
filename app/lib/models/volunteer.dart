@@ -17,7 +17,7 @@ class Volunteer {
       "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";
 
   /* CONSTRUCTORS */
-  Volunteer.fromGoogle(User? user) {
+  Volunteer.fromFirebaseAuth(User? user) {
     if (user == null) throw Exception("The user does not contain any data!");
 
     // cannot be null
