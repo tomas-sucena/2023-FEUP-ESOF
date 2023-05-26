@@ -45,24 +45,26 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildPage(AsyncSnapshot snapshot) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => EventFormPage(
-                organizer: widget._volunteer,
-                dbManager: widget._dbManager,
+      floatingActionButton: widget._volunteer.isOrganizer
+          ? FloatingActionButton(
+              backgroundColor: Theme.of(context).primaryColor,
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => EventFormPage(
+                      organizer: widget._volunteer,
+                      dbManager: widget._dbManager,
+                    ),
+                  ),
+                );
+              },
+              child: COCOIcon(
+                iconName: "Plus",
+                height: 38,
+                themeDependent: false,
               ),
-            ),
-          );
-        },
-        child: COCOIcon(
-          iconName: "Plus",
-          height: 38,
-          themeDependent: false,
-        ),
-      ),
+            )
+          : null,
       body: SingleChildScrollView(
         child: Column(
           children: [

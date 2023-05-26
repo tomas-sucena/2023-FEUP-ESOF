@@ -77,28 +77,34 @@ class _ProfilePageState extends State<ProfilePage> {
               canEdit: widget._canEdit,
             ),
             addVerticalSpace(24),
-            Center(
-              child: Text(
-                'Recent Events',
-                style: Theme.of(context).textTheme.displayMedium,
-              ),
-            ),
-            addVerticalSpace(16),
-            SizedBox(
-              height: 330,
-              width: 360,
-              child: EventCardViewer(
-                events: widget._volunteer.organizedEvents,
-                volunteer: widget._volunteer,
-                dbManager: widget._dbManager,
-                onRefresh: _refresh,
-                reverse: true,
-              ),
-            ),
-            (widget._canEdit)
-                ? MyButton(
-                    onTap: _signOut,
-                    text: const Text("Sign out"),
+            widget._volunteer.isOrganizer
+                ? Column(
+                    children: [
+                      Center(
+                        child: Text(
+                          'Recent Events',
+                          style: Theme.of(context).textTheme.displayMedium,
+                        ),
+                      ),
+                      addVerticalSpace(16),
+                      SizedBox(
+                        height: 330,
+                        width: 360,
+                        child: EventCardViewer(
+                          events: widget._volunteer.organizedEvents,
+                          volunteer: widget._volunteer,
+                          dbManager: widget._dbManager,
+                          onRefresh: _refresh,
+                          reverse: true,
+                        ),
+                      ),
+                      (widget._canEdit)
+                          ? MyButton(
+                              onTap: _signOut,
+                              text: const Text("Sign out"),
+                            )
+                          : SizedBox.shrink(),
+                    ],
                   )
                 : SizedBox.shrink(),
           ],

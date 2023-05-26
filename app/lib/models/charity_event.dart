@@ -74,7 +74,7 @@ class CharityEvent {
       _profilePicture = profilePicture;
 
   @override
-  bool operator== (other) => (other is CharityEvent) && (_id == other.id);
+  bool operator ==(other) => (other is CharityEvent) && (_id == other.id);
 
   Map<String, dynamic> toJSON() {
     return {

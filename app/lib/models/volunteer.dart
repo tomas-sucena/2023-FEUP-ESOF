@@ -9,11 +9,12 @@ class Volunteer {
   late String _email;
   late String? _phoneNumber;
   late NetworkImage _profilePicture;
+  late bool _isOrganizer;
   late List<CharityEvent> _organizedEvents;
   late List<CharityEvent> _favoriteEvents;
 
   static final String _defaultProfilePictureURL =
-      "https://i.pinimg.com/736x/c2/cf/2d/c2cf2dc539707a77ca40b8afe64ab1c1--pikachu-raichu-cute-pikachu.jpg";
+      "https://icon-library.com/images/default-profile-icon/default-profile-icon-24.jpg";
 
   /* CONSTRUCTORS */
   Volunteer.fromGoogle(User? user) {
@@ -27,6 +28,7 @@ class Volunteer {
 
     // can be null
     _phoneNumber = user.phoneNumber ?? "";
+    _isOrganizer = false;
 
     _organizedEvents = [];
     _favoriteEvents = [];
@@ -37,11 +39,12 @@ class Volunteer {
     _id = data["id"];
     _name = data["name"];
     _email = data["email"];
+    _phoneNumber = data["phoneNumber"];
 
     // can be null
-    _phoneNumber = data["phoneNumber"];
     _profilePicture =
         NetworkImage(data["profilePictureURL"] ?? _defaultProfilePictureURL);
+    _isOrganizer = data["isOrganizer"] ?? false;
 
     _organizedEvents = [];
     _favoriteEvents = [];
@@ -53,6 +56,7 @@ class Volunteer {
   String get email => _email;
   String? get phoneNumber => _phoneNumber;
   NetworkImage get profilePicture => _profilePicture;
+  bool get isOrganizer => _isOrganizer;
   List<CharityEvent> get organizedEvents => _organizedEvents;
   List<CharityEvent> get favoriteEvents => _favoriteEvents;
 
@@ -60,7 +64,7 @@ class Volunteer {
       _profilePicture = profilePicture;
 
   @override
-  bool operator== (other) => (other is Volunteer) && (_id == other.id);
+  bool operator ==(other) => (other is Volunteer) && (_id == other.id);
 
   Map<String, dynamic> toJSON() {
     List<String> organizedEventIDs = [];
@@ -76,6 +80,7 @@ class Volunteer {
       "email": _email,
       "phoneNumber": _phoneNumber,
       "profilePictureURL": _profilePicture.url,
+      "isOrganizer": _isOrganizer,
       "organizedEvents": organizedEventIDs,
       "favoriteEvents": favoriteEventIDs,
     };
