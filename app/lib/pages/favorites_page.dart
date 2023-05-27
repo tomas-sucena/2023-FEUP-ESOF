@@ -46,25 +46,31 @@ class _FavoritesPageState extends State<FavoritesPage> {
               ),
             ),
             addVerticalSpace(20),
-            widget._volunteer.favoriteEvents.isNotEmpty
-                ? SizedBox(
-                    height: 650,
-                    width: 360,
-                    child: EventCardViewer(
+            SizedBox(
+              height: 650,
+              width: 360,
+              child: widget._volunteer.favoriteEvents.isNotEmpty
+                  ? EventCardViewer(
                       events: widget._volunteer.favoriteEvents,
                       volunteer: widget._volunteer,
                       dbManager: widget._dbManager,
                       onRefresh: _refresh,
                       reverse: true,
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Text(
+                            "It seems there are no events...",
+                            style: Theme.of(context).textTheme.displayMedium,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
                     ),
-                  )
-                : Center(
-                    child: Text(
-                      "It seems there are no events...",
-                      style: Theme.of(context).textTheme.displayMedium,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+            ),
           ],
         ),
       ),

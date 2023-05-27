@@ -43,8 +43,7 @@ class DatabaseManager {
     if (documentSnapshot.exists && data != null)
       return _parseVolunteerData(data);
 
-    if (user == null)
-      throw Exception("The user with id $id does not exist!");
+    if (user == null) throw Exception("The user with id $id does not exist!");
 
     return _getVolunteerFromAuth(user);
   }
