@@ -28,4 +28,8 @@ Please contact us!
 
 Thank you!
 
-*team members names*
+#### Artur Oliveira
+#### Duarte Gonçalves
+#### Gonçalo Pinho
+#### João Afonso Viveiros
+#### Tomás Sucena Lopes
