@@ -83,3 +83,22 @@
 
 ### Before
 ![Before Iteration #4](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/assets/93825634/0732fe38-2645-4263-ab9b-954547881630)
+
+### After
+![After Iteration #4](https://github.com/FEUP-LEIC-ES-2022-23/2LEIC05T2/assets/93825634/c1aabfaa-5bc4-4859-b92d-40ba16e4adb3)
+
+### The Four Questions
+
+#### What went well?
+- We drastically improved our productivity and workflow, considering this was the iteration where we closed the most issues
+
+#### What didn't go well?
+- We had planned to use an external API to fetch volunteering events. However, we realized close to the deadline that no such API existed. <br> As such, we had to rewrite a lot of code and restructure our database, in order to accommodate a new type of user - the organizer - who can publish charity events.
+- We could not get the acceptance tests to function properly.
+
+#### What have we learned?
+- How to overcome an unexpected adversity that forced us to rethink our project
+- How to allow users to submit posts (in our case, charity events)
+
+#### What still puzzles us?
+- How to automate acceptance tests
